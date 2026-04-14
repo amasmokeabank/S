@@ -36,11 +36,22 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 1; /* redus pentru a nu interfera cu header-ul si butoanele */
+    z-index: 1;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjU1IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2YpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+');
     background-repeat: repeat;
     mix-blend-mode: overlay;
     opacity: 0.3;
+  }
+
+  /* adaugam spatiu aerisit sub header fara margin collapsing */
+  #content {
+    padding-top: 20px;
+  }
+
+  @media (max-width: 760px) {
+    #content {
+      padding-top: 15px;
+    }
   }
 
   .glass-majestic {
@@ -103,12 +114,12 @@
     box-shadow: 0 0 18px rgba(236,39,39,0.5);
   }
 
-  /* container-imperial cu display: flow-root pentru a izola marginile si a preveni margin collapsing */
+  /* container-imperial cu display: flow-root pentru a izola marginile */
   .container-imperial {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 28px;
-    display: flow-root; /* previne margin collapsing - garanteaza ca header-ul nu mai sare */
+    display: flow-root;
   }
 
   /* ===== MODIFICARI HAMBURGER + HEADER STICKY ===== */
@@ -147,7 +158,7 @@
     border-radius: 6px;
     transition: all 0.25s ease;
   }
-  /* overlay si meniu lateral */
+  /* overlay si meniu lateral - z-index corectate */
   .nav-overlay {
     position: fixed;
     top: 0;
@@ -156,7 +167,7 @@
     height: 100%;
     background: rgba(0,0,0,0.75);
     backdrop-filter: blur(8px);
-    z-index: 150;
+    z-index: 1500;
     opacity: 0;
     visibility: hidden;
     transition: 0.3s ease;
@@ -174,7 +185,7 @@
     background: linear-gradient(145deg, rgba(12, 7, 24, 0.98), rgba(5, 3, 12, 0.98));
     backdrop-filter: blur(20px);
     border-right: 1px solid rgba(236,39,39,0.6);
-    z-index: 200;
+    z-index: 2000;
     transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
     padding: 80px 24px 40px;
     display: flex;
@@ -201,7 +212,7 @@
     border-bottom-color: #EC2727;
     transform: translateX(6px);
   }
-  /* BLOG ca link normal in meniu (exact ca celelalte) */
+  /* BLOG ca link normal fara emoji */
   .side-menu .blog-link {
     color: #f0e2c5;
     text-decoration: none;
@@ -313,7 +324,7 @@
     }
   }
 
-  /* Sectiune hero compacta - fara margin-top care cauzeaza margin collapsing */
+  /* Sectiune hero compacta - mai mult spatiu interior */
   .hero-compact {
     margin: 0;
     margin-bottom: 30px;
@@ -327,7 +338,7 @@
   }
   .hero-compact > div {
     width: 100%;
-    padding: 35px 20px;
+    padding: 50px 20px;
   }
   .hero-compact h1 {
     font-size: clamp(1.8rem,6vw,2.8rem) !important;
@@ -344,7 +355,7 @@
     margin-top: 20px;
   }
 
-  /* spatiu intre Suport 24/7 si CUMPARA - redus (deja implementat) */
+  /* spatiu intre Suport 24/7 si CUMPARA - pastrat */
   .card-royal .list-heavy {
     margin-bottom: 8px;
   }
@@ -386,7 +397,7 @@
     margin: 12px auto !important;
   }
 
-  /* Sectiune aplicatie - spatiu marit intre text si buton */
+  /* Sectiune aplicatie */
   .app-section {
     display: flex;
     flex-wrap: wrap;
@@ -405,17 +416,20 @@
     }
   }
 
-  /* FAQ redus */
+  /* FAQ redus - titlu centrat */
   .faq-compact {
     margin: 40px 0 50px !important;
     padding: 20px 24px !important;
     border-radius: 32px !important;
+    text-align: center;
   }
   .faq-compact h2 {
     font-size: 1.4rem !important;
     margin-bottom: 10px;
+    text-align: center;
   }
   .faq-compact details {
+    text-align: left;
     padding: 0.4rem 1rem;
     margin-bottom: 0.6rem;
     border-radius: 1.5rem;
@@ -594,8 +608,8 @@
     <a href="#" class="nav-link">LISTA CANALE</a>
     <a href="#" class="nav-link">GHID INSTALARE</a>
     <a href="#" class="nav-link">PRETURI</a>
-    <!-- BLOG ca link normal in meniu -->
-    <a href="#" class="blog-link">📰 BLOG</a>
+    <!-- BLOG fara emoji -->
+    <a href="#" class="blog-link">BLOG</a>
   </div>
 
   <header class="header-heavy">
@@ -611,7 +625,7 @@
     <div class="container-imperial">
       <main>
 
-        <!-- Hero section - fara margin-top pentru a nu impinge header-ul -->
+        <!-- Hero section -->
         <div class="hero-compact" style="margin-top: 0; margin-bottom: 30px;">
           <div>
             <h1 class="heavy-red">TOT CE VREI SA VEI<br>ORICAND. ORIUNDE.</h1>
@@ -659,89 +673,8 @@
           <div class="offer-note">CONEXIUNILE MERG DOAR PE O SINGURA ADRESA IP</div>
         </div>
 
-        <!-- planuri preturi -->
+        <!-- planuri preturi cu preturile actualizate: 10.99, 35.99, 64.99, 96.99 -->
         <div style="display:flex; flex-wrap:wrap; gap: 1.8rem; justify-content:center; margin-bottom: 40px;">
           <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">1 LUNA</h2><p>4 CONEXIUNI</p><p class="price-old">€19.99</p><div class="price-new">€10.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
           <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">4 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€35.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">8 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€64.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">14 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€132.99</p><div class="price-new">€96.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
-        </div>
-
-        <!-- Sectiune aplicatie cu spatiu marit intre text si buton -->
-        <div class="glass-majestic app-section">
-          <div style="flex:1;">
-            <h2 class="heavy-red" style="font-size:1.6rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2>
-            <p style="font-size:0.95rem; margin-bottom: 20px;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p>
-            <a href="#" class="btn-heavy">INCEARCA ACUM</a>
-          </div>
-        </div>
-
-        <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
-        <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
-
-        <!-- FAQ redus -->
-        <div class="faq-compact" style="background: rgba(12,8,24,0.85);">
-          <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
-          <div class="faq-spacer"></div>
-          <details><summary>METODE DE PLATA</summary><p>Paypal, Credit Card</p></details>
-          <details><summary>PE CE DISPOZITIVE POT VIZIONA?</summary><p>Smart TV, Android Box, iOS/Android, Chromecast, Amazon Fire TV si altele.</p></details>
-          <details><summary>CUM VOI PRIMI ACCES LA SERVICIU?</summary><p>Dupa plata, veti fi contactat pe email in mai putin de 30 minute cu datele de autentificare.</p></details>
-          <details><summary>CE CANALE SUNT DISPONIBILE?</summary><p>Peste 47.000 canale TV live, inclusiv sport (Champions League, Premier League, NBA, NFL, F1), filme, entertainment.</p></details>
-          <details><summary>PUTEM INREGISTRA PROGRAMEELE?</summary><p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p></details>
-        </div>
-
-        <div style="background: transparent; text-align:center; padding: 30px 20px; margin: 20px 0;"><h2 style="font-size:1.4rem; font-weight:800; color:#f0e2c5;">SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2><a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-heavy" style="margin-top: 24px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a></div>
-      </main>
-    </div>
-  </div>
-
-  <footer class="footer-elegant">
-    <div><img src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania Logo" style="max-width: 220px; width: 100%;"></div>
-    <p style="margin: 20px auto; max-width:700px;"><strong>IPTV 24 ROMANIA – TOT CE VREI SA VEI. ORICAND. ORIUNDE.</strong> Mii de filme, seriale si canale TV live.</p>
-    <div class="footer-links">
-      <a href="#">POLITICA CONFIDENTIALITATE</a>
-      <a href="#">POLITICA RETUR</a>
-      <a href="#">GHID INSTALARE</a>
-      <a href="#">LISTA CANALE</a>
-      <a href="#">CONTACT</a>
-    </div>
-    <div style="margin-top: 20px;">COPYRIGHT © IPTV 24 ROMANIA | <a href="/cdn-cgi/l/email-protection" style="color:#ffa5a5;">OFFICE@IPTV24ROMANIA.COM</a></div>
-    <div style="margin-top: 24px;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="200" alt="Metode de plata"></div>
-  </footer>
-</div>
-
-<script>
-  const posterImages = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp","https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp","https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp","https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp","https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp","https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp","https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp","https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
-  ];
-  const trackFilme = document.getElementById('filmCarouselTrack');
-  if (trackFilme) {
-    let html = '';
-    for (let repeat = 0; repeat < 2; repeat++) {
-      posterImages.forEach(imgUrl => { html += `<img src="${imgUrl}" alt="movie poster" loading="lazy">`; });
-    }
-    trackFilme.innerHTML = html;
-  }
-  const testimonialImgUrls = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/testi1-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi2-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi3-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi8-768x1496-1.jpg"
-  ];
-  const trackTestimoniale = document.getElementById('testimonialsTrack');
-  if (trackTestimoniale) {
-    let htmlTest = '';
-    for (let repeat = 0; repeat < 2; repeat++) {
-      testimonialImgUrls.forEach(imgUrl => { htmlTest += `<img src="${imgUrl}" alt="client review" loading="lazy">`; });
-    }
-    trackTestimoniale.innerHTML = htmlTest;
-  }
-  const hamburger = document.getElementById('hamburgerBtn');
-  const sideMenu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('navOverlay');
-  const closeBtn = document.getElementById('closeMenuBtn');
-  function openMenu() { sideMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeMenu() { sideMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-  hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-</script>
-</body>
-</html>
+          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">8 LUN
