@@ -36,7 +36,7 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 1; /* redus pentru a nu interfera cu header-ul si butoanele */
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjU1IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2YpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+');
     background-repeat: repeat;
     mix-blend-mode: overlay;
@@ -103,10 +103,12 @@
     box-shadow: 0 0 18px rgba(236,39,39,0.5);
   }
 
+  /* container-imperial cu display: flow-root pentru a izola marginile si a preveni margin collapsing */
   .container-imperial {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 28px;
+    display: flow-root; /* previne margin collapsing - garanteaza ca header-ul nu mai sare */
   }
 
   /* ===== MODIFICARI HAMBURGER + HEADER STICKY ===== */
@@ -311,9 +313,10 @@
     }
   }
 
-  /* Sectiune hero compacta - fix margin collapsing */
+  /* Sectiune hero compacta - fara margin-top care cauzeaza margin collapsing */
   .hero-compact {
     margin: 0;
+    margin-bottom: 30px;
     position: relative;
     border-radius: 2rem;
     overflow: hidden;
@@ -341,7 +344,7 @@
     margin-top: 20px;
   }
 
-  /* spatiu intre Suport 24/7 si CUMPARA - redus */
+  /* spatiu intre Suport 24/7 si CUMPARA - redus (deja implementat) */
   .card-royal .list-heavy {
     margin-bottom: 8px;
   }
@@ -381,6 +384,25 @@
   .compact-services p {
     font-size: 0.95rem !important;
     margin: 12px auto !important;
+  }
+
+  /* Sectiune aplicatie - spatiu marit intre text si buton */
+  .app-section {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 36px;
+    margin: 40px 0;
+    padding: 32px 30px;
+    text-align: center;
+  }
+  .app-section .btn-heavy {
+    margin-top: 8px;
+  }
+  @media (min-width: 768px) {
+    .app-section {
+      gap: 42px;
+    }
   }
 
   /* FAQ redus */
@@ -572,7 +594,7 @@
     <a href="#" class="nav-link">LISTA CANALE</a>
     <a href="#" class="nav-link">GHID INSTALARE</a>
     <a href="#" class="nav-link">PRETURI</a>
-    <!-- BLOG ca link normal in meniu, fara efecte speciale -->
+    <!-- BLOG ca link normal in meniu -->
     <a href="#" class="blog-link">📰 BLOG</a>
   </div>
 
@@ -589,8 +611,8 @@
     <div class="container-imperial">
       <main>
 
-        <!-- Hero section compacta - fara margin collapsing -->
-        <div class="hero-compact" style="margin-top: 30px; margin-bottom: 30px;">
+        <!-- Hero section - fara margin-top pentru a nu impinge header-ul -->
+        <div class="hero-compact" style="margin-top: 0; margin-bottom: 30px;">
           <div>
             <h1 class="heavy-red">TOT CE VREI SA VEI<br>ORICAND. ORIUNDE.</h1>
             <p style="font-size: clamp(1.2rem,4vw,1.6rem); font-weight:700;">TESTEAZA ACUM</p>
@@ -637,7 +659,7 @@
           <div class="offer-note">CONEXIUNILE MERG DOAR PE O SINGURA ADRESA IP</div>
         </div>
 
-        <!-- planuri preturi cu spatiu redus intre Suport 24/7 si CUMPARA -->
+        <!-- planuri preturi -->
         <div style="display:flex; flex-wrap:wrap; gap: 1.8rem; justify-content:center; margin-bottom: 40px;">
           <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">1 LUNA</h2><p>4 CONEXIUNI</p><p class="price-old">€19.99</p><div class="price-new">€10.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
           <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">4 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€35.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
@@ -645,7 +667,14 @@
           <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">14 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€132.99</p><div class="price-new">€96.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
         </div>
 
-        <div class="glass-majestic" style="display:flex; flex-wrap:wrap; align-items:center; gap: 30px; margin: 40px 0; padding: 30px; text-align:center;"><div style="flex:1;"><h2 class="heavy-red" style="font-size:1.6rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2><p style="font-size:0.95rem;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p><a href="#" class="btn-heavy">INCEARCA ACUM</a></div></div>
+        <!-- Sectiune aplicatie cu spatiu marit intre text si buton -->
+        <div class="glass-majestic app-section">
+          <div style="flex:1;">
+            <h2 class="heavy-red" style="font-size:1.6rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2>
+            <p style="font-size:0.95rem; margin-bottom: 20px;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p>
+            <a href="#" class="btn-heavy">INCEARCA ACUM</a>
+          </div>
+        </div>
 
         <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
