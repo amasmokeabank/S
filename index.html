@@ -227,29 +227,9 @@
     border-bottom-color: #EC2727;
     transform: translateX(6px);
   }
-  /* Buton inchidere perfect drept si centrat */
+  /* buton inchidere complet eliminat */
   .close-menu-btn {
-    position: absolute;
-    top: 24px;
-    right: 24px;
-    background: rgba(236,39,39,0.2);
-    border: none;
-    color: #ffc2c2;
-    font-size: 26px;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.2s;
-    line-height: 1;
-    padding: 0;
-  }
-  .close-menu-btn:hover {
-    background: #EC2727;
-    color: white;
+    display: none;
   }
   .desktop-nav-links {
     display: none;
@@ -428,7 +408,7 @@
     }
   }
 
-  /* FAQ - fara fundal violet, fara chenar dreapta, doar linie rosie stanga */
+  /* FAQ - fara fundal violet, fara chenar dreapta, doar linie rosie stanga (ca in versiunea anterioara) */
   .faq-compact {
     margin: 40px 0 50px !important;
     padding: 20px 24px !important;
@@ -468,6 +448,7 @@
     margin-bottom: 0.8rem;
   }
 
+  /* footer fara pipe-uri */
   .footer-elegant {
     background: #03010a;
     border-top: 3px solid #c93a3a;
@@ -478,7 +459,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 24px;
+    gap: 28px;
     margin: 25px 0;
   }
   .footer-links a {
@@ -490,6 +471,10 @@
   }
   .footer-links a:hover {
     color: #EC2727;
+  }
+  /* ascundem orice separator vertical */
+  .footer-links .sep {
+    display: none;
   }
 
   .nav-link {
@@ -596,7 +581,6 @@
 
   <div class="nav-overlay" id="navOverlay"></div>
   <div class="side-menu" id="sideMenu">
-    <button class="close-menu-btn" id="closeMenuBtn">✕</button>
     <a href="#" class="nav-link">ACASA</a>
     <a href="#" class="nav-link">LISTA CANALE</a>
     <a href="#" class="nav-link">GHID INSTALARE</a>
@@ -678,7 +662,7 @@
         <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
 
-        <!-- FAQ fara fundal violet, fara chenar dreapta -->
+        <!-- FAQ fara fundal violet, fara chenar dreapta, asa cum a fost in versiunea anterioara -->
         <div class="faq-compact">
           <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
           <div class="faq-spacer"></div>
@@ -735,11 +719,9 @@
   const hamburger = document.getElementById('hamburgerBtn');
   const sideMenu = document.getElementById('sideMenu');
   const overlay = document.getElementById('navOverlay');
-  const closeBtn = document.getElementById('closeMenuBtn');
   function openMenu() { sideMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
   function closeMenu() { sideMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
   hamburger.addEventListener('click', openMenu);
-  closeBtn.addEventListener('click', closeMenu);
   overlay.addEventListener('click', closeMenu);
 </script>
 </body>
