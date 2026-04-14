@@ -227,7 +227,6 @@
     border-bottom-color: #EC2727;
     transform: translateX(6px);
   }
-  /* buton inchidere complet eliminat */
   .close-menu-btn {
     display: none;
   }
@@ -298,7 +297,7 @@
     }
   }
 
-  /* Hero section - texte pe o singura linie */
+  /* Hero section - text scurt pe o singura linie */
   .hero-compact {
     margin: 0;
     margin-bottom: 30px;
@@ -350,7 +349,6 @@
     margin-bottom: 0;
   }
 
-  /* preturile ridicate mai sus */
   .price-new {
     font-size: 2.6rem;
     font-weight: 900;
@@ -408,7 +406,7 @@
     }
   }
 
-  /* FAQ - fara fundal violet, fara chenar dreapta, doar linie rosie stanga (ca in versiunea anterioara) */
+  /* FAQ - fara triunghiuri, doar romb si linie rosie stanga, fara chenar dreapta */
   .faq-compact {
     margin: 40px 0 50px !important;
     padding: 20px 24px !important;
@@ -428,21 +426,32 @@
     padding: 0.6rem 1.2rem;
     border-left: 4px solid var(--red-primary);
     border-right: none;
+    border-top: none;
+    border-bottom: none;
     text-align: left;
   }
+  /* Ascundem complet marker-ul default (triunghiul) */
   .faq-compact summary {
     font-size: 0.9rem !important;
     font-weight: 700;
     color: #ffb3b3;
+    list-style: none;
+    display: block;
+    cursor: pointer;
+  }
+  .faq-compact summary::-webkit-details-marker {
+    display: none;
   }
   .faq-compact summary::before {
     content: "◈ ";
     color: var(--red-primary);
     font-size: 0.9rem;
+    display: inline-block;
+    margin-right: 6px;
   }
   .faq-compact details p {
     font-size: 0.75rem;
-    padding: 4px 0 2px;
+    padding: 6px 0 2px 18px;
   }
   .faq-spacer {
     margin-bottom: 0.8rem;
@@ -472,7 +481,6 @@
   .footer-links a:hover {
     color: #EC2727;
   }
-  /* ascundem orice separator vertical */
   .footer-links .sep {
     display: none;
   }
@@ -608,7 +616,7 @@
             <p style="font-size: 1.3rem; font-weight:800; background:rgba(0,0,0,0.5); display:inline-block; padding:0 25px; border-radius:60px; white-space: nowrap;">GRATUIT PENTRU 24 ORE</p>
             <div style="margin-top: 28px;"><a href="#" class="btn-heavy">TESTEAZA ACUM</a></div>
             <div class="plain-text-lines">
-              <p>Peste 10.000 canale TV HD & 4K, locale si internationale</p>
+              <p>10k canale TV HD, 4K, locale & internaționale</p>
               <p>Biblioteca cu filme si seriale populare actualizata</p>
               <p>Fara antene. Fara cabluri. Fara contracte complicate.</p>
             </div>
@@ -662,7 +670,7 @@
         <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
 
-        <!-- FAQ fara fundal violet, fara chenar dreapta, asa cum a fost in versiunea anterioara -->
+        <!-- FAQ fara triunghiuri, doar romb si linie rosie stanga -->
         <div class="faq-compact">
           <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
           <div class="faq-spacer"></div>
