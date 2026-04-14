@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ExtraVisa — визы в любую страну без отказа</title>
+    <meta name="description" content="100% оформление виз в США, Шенген, Англию, Канаду. Сложные случаи, чистые паспорта, срочно. Оплата по факту. Космический подход к визам.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+            background: #ffffff;
+            color: #111;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        /* супер минимализм, чб акценты, чистый воздух */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header */
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #eaeef2;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.96);
+        }
+        .header-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 16px 0;
+        }
+        .logo {
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: -0.02em;
+            text-decoration: none;
+            color: #000;
+        }
+        .logo span:first-child { color: #f97316; }
+        .logo span:last-child { color: #0f172a; background: #f1f5f9; padding: 0 6px; border-radius: 20px; font-size: 1.2rem;}
+        .logo small { font-size: 0.75rem; font-weight: 400; color: #475569; margin-left: 8px; }
+
+        .contacts {
+            text-align: right;
+        }
+        .phone {
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.3px;
+            color: #0f172a;
+            text-decoration: none;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+        .phone a {
+            text-decoration: none;
+            color: #0f172a;
+            background: #f8fafc;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+        .phone a:hover { background: #f97316; color: white; }
+        .worktime { font-size: 0.7rem; color: #f97316; font-weight: 500; margin-top: 4px;}
+
+        /* навигация — лаконичная */
+        .nav {
+            background: #0f172a;
+            border-radius: 60px;
+            margin: 12px 0 16px;
+            padding: 0 8px;
+        }
+        .nav-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+            list-style: none;
+        }
+        .nav-list li a {
+            display: inline-block;
+            padding: 10px 18px;
+            color: #e2e8f0;
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+            border-radius: 40px;
+        }
+        .nav-list li a:hover { background: #f97316; color: white; }
+
+        /* hero слайдер — заглушки изображений, но эффект */
+        .hero {
+            background: #0a0c10;
+            border-radius: 32px;
+            margin: 24px 0;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-placeholder {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            gap: 0;
+        }
+        .slide-place {
+            flex: 0 0 100%;
+            scroll-snap-align: start;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            height: 380px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        /* заглушки для картинок (placeholder) */
+        .slide-place[data-img="1"] { background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiIHZpZXdCb3g9IjAgMCAxOTIwIDEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMxZTJiM2IiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1zaXplPSI0MCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPldBTEwgU1RSRUVUIE5PIENPTlRST0xTPC90ZXh0Pjwvc3ZnPg=='); background-size: cover; }
+        .slide-place[data-img="2"] { background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOTIwIiBoZWlnaHQ9IjEwODAiPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiMyMjJiNDUiLz48Y2lyY2xlIGN4PSI5NjAiIGN5PSI1NDAiIHI9IjEwMCIgZmlsbD0iI2Y5NzMxNiIgb3BhY2l0eT0iMC4zIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZpbGw9IndoaXRlIiBmb250LXNpemU9IjI4IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5WSVNBICsgR0FSQU5USUVTPC90ZXh0Pjwvc3ZnPg=='); background-size: cover; }
+        .slide-text {
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(12px);
+            padding: 20px 32px;
+            border-radius: 60px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        /* преимущества грид */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 32px;
+            margin: 48px 0;
+        }
+        .benefit-card {
+            background: #f8fafc;
+            padding: 28px 24px;
+            border-radius: 32px;
+            transition: all 0.2s;
+            border: 1px solid #eef2ff;
+        }
+        .benefit-card:hover { transform: translateY(-4px); border-color: #f97316; }
+        .benefit-icon {
+            font-size: 2.6rem;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+        h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+        .tagline {
+            background: #f97316;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 600;
+            display: inline-block;
+            font-size: 0.75rem;
+        }
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+            margin: 40px 0;
+        }
+        .service-item {
+            background: white;
+            border-radius: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.05);
+            padding: 24px;
+            text-align: center;
+            border: 1px solid #edf2f7;
+            transition: 0.2s;
+        }
+        .service-item .flag-place {
+            width: 80px;
+            height: 80px;
+            background: #f1f5f9;
+            border-radius: 100px;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.6rem;
+        }
+        .btn-outline {
+            margin-top: 20px;
+            display: inline-block;
+            background: none;
+            border: 1.5px solid #f97316;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #f97316;
+            transition: 0.2s;
+        }
+        .btn-outline:hover { background: #f97316; color: white; }
+        .btn-full {
+            background: #0f172a;
+            color: white;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-full:hover { background: #f97316; transform: scale(0.98); }
+
+        .form-block {
+            background: #f1f5f9;
+            border-radius: 48px;
+            padding: 48px 32px;
+            margin: 48px 0;
+            text-align: center;
+        }
+        .form-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 28px;
+        }
+        .form-grid input, .form-grid textarea {
+            padding: 14px 20px;
+            border-radius: 60px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            flex: 1 1 240px;
+            background: white;
+        }
+        .form-grid textarea { flex-basis: 100%; border-radius: 32px; resize: vertical; min-height: 100px; }
+        button { background: #f97316; border: none; cursor: pointer; color: white; font-weight: bold; padding: 14px 32px; border-radius: 60px; transition: 0.2s;}
+        button:hover { background: #ea580c; }
+
+        .faq-item {
+            background: white;
+            border-radius: 28px;
+            margin-bottom: 16px;
+            border: 1px solid #eef2ff;
+            overflow: hidden;
+        }
+        .faq-q {
+            padding: 20px 24px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .faq-q .marker {
+            background: #0f172a;
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+        }
+        .faq-a {
+            padding: 0 24px 20px 68px;
+            display: none;
+            color: #334155;
+        }
+        .faq-item.open .faq-a { display: block; }
+
+        .map-place {
+            background: #e2e8f0;
+            border-radius: 28px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #475569;
+            font-weight: 500;
+            margin: 40px 0;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjY2JkNWUxIj48cGF0aCBkPSJNMTIgMkM3LjU4IDIgNCA1LjU4IDQgMTBjMCA0LjQyIDggMTIgOCAxMnM4LTcuNTggOC0xMmMwLTQuNDItMy41OC04LTgtOHoiLz48Y2lyY2xlIGN4PSIxMiIgY3k9IjEwIiByPSIzIi8+PC9zdmc+') repeat center/40px;
+        }
+        .address-card {
+            background: white;
+            border-radius: 24px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        footer {
+            background: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 32px 0;
+            margin-top: 40px;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 720px) {
+            .header-inner { flex-direction: column; text-align: center; }
+            .contacts { text-align: center; }
+            .phone { justify-content: center; }
+            .slide-text { font-size: 1.2rem; padding: 12px 20px; }
+            .slide-place { height: 280px; }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <span>Экстра</span><span>Виза</span>
+                <small>визовый центр</small>
+            </a>
+            <div class="contacts">
+                <div class="phone">
+                    <a href="tel:84957698586">+7 (495) 769-85-86</a>
+                    <a href="tel:89167778586">+7 (916) 777-85-86</a>
+                </div>
+                <div class="worktime">пн-сб 10:00–21:00 · без выходных для клиентов</div>
+                <div>✉ operatorinform@mail.ru</div>
+            </div>
+        </div>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Шенген</a></li>
+                <li><a href="#">США</a></li>
+                <li><a href="#">Канада</a></li>
+                <li><a href="#">Англия</a></li>
+                <li><a href="#">Другие страны</a></li>
+                <li><a href="#">Загранпаспорт</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <!-- герой-слайдер (заглушки) -->
+        <div class="hero">
+            <div class="slider-placeholder" id="heroSlider">
+                <div class="slide-place" data-img="1"><div class="slide-text">ВИЗА 100% <br> БЕЗ ОТКАЗА</div></div>
+                <div class="slide-place" data-img="2"><div class="slide-text">СЛОЖНЫЕ СЛУЧАИ<br>РЕАЛЬНАЯ ПОМОЩЬ</div></div>
+                <div class="slide-place" data-img="1"><div class="slide-text">ШЕНГЕН, США, АНГЛИЯ<br>ЗА 2 ДНЯ</div></div>
+            </div>
+        </div>
+
+        <!-- преимущества как космический корабль -->
+        <div class="grid-2col">
+            <div class="benefit-card"><div class="benefit-icon">🚀</div><h3>100% гарантия</h3><p>Оформление даже после отказов. Работаем по факту получения — оплата после визы.</p></div>
+            <div class="benefit-card"><div class="benefit-icon">⚡</div><h3>Срочная виза от 2 дней</h3><p>Без сокращения срока. Биометрия, собеседование — всё под ключ.</p></div>
+            <div class="benefit-card"><div class="benefit-icon">📄</div><h3>По двум документам</h3><p>Загранпаспорт + фото — и мультивиза готова, даже в чистый паспорт.</p></div>
+            <div class="benefit-card"><div class="benefit-icon">🌍</div><h3>Дистанционно / курьер 0₽</h3><p>Живите где угодно — документы заберем бесплатно, привезем готовую визу.</p></div>
+        </div>
+
+        <!-- наши услуги (заглушки флагов иконками) -->
+        <div style="text-align: center;"><span class="tagline">Миссия выполнима</span><h2 style="margin: 16px 0;">КЛЮЧЕВЫЕ НАПРАВЛЕНИЯ</h2></div>
+        <div class="service-grid">
+            <div class="service-item"><div class="flag-place">🇪🇺</div><h3>Шенген</h3><p>Мультивиза 1-5 лет. 100% в чистый паспорт.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+            <div class="service-item"><div class="flag-place">🇺🇸</div><h3>США</h3><p>B1/B2, собеседование, срочно. Поддержка адвокатов.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+            <div class="service-item"><div class="flag-place">🇨🇦</div><h3>Канада</h3><p>Гостевые визы, транзит. Опыт 10+ лет.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+            <div class="service-item"><div class="flag-place">🇬🇧</div><h3>Англия</h3><p>Стандарт, премиум. Сложные случаи.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+            <div class="service-item"><div class="flag-place">🌏</div><h3>Другие страны</h3><p>Австралия, Япония, Китай, Новая Зеландия.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+            <div class="service-item"><div class="flag-place">🛂</div><h3>Загранпаспорт</h3><p>Биометрия, новый паспорт, срочно. Оформление 3 дня.</p><a href="#" class="btn-outline">Подробнее →</a></div>
+        </div>
+
+        <!-- Гарантии список -->
+        <div style="background: #0f172a; border-radius: 48px; padding: 48px 32px; margin: 40px 0; color: white;">
+            <h2 style="color: white;">НАШИ ГАРАНТИИ — ЭТО РАКЕТА</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 12px; margin-top: 28px;">
+                <div>✅ Шенген мульти до 5 лет в чистый паспорт</div>
+                <div>✅ Виза после отказа — реальная помощь</div>
+                <div>✅ VIP клиентам и обслуживающему персоналу</div>
+                <div>✅ Оплата по факту получения</div>
+                <div>✅ Бесплатный курьер по Москве</div>
+                <div>✅ Консультация 24/7 для клиентов</div>
+            </div>
+        </div>
+
+        <!-- Как мы работаем 4 шага -->
+        <div style="margin: 48px 0;"><h2 style="text-align: center;">🚀 КАК МЫ РАБОТАЕМ</h2>
+        <div class="grid-2col">
+            <div class="benefit-card"><span style="font-size: 3rem;">1</span><h3>Звонок / письмо</h3><p>Присылайте документы, мы анализируем ситуацию.</p></div>
+            <div class="benefit-card"><span style="font-size: 3rem;">2</span><h3>Предлагаем решение</h3><p>Готовим идеальный пакет, стратегию под посольство.</p></div>
+            <div class="benefit-card"><span style="font-size: 3rem;">3</span><h3>Подача и контроль</h3><p>Отслеживаем статус, решаем вопросы без вас.</p></div>
+            <div class="benefit-card"><span style="font-size: 3rem;">4</span><h3>Готово!</h3><p>Доставка паспорта с визой в любую точку.</p></div>
+        </div></div>
+
+        <!-- форма захвата (супер конверсия) -->
+        <div class="form-block">
+            <span class="tagline">Бесплатный разбор вашего кейса</span>
+            <h2 style="margin: 16px 0;">Оставьте заявку — получите визу без отказа</h2>
+            <p style="margin-bottom: 20px;">Ответим через 15 минут в рабочее время. Сложные случаи — наша стихия.</p>
+            <form id="quickForm" action="#" method="post">
+                <div class="form-grid">
+                    <input type="text" placeholder="Ваше имя *" required>
+                    <input type="tel" placeholder="Телефон *" required>
+                    <input type="email" placeholder="E-mail *" required>
+                    <textarea placeholder="Опишите ситуацию: куда виза, какие отказы, срочность..."></textarea>
+                    <button type="submit">👉 Получить план визы 100%</button>
+                </div>
+                <p style="font-size: 0.7rem; margin-top: 16px;">Нажимая, вы соглашаетесь с обработкой данных. Никакого спама, только визовый космос.</p>
+            </form>
+        </div>
+
+        <!-- Вопрос-ответ (аккордеон) -->
+        <h2 style="margin: 40px 0 16px;">❓ КОСМИЧЕСКИЕ ОТВЕТЫ</h2>
+        <div id="faqBlock">
+            <div class="faq-item"><div class="faq-q"><span class="marker">?</span>Как оформить визу, если я не в Москве?</div><div class="faq-a">Мы работаем со всей РФ. Курьер бесплатно приедет к вам, либо вы пришлете документы почтой. Дистанционное сопровождение полное.</div></div>
+            <div class="faq-item"><div class="faq-q"><span class="marker">?</span>Вы делаете визы гражданам СНГ?</div><div class="faq-a">Да, имеем успешный опыт. Позвоните, уточним детали под вашу ситуацию.</div></div>
+            <div class="faq-item"><div class="faq-q"><span class="marker">?</span>Почему нет цен на сайте?</div><div class="faq-a">У нас индивидуальный подход: цена зависит от сложности. После бесплатной консультации называем финальную стоимость. Минимум — дешевле рынка, сложные кейсы — честная цена.</div></div>
+            <div class="faq-item"><div class="faq-q"><span class="marker">?</span>Сколько страниц нужно в загранпаспорте?</div><div class="faq-a">Минимум 2 свободные страницы. При необходимости поможем срочно оформить новый паспорт.</div></div>
+            <div class="faq-item"><div class="faq-q"><span class="marker">?</span>Есть ли гарантия получения?</div><div class="faq-a">100% гарантия или возврат денег за наши услуги. Подготовим документы так, чтобы посольство сказало "ДА".</div></div>
+        </div>
+
+        <!-- Заглушка видео (иконка) -->
+        <div style="background: #eef2ff; border-radius: 32px; padding: 36px; text-align: center; margin: 48px 0;">
+            <div style="font-size: 3rem;">🎬</div>
+            <h3>Видео-инструкция: как получить визу без стресса</h3>
+            <div style="background: #cbd5e1; width: 100%; max-width: 560px; margin: 20px auto; border-radius: 28px; height: 200px; display: flex; align-items: center; justify-content: center; gap: 8px; color: #334155;">
+                ▶️ Заглушка видео-презентации (инсайды от визового эксперта)
+            </div>
+            <p>Секреты одобрения от наших партнёров — бывших сотрудников консульств.</p>
+        </div>
+
+        <!-- карта / схема проезда (заглушка) -->
+        <div class="address-card">
+            <h3>Как добраться до штаба «ЭкстраВиза»</h3>
+            <div class="map-place"></div>
+            <p>📍 1-й Люсиновский переулок, дом 3Б, м. Добрынинская<br>☎️ 8 (495) 769-85-86 | ежедневно с 10:00 до 21:00</p>
+            <a href="#" class="btn-full" style="background: #f97316;">Построить маршрут</a>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 ЭкстраВиза — визовый центр №1 для россиян. Визы в 80+ стран, включая США, Канаду, Шенген, Англию, Японию, Австралию.</p>
+        <p style="margin-top: 12px;">Внимание: мы НЕ оформляем рабочие/студенческие визы, ВНЖ и гражданство. Только визы для путешествий и бизнеса с гарантией.</p>
+    </div>
+</footer>
+
+<script>
+    // Аккордеон FAQ
+    const faqs = document.querySelectorAll('.faq-item');
+    faqs.forEach(item => {
+        const q = item.querySelector('.faq-q');
+        q.addEventListener('click', () => {
+            item.classList.toggle('open');
+        });
+    });
+    // Простой слайдер (авто)
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-place');
+    if(slides.length) {
+        setInterval(() => {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides.forEach(s => s.style.display = 'flex');
+            const container = document.querySelector('.slider-placeholder');
+            if(container) container.scrollTo({ left: currentSlide * container.clientWidth, behavior: 'smooth' });
+        }, 4200);
+    }
+    // форма - эмуляция отправки (без реального бекенда, но для конверсии)
+    const form = document.getElementById('quickForm');
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('🚀 Заявка принята! Наш специалист свяжется с вами в ближайшее время. Вместе к визе без отказа!');
+            form.reset();
+        });
+    }
+    // добавим навигацию по якорям для мобил
+    document.querySelectorAll('.nav-list a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            if(this.getAttribute('href') === '#') e.preventDefault();
+        });
+    });
+    // для кнопки "написать нам" - скролл к форме
+    const writeBtn = document.querySelector('.btn-full');
+    if(writeBtn) {
+        writeBtn.addEventListener('click', () => {
+            document.querySelector('.form-block').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    // курс валют (имитация, чтобы было живо)
+    const usdSpan = document.createElement('span');
+    const eurSpan = document.createElement('span');
+    const kursDiv = document.querySelector('.worktime');
+    if(kursDiv) {
+        const rateDiv = document.createElement('div');
+        rateDiv.style.fontSize = '0.7rem';
+        rateDiv.style.marginTop = '6px';
+        rateDiv.innerHTML = `USD ~ 92.3 ₽ &nbsp;|&nbsp; EUR ~ 99.8 ₽`;
+        kursDiv.after(rateDiv);
+    }
+</script>
+</body>
+</html>
