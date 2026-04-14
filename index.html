@@ -87,7 +87,6 @@
     text-align: center;
     transition: none;
   }
-  /* Eliminam hover si transformari */
   .card-royal:hover {
     transform: none;
     border-color: rgba(236, 39, 39, 0.3);
@@ -177,8 +176,8 @@
   .side-menu {
     position: fixed;
     top: 0;
-    left: -280px;
-    width: 280px;
+    left: -320px;
+    width: 320px;
     height: 100%;
     background: linear-gradient(145deg, rgba(12, 7, 24, 0.98), rgba(5, 3, 12, 0.98));
     backdrop-filter: blur(20px);
@@ -249,6 +248,7 @@
     }
     .side-menu {
       width: 260px;
+      left: -260px;
     }
   }
   @media (min-width: 781px) {
@@ -257,6 +257,7 @@
     }
     .side-menu {
       width: 320px;
+      left: -320px;
     }
   }
 
@@ -408,7 +409,7 @@
     }
   }
 
-  /* FAQ - fara efecte, doar simbol rosu */
+  /* FAQ - doar pe desktop centram intrebarile, pe mobil ramane default */
   .faq-compact {
     margin: 40px 0 20px !important;
     padding: 20px 0 !important;
@@ -419,6 +420,7 @@
   .faq-compact h2 {
     font-size: 1.4rem !important;
     margin-bottom: 20px;
+    text-align: center;
   }
 
   .faq-compact details {
@@ -463,6 +465,16 @@
     line-height: 1.5;
   }
 
+  /* Doar pe desktop: centram continutul fiecarui details (intrebare + raspuns) */
+  @media (min-width: 992px) {
+    .faq-compact details {
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+  }
+
   /* Sectiune contact - spatiu redus */
   .contact-section {
     background: transparent;
@@ -477,7 +489,7 @@
     margin-bottom: 20px;
   }
 
-  /* footer fara pipe-uri si fara separator */
+  /* footer fara pipe-uri */
   .footer-elegant {
     background: #03010a;
     border-top: 3px solid #c93a3a;
@@ -660,7 +672,8 @@
           <div class="card-royal" style="flex:1 1 280px;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EC2727" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"/><path d="M9 4 L12 8 L15 4" stroke="currentColor"/><circle cx="12" cy="12" r="2" stroke="currentColor"/></svg></div><h2 class="heavy-red" style="font-size:1.7rem;">SERIALE TOP</h2><p>Ultimele episoade din seriale populare pe dispozitiv.</p></div>
         </div>
 
-        <div style="text-align:center; margin: 20px 0 20px;"><h2 class="heavy-red" style="font-size:2rem;">+10,000 FILME SI SERIALE DE TOP</h2></div>
+        <!-- Titlu mutat mai jos -->
+        <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:2rem;">+10,000 FILME SI SERIALE DE TOP</h2></div>
         <div class="infinite-carousel"><div class="carousel-track" id="filmCarouselTrack"></div></div>
 
         <div class="glass-majestic compact-services">
@@ -701,7 +714,7 @@
         <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
 
-        <!-- Sectiunea FAQ -->
+        <!-- Sectiunea FAQ cu intrebari centrate doar pe desktop -->
         <div class="faq-compact">
           <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
           <div class="faq-spacer"></div>
@@ -712,7 +725,7 @@
           <details><summary>PUTEM INREGISTRA PROGRAMEELE?</summary><p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p></details>
         </div>
 
-        <!-- Sectiune contact cu spatiu redus fata de FAQ -->
+        <!-- Sectiune contact -->
         <div class="contact-section">
           <h2>SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2>
           <a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-heavy" style="margin-top: 20px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a>
