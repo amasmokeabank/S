@@ -183,7 +183,7 @@
   .side-menu.open {
     left: 0;
   }
-  .side-menu a, .side-menu .blog-placeholder {
+  .side-menu a {
     color: #f0e2c5;
     text-decoration: none;
     font-weight: 700;
@@ -199,25 +199,25 @@
     border-bottom-color: #EC2727;
     transform: translateX(6px);
   }
-  .blog-placeholder {
-    cursor: default;
-    background: rgba(236,39,39,0.12);
-    border-radius: 18px;
-    padding: 14px 18px !important;
-    text-align: center;
-    font-weight: 800;
-    font-size: 1rem;
-    color: #ffb3b3;
-    border: 1px dashed rgba(236,39,39,0.5);
-    margin-top: 12px;
-    backdrop-filter: blur(4px);
-  }
-  .blog-placeholder span {
+  /* BLOG ca link normal in meniu (exact ca celelalte) */
+  .side-menu .blog-link {
+    color: #f0e2c5;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(236,39,39,0.3);
+    transition: 0.2s;
     display: block;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: #cfc5aa;
-    margin-top: 6px;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+  }
+  .side-menu .blog-link:hover {
+    color: #ffb3b3;
+    border-bottom-color: #EC2727;
+    transform: translateX(6px);
   }
   .close-menu-btn {
     position: absolute;
@@ -297,10 +297,6 @@
     .header-heavy {
       padding: 10px 16px;
     }
-    /* hero mai compact */
-    div[style*="min-height: 620px"] {
-      min-height: 420px !important;
-    }
     .plain-text-lines p {
       font-size: 0.7rem;
     }
@@ -315,14 +311,20 @@
     }
   }
 
-  /* Sectiune hero compacta (cerinta) */
+  /* Sectiune hero compacta - fix margin collapsing */
   .hero-compact {
-    margin: 30px 0 30px !important;
-    min-height: auto !important;
-    padding: 20px 0 !important;
+    margin: 0;
+    position: relative;
+    border-radius: 2rem;
+    overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/iptv24romania_tvbackground-scaled.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    text-align: center;
   }
-  .hero-compact div[style*="padding: 55px 24px"] {
-    padding: 35px 20px !important;
+  .hero-compact > div {
+    width: 100%;
+    padding: 35px 20px;
   }
   .hero-compact h1 {
     font-size: clamp(1.8rem,6vw,2.8rem) !important;
@@ -339,21 +341,51 @@
     margin-top: 20px;
   }
 
-  /* spatiu intre ACTIVARE INSTANT si CUMPARA */
-  .card-royal p:last-of-type {
-    margin-top: 18px;
-    margin-bottom: 0;
+  /* spatiu intre Suport 24/7 si CUMPARA - redus */
+  .card-royal .list-heavy {
+    margin-bottom: 8px;
   }
   .btn-wrapper {
-    margin-top: 24px;
+    margin-top: 12px;
   }
-  .card-royal .btn-heavy {
-    margin-top: 8px;
+  .card-royal p:last-of-type {
+    margin-top: 16px;
+    margin-bottom: 0;
   }
 
-  /* FAQ redus de 3 ori */
+  /* Sectiuni compacte pentru oferte si servicii */
+  .compact-offer {
+    text-align: center;
+    margin: 30px 0 20px;
+    padding: 10px 0;
+  }
+  .compact-offer h2 {
+    font-size: 1.6rem !important;
+    margin-bottom: 8px;
+  }
+  .compact-offer .offer-highlight {
+    font-size: 1.3rem !important;
+    margin: 8px 0;
+  }
+  .compact-offer .offer-note {
+    font-size: 0.85rem;
+    padding: 4px 16px;
+  }
+  .compact-services {
+    padding: 28px 20px !important;
+    margin: 40px 0 !important;
+  }
+  .compact-services h2 {
+    font-size: 1.6rem !important;
+  }
+  .compact-services p {
+    font-size: 0.95rem !important;
+    margin: 12px auto !important;
+  }
+
+  /* FAQ redus */
   .faq-compact {
-    margin: 40px 0 40px !important;
+    margin: 40px 0 50px !important;
     padding: 20px 24px !important;
     border-radius: 32px !important;
   }
@@ -370,9 +402,6 @@
     font-size: 0.9rem !important;
     font-weight: 700;
   }
-  .faq-compact summary::before {
-    font-size: 0.9rem;
-  }
   .faq-compact details p {
     font-size: 0.75rem;
     padding: 4px 0;
@@ -381,7 +410,7 @@
     margin-bottom: 0.8rem;
   }
 
-  /* footer restructurat elegant */
+  /* footer restructurat */
   .footer-elegant {
     background: #03010a;
     border-top: 3px solid #c93a3a;
@@ -404,9 +433,6 @@
   }
   .footer-links a:hover {
     color: #EC2727;
-  }
-  .footer-links span.sep {
-    display: none;
   }
 
   /* restul stilurilor originale */
@@ -475,29 +501,6 @@
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-  }
-  .offer-section {
-    text-align: center;
-    margin: 40px 0 30px;
-    padding: 20px 0;
-  }
-  .offer-section h2 {
-    font-size: 2rem;
-    margin-bottom: 15px;
-  }
-  .offer-section .offer-highlight {
-    color: #ff8a8a;
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin: 15px 0;
-  }
-  .offer-section .offer-note {
-    background: transparent;
-    display: inline-block;
-    padding: 6px 20px;
-    font-weight: 700;
-    color: var(--red-primary);
-    border-bottom: 1px solid rgba(236, 39, 39, 0.4);
   }
   .infinite-carousel {
     position: relative;
@@ -569,11 +572,8 @@
     <a href="#" class="nav-link">LISTA CANALE</a>
     <a href="#" class="nav-link">GHID INSTALARE</a>
     <a href="#" class="nav-link">PRETURI</a>
-    <!-- BLOG doar in hamburger (cerinta) -->
-    <div class="blog-placeholder">
-      📰 BLOG (COMING SOON)
-      <span>Știri, noutăți, ghiduri exclusive</span>
-    </div>
+    <!-- BLOG ca link normal in meniu, fara efecte speciale -->
+    <a href="#" class="blog-link">📰 BLOG</a>
   </div>
 
   <header class="header-heavy">
@@ -589,13 +589,13 @@
     <div class="container-imperial">
       <main>
 
-        <!-- Hero section compactata -->
-        <div class="hero-compact" style="position:relative; margin: 30px 0 30px; border-radius: 2rem; overflow:hidden; background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/iptv24romania_tvbackground-scaled.jpg') center/cover; display:flex; align-items:center; text-align:center;">
-          <div style="width:100%; padding: 35px 20px;">
-            <h1 class="heavy-red" style="font-size: clamp(1.8rem,6vw,2.8rem); font-weight:900; margin-bottom:0.6rem;">TOT CE VREI SA VEI<br>ORICAND. ORIUNDE.</h1>
-            <p style="font-size: clamp(1.2rem,4vw,1.6rem); font-weight:700; margin: 12px 0 10px;">TESTEAZA ACUM</p>
+        <!-- Hero section compacta - fara margin collapsing -->
+        <div class="hero-compact" style="margin-top: 30px; margin-bottom: 30px;">
+          <div>
+            <h1 class="heavy-red">TOT CE VREI SA VEI<br>ORICAND. ORIUNDE.</h1>
+            <p style="font-size: clamp(1.2rem,4vw,1.6rem); font-weight:700;">TESTEAZA ACUM</p>
             <p style="font-size: 1.3rem; font-weight:800; background:rgba(0,0,0,0.5); display:inline-block; padding:0 25px; border-radius:60px;">GRATUIT PENTRU 24 ORE</p>
-            <div style="margin-top: 28px;"><a href="#" class="btn-heavy" style="font-size:0.9rem; padding:10px 28px;">TESTEAZA ACUM</a></div>
+            <div style="margin-top: 28px;"><a href="#" class="btn-heavy">TESTEAZA ACUM</a></div>
             <div class="plain-text-lines">
               <p>Peste 10.000 de canale TV HD & 4K, locale si internationale</p>
               <p>O biblioteca actualizata constant cu filme si seriale populare</p>
@@ -605,19 +605,23 @@
         </div>
 
         <!-- 3 carduri principale -->
-        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 50px 0;">
+        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 40px 0 30px;">
           <div class="card-royal" style="flex:1 1 280px;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EC2727" stroke-width="1.2"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor"/><path d="M8 5 L12 9 L16 5" stroke="currentColor"/></svg></div><h2 class="heavy-red" style="font-size:1.9rem;">CALITATE PREMIUM</h2><p>Filme si seriale la calitate superioara. Acces instant pe orice dispozitiv.</p></div>
           <div class="card-royal" style="flex:1 1 280px;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EC2727" stroke-width="1.2"><path d="M4 4 L20 4 L20 20 L4 20 Z" stroke="currentColor"/><path d="M8 8 L16 8 M8 12 L14 12 M8 16 L12 16" stroke="currentColor"/></svg></div><h2 class="heavy-red" style="font-size:1.9rem;">CANALE PREMIUM</h2><p>Peste 30.000 de canale TV din toata lumea. Testeaza acum!</p></div>
           <div class="card-royal" style="flex:1 1 280px;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#EC2727" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"/><path d="M9 4 L12 8 L15 4" stroke="currentColor"/><circle cx="12" cy="12" r="2" stroke="currentColor"/></svg></div><h2 class="heavy-red" style="font-size:1.9rem;">SERIALE PENTRU TINE</h2><p>Ultimele episoade din seriale populare direct pe dispozitivul tau.</p></div>
         </div>
 
-        <div style="text-align:center; margin: 30px 0 20px;"><h2 class="heavy-red" style="font-size:2.3rem;">+10,000 FILME SI SERIALE DE TOP</h2></div>
+        <div style="text-align:center; margin: 20px 0 20px;"><h2 class="heavy-red" style="font-size:2rem;">+10,000 FILME SI SERIALE DE TOP</h2></div>
         <div class="infinite-carousel"><div class="carousel-track" id="filmCarouselTrack"></div></div>
 
-        <div class="glass-majestic" style="padding: 40px 24px; margin: 60px 0;"><h2 class="heavy-red" style="font-size:2rem;">SERVICIILE NOASTRE – DE CE NOI</h2><p style="max-width:750px; margin:20px auto; font-size:1.1rem;">INTERFATA SIMPLA. SERVICIU USOR DE FOLOSIT. Platforma intuitivă. Plăți PayPal sau card. Activare în câteva minute.</p></div>
+        <!-- SERVICIILE NOASTRE – compact -->
+        <div class="glass-majestic compact-services">
+          <h2 class="heavy-red">SERVICIILE NOASTRE – DE CE NOI</h2>
+          <p>INTERFATA SIMPLA. SERVICIU USOR DE FOLOSIT. Platforma intuitivă. Plăți PayPal sau card. Activare în câteva minute.</p>
+        </div>
 
         <!-- 6 beneficii -->
-        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 50px 0;">
+        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 40px 0;">
           <div class="card-royal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#EC2727"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"/><path d="M8 12 L16 12" stroke="currentColor"/></svg></div><h3 class="heavy-red">LIVE TV CHANNELS</h3><p>Peste 47.000 canale TV live, Catch Up si EPG.</p></div>
           <div class="card-royal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#EC2727"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor"/><path d="M9 9 L15 9 M9 13 L13 13" stroke="currentColor"/></svg></div><h3 class="heavy-red">VIDEO-ON-DEMAND</h3><p>Peste 160.000 titluri VOD, filme si seriale noi.</p></div>
           <div class="card-royal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#EC2727"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M12 8 L12 12 L15 15" stroke="currentColor"/></svg></div><h3 class="heavy-red">SERVER ONLINE</h3><p>Uptime 99.99% cu tehnologie Anti-Freeze.</p></div>
@@ -626,24 +630,29 @@
           <div class="card-royal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#EC2727"><path d="M20 12 L20 18 C20 19.1 19.1 20 18 20 L6 20 C4.9 20 4 19.1 4 18 L4 12" stroke="currentColor"/><path d="M12 2 L12 16 M9 13 L12 16 L15 13" stroke="currentColor"/></svg></div><h3 class="heavy-red">24/7 SUPPORT</h3><p>Asistenta in chat sau email oricand.</p></div>
         </div>
 
-        <div class="offer-section"><h2 class="heavy-red">ALEGE ABONAMENTUL POTRIVIT PENTRU TINE</h2><div class="offer-highlight">SUPER OFERTA: 50% REDUCERE LA ABONAMENTE</div><div class="offer-note">CONEXIUNILE MERG DOAR PE O SINGURA ADRESA IP</div></div>
-
-        <!-- planuri preturi cu spatiu marit intre ACTIVARE INSTANT si CUMPARA -->
-        <div style="display:flex; flex-wrap:wrap; gap: 1.8rem; justify-content:center; margin-bottom: 50px;">
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">1 LUNA</h2><p>4 CONEXIUNI</p><p class="price-old">€19.99</p><div class="price-new">€10.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 18px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">4 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€35.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 18px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">8 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€64.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 18px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">14 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€132.99</p><div class="price-new">€96.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 18px;">ACTIVARE INSTANT</p></div>
+        <!-- Oferta compacta -->
+        <div class="compact-offer">
+          <h2 class="heavy-red">ALEGE ABONAMENTUL POTRIVIT PENTRU TINE</h2>
+          <div class="offer-highlight heavy-red">SUPER OFERTA: 50% REDUCERE LA ABONAMENTE</div>
+          <div class="offer-note">CONEXIUNILE MERG DOAR PE O SINGURA ADRESA IP</div>
         </div>
 
-        <div class="glass-majestic" style="display:flex; flex-wrap:wrap; align-items:center; gap: 36px; margin: 60px 0; padding: 35px; text-align:center;"><div style="flex:1;"><h2 class="heavy-red" style="font-size:1.8rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2><p style="font-size:1rem;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p><a href="#" class="btn-heavy">INCEARCA ACUM</a></div></div>
+        <!-- planuri preturi cu spatiu redus intre Suport 24/7 si CUMPARA -->
+        <div style="display:flex; flex-wrap:wrap; gap: 1.8rem; justify-content:center; margin-bottom: 40px;">
+          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">1 LUNA</h2><p>4 CONEXIUNI</p><p class="price-old">€19.99</p><div class="price-new">€10.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
+          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">4 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€35.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
+          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">8 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€64.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
+          <div class="card-royal" style="flex:1 1 260px;"><h2 class="heavy-red">14 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€132.99</p><div class="price-new">€96.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="#" class="btn-heavy">CUMPARA</a></div><p style="margin-top: 16px;">ACTIVARE INSTANT</p></div>
+        </div>
 
-        <div style="text-align:center; margin: 50px 0 20px;"><h2 class="heavy-red" style="font-size:2rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
+        <div class="glass-majestic" style="display:flex; flex-wrap:wrap; align-items:center; gap: 30px; margin: 40px 0; padding: 30px; text-align:center;"><div style="flex:1;"><h2 class="heavy-red" style="font-size:1.6rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2><p style="font-size:0.95rem;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p><a href="#" class="btn-heavy">INCEARCA ACUM</a></div></div>
+
+        <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
 
-        <!-- FAQ redus de 3 ori, doar intrebarile cerute -->
-        <div class="faq-compact" style="background: rgba(12,8,24,0.85); border-radius: 32px; margin: 40px 0 50px; padding: 20px 24px;">
-          <h2 class="heavy-red" style="text-align:center; font-size:1.4rem;">INTREBARI FRECVENTE</h2>
+        <!-- FAQ redus -->
+        <div class="faq-compact" style="background: rgba(12,8,24,0.85);">
+          <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
           <div class="faq-spacer"></div>
           <details><summary>METODE DE PLATA</summary><p>Paypal, Credit Card</p></details>
           <details><summary>PE CE DISPOZITIVE POT VIZIONA?</summary><p>Smart TV, Android Box, iOS/Android, Chromecast, Amazon Fire TV si altele.</p></details>
@@ -652,12 +661,11 @@
           <details><summary>PUTEM INREGISTRA PROGRAMEELE?</summary><p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p></details>
         </div>
 
-        <div style="background: transparent; text-align:center; padding: 40px 20px; margin: 30px 0;"><h2 style="font-size:1.5rem; font-weight:800; color:#f0e2c5;">SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2><a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-heavy" style="margin-top: 28px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a></div>
+        <div style="background: transparent; text-align:center; padding: 30px 20px; margin: 20px 0;"><h2 style="font-size:1.4rem; font-weight:800; color:#f0e2c5;">SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2><a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-heavy" style="margin-top: 24px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a></div>
       </main>
     </div>
   </div>
 
-  <!-- footer restructurat frumos fara pipe-uri vizibile -->
   <footer class="footer-elegant">
     <div><img src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania Logo" style="max-width: 220px; width: 100%;"></div>
     <p style="margin: 20px auto; max-width:700px;"><strong>IPTV 24 ROMANIA – TOT CE VREI SA VEI. ORICAND. ORIUNDE.</strong> Mii de filme, seriale si canale TV live.</p>
