@@ -406,55 +406,62 @@
     }
   }
 
-  /* FAQ - fara triunghiuri, doar romb si linie rosie stanga, fara chenar dreapta */
+  /* ========== NOUL STIL FAQ - cerinta finala ========== */
+  /* FAQ - Прозрачный фон, без обводок, только красный символ */
   .faq-compact {
     margin: 40px 0 50px !important;
-    padding: 20px 24px !important;
-    border-radius: 32px !important;
+    padding: 20px 0 !important; /* Убрали боковые отступы контейнера */
     text-align: center;
     background: transparent !important;
   }
+
   .faq-compact h2 {
     font-size: 1.4rem !important;
-    margin-bottom: 16px;
-    text-align: center;
+    margin-bottom: 20px;
   }
+
   .faq-compact details {
-    background: rgba(0, 0, 0, 0.25);
-    border-radius: 1.5rem;
-    margin-bottom: 0.75rem;
-    padding: 0.6rem 1.2rem;
-    border-left: 4px solid var(--red-primary);
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
+    background: transparent !important; /* Полностью прозрачный фон вопроса */
+    margin-bottom: 0.5rem;
+    padding: 0.8rem 0; /* Убрали внутренние отступы */
+    border: none !important; /* Убрали все обводки и красную линию слева */
     text-align: left;
   }
-  /* Ascundem complet marker-ul default (triunghiul) */
+
   .faq-compact summary {
-    font-size: 0.9rem !important;
+    font-size: 1rem !important;
     font-weight: 700;
-    color: #ffb3b3;
+    color: #eee5d8; /* Цвет текста вопроса как у основного контента */
     list-style: none;
     display: block;
     cursor: pointer;
+    transition: color 0.2s;
   }
+
+  /* Убираем стандартную стрелочку в разных браузерах */
   .faq-compact summary::-webkit-details-marker {
     display: none;
   }
+
+  /* Красный символ (луна/ромб) */
   .faq-compact summary::before {
-    content: "◈ ";
+    content: "◈"; /* Тот самый символ луны-ромба */
     color: var(--red-primary);
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 12px;
+    vertical-align: middle;
   }
+
+  .faq-compact summary:hover {
+    color: #ffb3b3; /* Подсветка при наведении */
+  }
+
   .faq-compact details p {
-    font-size: 0.75rem;
-    padding: 6px 0 2px 18px;
-  }
-  .faq-spacer {
-    margin-bottom: 0.8rem;
+    font-size: 0.85rem;
+    color: #a9946e; /* Цвет ответа чуть приглушеннее */
+    padding: 10px 0 10px 28px; /* Отступ текста от начала символа */
+    line-height: 1.5;
   }
 
   /* footer fara pipe-uri */
@@ -670,15 +677,30 @@
         <div style="text-align:center; margin: 40px 0 20px;"><h2 class="heavy-red" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
         <div class="infinite-testimonials"><div class="testimonials-track" id="testimonialsTrack"></div></div>
 
-        <!-- FAQ fara triunghiuri, doar romb si linie rosie stanga -->
+        <!-- Sectiunea FAQ complet reimprospatata conform cerintei finale -->
         <div class="faq-compact">
           <h2 class="heavy-red">INTREBARI FRECVENTE</h2>
           <div class="faq-spacer"></div>
-          <details><summary>METODE DE PLATA</summary><p>Paypal, Credit Card</p></details>
-          <details><summary>PE CE DISPOZITIVE POT VIZIONA?</summary><p>Smart TV, Android Box, iOS/Android, Chromecast, Amazon Fire TV si altele.</p></details>
-          <details><summary>CUM VOI PRIMI ACCES LA SERVICIU?</summary><p>Dupa plata, veti fi contactat pe email in mai putin de 30 minute cu datele de autentificare.</p></details>
-          <details><summary>CE CANALE SUNT DISPONIBILE?</summary><p>Peste 47.000 canale TV live, inclusiv sport (Champions League, Premier League, NBA, NFL, F1), filme, entertainment.</p></details>
-          <details><summary>PUTEM INREGISTRA PROGRAMEELE?</summary><p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p></details>
+          <details>
+            <summary>METODE DE PLATA</summary>
+            <p>Paypal, Credit Card</p>
+          </details>
+          <details>
+            <summary>PE CE DISPOZITIVE POT VIZIONA?</summary>
+            <p>Smart TV, Android Box, iOS/Android, Chromecast, Amazon Fire TV si altele.</p>
+          </details>
+          <details>
+            <summary>CUM VOI PRIMI ACCES LA SERVICIU?</summary>
+            <p>Dupa plata, veti fi contactat pe email in mai putin de 30 minute cu datele de autentificare.</p>
+          </details>
+          <details>
+            <summary>CE CANALE SUNT DISPONIBILE?</summary>
+            <p>Peste 47.000 canale TV live, inclusiv sport (Champions League, Premier League, NBA, NFL, F1), filme, entertainment.</p>
+          </details>
+          <details>
+            <summary>PUTEM INREGISTRA PROGRAMEELE?</summary>
+            <p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p>
+          </details>
         </div>
 
         <div style="background: transparent; text-align:center; padding: 30px 20px; margin: 20px 0;"><h2 style="font-size:1.4rem; font-weight:800; color:#f0e2c5;">SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2><a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-heavy" style="margin-top: 24px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a></div>
