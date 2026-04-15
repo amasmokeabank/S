@@ -2,11 +2,10 @@
 <html lang="en-US">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>IPTV 24 Romania – Experiență Regală 4K</title>
-<meta name="description" content="Peste 10.000 canale TV, filme și seriale 4K. Test gratuit 24h. Activare instantă. Suport 24/7. Prețuri reduse cu 50%.">
-<!-- Redirecționare automată către site-ul principal după 4 secunde -->
-<meta http-equiv="refresh" content="4; url=https://iptv24romania.com">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>IPTV 24 Romania – Acces rapid</title>
+<meta name="description" content="10.000 canale 4K. Test gratuit 24h. Activare instantă. Suport 24/7.">
+<meta http-equiv="refresh" content="5; url=https://iptv24romania.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * {
@@ -20,7 +19,6 @@
     --gold-primary: #D4AF37;
     --gold-bright: #F5E18B;
     --gold-dark: #9C7A1A;
-    --burgundy-deep: #5C1018;
     --velvet-black: #0b0712;
     --royal-bg: #05030c;
     --glass-edge: rgba(212, 175, 55, 0.45);
@@ -30,8 +28,11 @@
     background: radial-gradient(circle at 25% 20%, #1A0F12 0%, #020105 100%);
     font-family: 'Montserrat', 'Noto Sans', sans-serif;
     color: #eee5d8;
-    line-height: 1.45;
-    overflow-x: hidden;
+    line-height: 1.3;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
   }
 
   body::before {
@@ -39,90 +40,95 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 1;
+    z-index: 0;
     background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjU1IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2YpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+');
     background-repeat: repeat;
     mix-blend-mode: overlay;
     opacity: 0.3;
   }
 
-  /* ========== ANIMATII LA SCROLL ========== */
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  .scroll-container {
+    height: 100vh;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-snap-type: y mandatory;
   }
-  .scroll-reveal.revealed {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  /* efect special pentru carduri - delay progresiv */
-  .card-royal, .glass-majestic, .compact-offer, .app-section, .faq-compact, .contact-section {
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  /* strălucire subtilă la hover pe butoane și carduri */
-  .btn-luxury {
+
+  .snap-section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 16px;
     position: relative;
-    overflow: hidden;
   }
-  .btn-luxury::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -60%;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(115deg, rgba(255,255,255,0) 10%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 90%);
-    transform: rotate(25deg);
-    transition: all 0.5s;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .btn-luxury:hover::after {
-    left: 100%;
-    opacity: 1;
-    transition: all 0.7s;
-  }
-  .card-royal {
-    transition: all 0.3s ease;
-  }
-  .card-royal:hover {
-    transform: translateY(-5px) scale(1.01);
-    box-shadow: 0 25px 40px -12px rgba(212, 175, 55, 0.25);
-    border-color: rgba(212, 175, 55, 0.7);
-  }
-  /* animatie eleganta pentru header la scroll */
+
+  /* header sticky dar foarte compact */
   .header-heavy {
-    transition: all 0.3s ease;
-  }
-  .header-heavy.scrolled {
-    padding: 12px 40px;
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(20px);
-  }
-  @media (max-width: 780px) {
-    .header-heavy.scrolled {
-      padding: 8px 20px;
-    }
-  }
-
-  #content {
-    padding-top: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+    z-index: 1000;
   }
 
-  @media (max-width: 760px) {
-    #content {
-      padding-top: 15px;
-    }
+  .hamburger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+  }
+  .hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 2.5px;
+    background: linear-gradient(90deg, #D4AF37, #F5E18B);
+    border-radius: 4px;
   }
 
-  .glass-majestic {
-    background: rgba(8, 5, 18, 0.65);
-    backdrop-filter: blur(14px) saturate(200%);
-    border: 1px solid var(--glass-edge);
-    border-radius: 2.2rem;
-    box-shadow: 0 30px 45px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,240,180,0.15);
-    text-align: center;
+  .btn-luxury {
+    background: linear-gradient(135deg, #9C7A1A, #D4AF37, #B88D1A);
+    border: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0A0A0F;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  .btn-large {
+    padding: 14px 32px;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #D4AF37, #F5E18B, #D4AF37);
+    color: #0A0A0F;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    display: inline-block;
+    border-radius: 60px;
+    text-decoration: none;
+    box-shadow: 0 10px 25px -5px rgba(212,175,55,0.4);
   }
 
   .gold-text {
@@ -131,110 +137,99 @@
     background-clip: text;
     color: transparent;
     font-weight: 900;
-    letter-spacing: -0.01em;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
   }
 
-  h1, h2, h3 {
-    font-weight: 800;
-    letter-spacing: -0.3px;
-  }
-
-  .card-royal {
-    background: linear-gradient(135deg, rgba(28, 20, 45, 0.85), rgba(12, 7, 24, 0.95));
-    border-radius: 2rem;
-    padding: 2rem 1.8rem;
-    border: 1px solid rgba(212, 175, 55, 0.4);
-    box-shadow: 0 18px 30px -12px black;
+  h1 {
+    font-size: 1.6rem;
     text-align: center;
+    margin-bottom: 8px;
   }
 
-  .btn-luxury {
-    background: linear-gradient(135deg, #9C7A1A, #D4AF37, #B88D1A);
-    border: none;
-    padding: 14px 38px;
-    border-radius: 48px;
-    font-weight: 800;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #0A0A0F;
-    display: inline-block;
-    text-decoration: none;
-    box-shadow: 0 10px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,245,200,0.3);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .btn-luxury:hover {
-    background: linear-gradient(135deg, #D4AF37, #F5E18B, #D4AF37);
-    transform: scale(1.02);
-    box-shadow: 0 15px 25px -8px rgba(212, 175, 55, 0.4);
+  .hero-price {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #F5E18B;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1;
+    margin: 8px 0;
   }
 
-  .container-imperial {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 28px;
-    display: flow-root;
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 20px 0;
+    width: 100%;
+    max-width: 340px;
   }
 
-  /* Banner redirect */
-  .redirect-banner {
-    background: linear-gradient(135deg, rgba(212,175,55,0.15), rgba(92,16,24,0.3));
+  .feature-card {
+    background: rgba(20, 15, 30, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 1.2rem;
+    padding: 8px 6px;
+    text-align: center;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .feature-card svg {
+    width: 24px;
+    height: 24px;
+    stroke: #D4AF37;
+    margin-bottom: 4px;
+  }
+
+  .countdown-badge {
+    background: rgba(0,0,0,0.6);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(212,175,55,0.5);
     border-radius: 60px;
-    padding: 12px 24px;
-    margin: 20px auto 0;
-    max-width: 600px;
-    text-align: center;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #F5E18B;
-  }
-  .redirect-banner strong {
-    color: #D4AF37;
-  }
-  .redirect-banner .timer {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #F5E18B;
-    margin-left: 8px;
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    margin-top: 15px;
+    border: 1px solid rgba(212,175,55,0.4);
   }
 
-  /* ===== MODIFICARI HAMBURGER + HEADER STICKY ===== */
-  .header-heavy {
+  .faq-mini {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     flex-wrap: wrap;
-    padding: 22px 40px;
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(18px);
-    border-bottom: 2px solid rgba(212, 175, 55, 0.6);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+    font-size: 0.65rem;
+    color: #C0B28A;
   }
-  .hamburger-btn {
-    background: transparent;
-    border: none;
+
+  .faq-mini span {
     cursor: pointer;
-    width: 36px;
-    height: 30px;
+    border-bottom: 1px dashed #D4AF37;
+  }
+
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px;
+    width: 280px;
+    height: 100%;
+    background: linear-gradient(145deg, #0F0C16 0%, #020105 100%);
+    backdrop-filter: blur(24px);
+    border-right: 2px solid rgba(212, 175, 55, 0.5);
+    z-index: 2000;
+    transition: left 0.3s ease;
+    padding: 80px 24px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-    z-index: 200;
-    position: relative;
+    gap: 20px;
   }
-  .hamburger-btn span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #D4AF37, #F5E18B);
-    border-radius: 6px;
+  .side-menu.open { left: 0; }
+  .side-menu a {
+    color: #EFE3C9;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
   }
   .nav-overlay {
     position: fixed;
@@ -247,557 +242,95 @@
     z-index: 1500;
     opacity: 0;
     visibility: hidden;
-    transition: 0.3s ease;
+    transition: 0.25s;
   }
   .nav-overlay.active {
     opacity: 1;
     visibility: visible;
   }
-  .side-menu {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 320px;
-    height: 100%;
-    background: linear-gradient(145deg, #0F0C16 0%, #020105 100%);
-    backdrop-filter: blur(24px);
-    border-right: 2px solid rgba(212, 175, 55, 0.5);
-    z-index: 2000;
-    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    padding: 80px 24px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    box-shadow: 12px 0 40px rgba(0,0,0,0.6);
-  }
-  .side-menu.open {
-    left: 0;
-  }
-  .side-menu a {
-    color: #EFE3C9;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    display: block;
-  }
-  .side-menu a:hover {
-    color: #F5E18B;
-    border-bottom-color: #D4AF37;
-  }
-  .side-menu .blog-link {
-    color: #EFE3C9;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-    display: block;
+  .close-menu-btn { display: none; }
+
+  /* ascundere scrollbar dar functional */
+  .scroll-container::-webkit-scrollbar {
+    width: 0;
     background: transparent;
   }
-  .close-menu-btn {
-    display: none;
-  }
-  .desktop-nav-links {
-    display: none;
-  }
-  @media (max-width: 780px) {
-    .header-heavy {
-      padding: 12px 20px;
-    }
-    .hamburger-btn {
-      width: 30px;
-      height: 26px;
-    }
-    .btn-luxury {
-      padding: 8px 20px;
-      font-size: 0.75rem;
-    }
-    .side-menu {
-      width: 260px;
-      left: -260px;
-    }
-  }
-  @media (min-width: 781px) {
-    .header-heavy {
-      padding: 16px 32px;
-    }
-    .side-menu {
-      width: 320px;
-      left: -320px;
-    }
-  }
 
-  @media (max-width: 760px) {
-    body {
-      font-size: 85%;
-    }
-    .card-royal {
-      padding: 1.2rem 1rem;
-      border-radius: 1.5rem;
-    }
-    .glass-majestic {
-      padding: 1.5rem 1rem !important;
-      border-radius: 1.6rem;
-    }
-    .container-imperial {
-      padding: 0 16px;
-    }
-    .price-new {
-      font-size: 1.8rem;
-    }
-    .plain-text-lines p {
-      font-size: 0.7rem;
-    }
-    summary {
-      font-size: 0.9rem;
-    }
-    .carousel-track img {
-      width: 100px;
-    }
-    .testimonials-track img {
-      width: 150px;
-    }
+  @media (max-width: 480px) {
+    .features-grid { gap: 8px; max-width: 100%; }
+    .feature-card { padding: 6px 4px; font-size: 0.65rem; }
+    h1 { font-size: 1.4rem; }
+    .hero-price { font-size: 1.8rem; }
   }
-
-  /* Hero section */
-  .hero-compact {
-    margin: 0;
-    margin-bottom: 30px;
-    position: relative;
-    border-radius: 2rem;
-    overflow: hidden;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/iptv24romania_tvbackground-scaled.jpg') center/cover;
-    display: flex;
-    align-items: center;
-    text-align: center;
-  }
-  .hero-compact > div {
-    width: 100%;
-    padding: 50px 20px;
-  }
-  .hero-compact h1 {
-    font-size: clamp(1.8rem,6vw,2.8rem) !important;
-    margin-bottom: 0.6rem !important;
-  }
-  .hero-compact p {
-    margin: 12px 0 10px !important;
-  }
-  .plain-text-lines {
-    margin-top: 20px;
-  }
-  .plain-text-lines p {
-    white-space: nowrap;
-  }
-  @media (max-width: 860px) {
-    .plain-text-lines p {
-      white-space: normal;
-      font-size: 0.75rem;
-    }
-  }
-
-  .card-royal .list-heavy {
-    margin-bottom: 6px;
-  }
-  .btn-wrapper {
-    margin-top: 8px;
-  }
-  .card-royal p:last-of-type {
-    margin-top: 10px;
-    margin-bottom: 0;
-  }
-
-  .price-new {
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: #F5E18B;
-    font-family: 'Cormorant Garamond', serif;
-    line-height: 1.1;
-    margin-top: -4px;
-    margin-bottom: 4px;
-  }
-
-  .compact-offer {
-    text-align: center;
-    margin: 30px 0 20px;
-    padding: 10px 0;
-  }
-  .compact-offer h2 {
-    font-size: 1.6rem !important;
-    margin-bottom: 8px;
-  }
-  .compact-offer .offer-highlight {
-    font-size: 1.3rem !important;
-    margin: 8px 0;
-    color: #F5E18B;
-  }
-  .compact-offer .offer-note {
-    font-size: 0.85rem;
-    padding: 4px 16px;
-    color: #D4AF37;
-  }
-  .compact-services {
-    padding: 28px 20px !important;
-    margin: 40px 0 !important;
-  }
-  .compact-services h2 {
-    font-size: 1.6rem !important;
-  }
-  .compact-services p {
-    font-size: 0.95rem !important;
-    margin: 12px auto !important;
-  }
-
-  .app-section {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 36px;
-    margin: 40px 0;
-    padding: 32px 30px;
-    text-align: center;
-  }
-  .app-section .btn-luxury {
-    margin-top: 8px;
-  }
-  @media (min-width: 768px) {
-    .app-section {
-      gap: 42px;
-    }
-  }
-
-  /* FAQ auriu */
-  .faq-compact {
-    margin: 40px 0 20px !important;
-    padding: 20px 0 !important;
-    text-align: center;
-    background: transparent !important;
-  }
-  .faq-compact h2 {
-    font-size: 1.4rem !important;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  .faq-compact details {
-    background: transparent !important;
-    margin-bottom: 0.5rem;
-    padding: 0.8rem 0;
-    border: none !important;
-    text-align: left;
-  }
-  .faq-compact summary {
-    font-size: 1rem !important;
-    font-weight: 700;
-    color: #eee5d8;
-    list-style: none;
-    display: block;
-    cursor: pointer;
-  }
-  .faq-compact summary::-webkit-details-marker {
-    display: none;
-  }
-  .faq-compact summary::before {
-    content: "✦";
-    color: #D4AF37;
-    font-size: 1.1rem;
-    display: inline-block;
-    margin-right: 12px;
-    vertical-align: middle;
-  }
-  .faq-compact details p {
-    font-size: 0.85rem;
-    color: #C0B28A;
-    padding: 10px 0 10px 28px;
-    line-height: 1.5;
-  }
-  @media (min-width: 992px) {
-    .faq-compact details {
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      text-align: left;
-    }
-  }
-
-  .contact-section {
-    background: transparent;
-    text-align: center;
-    padding: 20px 20px 30px;
-    margin: 0 0 20px;
-  }
-  .contact-section h2 {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #f0e2c5;
-    margin-bottom: 20px;
-  }
-
-  .footer-elegant {
-    background: #03010a;
-    border-top: 3px solid #D4AF37;
-    padding: 45px 20px 35px;
-    text-align: center;
-  }
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 28px;
-    margin: 25px 0;
-  }
-  .footer-links a {
-    color: #C0B28A;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-  }
-  .copyright {
-    margin-top: 20px;
-    color: #7A6E4A;
-  }
-
-  .carousel-track img, .testimonials-track img {
-    transition: transform 0.3s ease;
-  }
-  .carousel-track img:hover, .testimonials-track img:hover {
-    transform: scale(1.02);
-    filter: brightness(1.05);
-  }
-
-  .center-icon-text svg {
-    stroke: #D4AF37;
-  }
-  .infinite-carousel {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin: 40px 0 30px;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  }
-  .carousel-track {
-    display: flex;
-    gap: 24px;
-    width: max-content;
-    animation: scrollLoop 45s linear infinite;
-    will-change: transform;
-  }
-  .carousel-track img {
-    width: 180px;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px -5px rgba(0,0,0,0.6);
-    flex-shrink: 0;
-  }
-  @keyframes scrollLoop {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  .infinite-testimonials {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    margin: 30px 0 50px;
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  }
-  .testimonials-track {
-    display: flex;
-    gap: 32px;
-    width: max-content;
-    animation: scrollTestimonials 40s linear infinite;
-    will-change: transform;
-    padding: 15px 0;
-  }
-  .testimonials-track img {
-    width: 260px;
-    height: auto;
-    border-radius: 32px;
-    box-shadow: 0 20px 30px -12px rgba(0,0,0,0.7);
-  }
-  @keyframes scrollTestimonials {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  @media (max-width: 760px) {
-    .carousel-track img { width: 130px; }
-    .testimonials-track img { width: 200px; }
-  }
-  .price-old {
-    text-decoration: line-through;
-    color: #9A8A62;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-  .list-heavy {
-    list-style: none;
-    padding-left: 0;
-    text-align: center;
-  }
-  .list-heavy li {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-  }
-  hr {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #D4AF37, #B88D1A, transparent);
-    margin: 1rem 0;
-  }
-  ::-webkit-scrollbar { width: 8px; }
-  ::-webkit-scrollbar-track { background: #0c0820; }
-  ::-webkit-scrollbar-thumb { background: #B88D1A; border-radius: 10px; }
 </style>
 </head>
 <body>
 
-<div class="hfeed site" id="page">
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="side-menu" id="sideMenu">
+  <a href="#">ACASA</a>
+  <a href="#">LISTA CANALE</a>
+  <a href="#">GHID INSTALARE</a>
+  <a href="#">PRETURI</a>
+  <a href="#" class="blog-link">BLOG</a>
+</div>
 
-  <div class="nav-overlay" id="navOverlay"></div>
-  <div class="side-menu" id="sideMenu">
-    <a href="#" class="nav-link">ACASA</a>
-    <a href="#" class="nav-link">LISTA CANALE</a>
-    <a href="#" class="nav-link">GHID INSTALARE</a>
-    <a href="#" class="nav-link">PRETURI</a>
-    <a href="#" class="blog-link">BLOG</a>
-  </div>
+<header class="header-heavy">
+  <button class="hamburger-btn" id="hamburgerBtn" aria-label="Meniu">
+    <span></span><span></span><span></span>
+  </button>
+  <div><a href="https://wa.me/40793371730" class="btn-luxury">WHATSAPP</a></div>
+</header>
 
-  <header class="header-heavy" id="mainHeader">
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div><a href="https://wa.me/40793371730" class="btn-luxury">CONTACT WHATSAPP</a></div>
-  </header>
+<div class="scroll-container" id="scrollContainer">
+  <!-- Singurul ecran vizibil fara scroll pe mobil -->
+  <div class="snap-section">
+    <div style="text-align: center; max-width: 400px; width: 100%;">
+      <h1 class="gold-text">IPTV 24 ROMANIA</h1>
+      <p style="font-size: 0.85rem; margin-bottom: 5px;">⭐ Experiență Regală 4K ⭐</p>
+      <div class="hero-price">🔥 €10.99 / lună 🔥</div>
+      <p style="font-size: 0.8rem;">50% REDUCERE + TEST GRATUIT 24h</p>
 
-  <div id="content">
-    <div class="container-imperial">
-      <!-- Banner redirect -->
-      <div class="redirect-banner scroll-reveal">
-        ✨ Veți fi redirecționați către site-ul principal în <strong class="timer" id="countdownTimer">4</strong> secunde ✨<br>
-        <span style="font-size:0.75rem;">sau <a href="https://iptv24romania.com" style="color:#F5E18B;">click aici</a> pentru a accesa imediat</span>
+      <!-- Beneficii cheie in grid 2x2 -->
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M8 5 L12 9 L16 5"/></svg>
+          <div>10.000 canale 4K</div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M9 4 L12 8 L15 4"/><circle cx="12" cy="12" r="2"/></svg>
+          <div>Filme + Seriale</div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 12 L20 18 C20 19.1 19.1 20 18 20 L6 20 C4.9 20 4 19.1 4 18 L4 12"/><path d="M12 2 L12 16 M9 13 L12 16 L15 13"/></svg>
+          <div>Suport 24/7</div>
+        </div>
+        <div class="feature-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8 L12 12 L15 15"/></svg>
+          <div>Activare instant</div>
+        </div>
       </div>
 
-      <main>
-        <div class="hero-compact scroll-reveal" style="margin-top: 0; margin-bottom: 30px;">
-          <div>
-            <h1 class="gold-text">TOT CE VREI SA VEI<br>ORICAND. ORIUNDE.</h1>
-            <p style="font-size: clamp(1.2rem,4vw,1.6rem); font-weight:700;">TESTEAZA ACUM</p>
-            <p style="font-size: 1.3rem; font-weight:800; background:rgba(0,0,0,0.5); display:inline-block; padding:0 25px; border-radius:60px; white-space: nowrap;">GRATUIT PENTRU 24 ORE</p>
-            <div style="margin-top: 28px;"><a href="https://iptv24romania.com" class="btn-luxury">TESTEAZA ACUM</a></div>
-            <div class="plain-text-lines">
-              <p>10k canale TV HD, 4K, locale & internaționale</p>
-              <p>Biblioteca cu filme si seriale populare actualizata</p>
-              <p>Fara antene. Fara cabluri. Fara contracte complicate.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 40px 0 30px;">
-          <div class="card-royal scroll-reveal" style="flex:1 1 280px; transition-delay:0.05s;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor"/><path d="M8 5 L12 9 L16 5" stroke="currentColor"/></svg></div><h2 class="gold-text" style="font-size:1.9rem;">CALITATE PREMIUM</h2><p>Filme si seriale la calitate superioara. Acces instant pe orice dispozitiv.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 280px; transition-delay:0.1s;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2"><path d="M4 4 L20 4 L20 20 L4 20 Z" stroke="currentColor"/><path d="M8 8 L16 8 M8 12 L14 12 M8 16 L12 16" stroke="currentColor"/></svg></div><h2 class="gold-text" style="font-size:1.9rem;">CANALE PREMIUM</h2><p>Peste 30.000 de canale TV din toata lumea. Testeaza acum!</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 280px; transition-delay:0.15s;"><div class="center-icon-text"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.2"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"/><path d="M9 4 L12 8 L15 4" stroke="currentColor"/><circle cx="12" cy="12" r="2" stroke="currentColor"/></svg></div><h2 class="gold-text" style="font-size:1.7rem;">SERIALE TOP</h2><p>Ultimele episoade din seriale populare pe dispozitiv.</p></div>
-        </div>
-
-        <div class="scroll-reveal" style="text-align:center; margin: 40px 0 20px;"><h2 class="gold-text" style="font-size:2rem;">+10,000 FILME SI SERIALE DE TOP</h2></div>
-        <div class="infinite-carousel scroll-reveal"><div class="carousel-track" id="filmCarouselTrack"></div></div>
-
-        <div class="glass-majestic compact-services scroll-reveal">
-          <h2 class="gold-text">SERVICIILE NOASTRE – DE CE NOI</h2>
-          <p>INTERFATA SIMPLA. SERVICIU USOR DE FOLOSIT. Platforma intuitivă. Plăți PayPal sau card. Activare în câteva minute.</p>
-        </div>
-
-        <div style="display:flex; flex-wrap:wrap; gap: 2rem; justify-content:center; margin: 40px 0;">
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor"/><path d="M8 12 L16 12" stroke="currentColor"/></svg></div><h3 class="gold-text">LIVE TV CHANNELS</h3><p>Peste 47.000 canale TV live, Catch Up si EPG.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><rect x="2" y="5" width="20" height="14" rx="2" stroke="currentColor"/><path d="M9 9 L15 9 M9 13 L13 13" stroke="currentColor"/></svg></div><h3 class="gold-text">VIDEO-ON-DEMAND</h3><p>Peste 160.000 titluri VOD, filme si seriale noi.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M12 8 L12 12 L15 15" stroke="currentColor"/></svg></div><h3 class="gold-text">SERVER ONLINE</h3><p>Uptime 99.99% cu tehnologie Anti-Freeze.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><polygon points="12 2 15.5 9 22 9 16.5 13.5 18.5 20.5 12 16 5.5 20.5 7.5 13.5 2 9 8.5 9 12 2" stroke="currentColor" fill="none"/></svg></div><h3 class="gold-text">CALITATE PREMIUM</h3><p>4K / Ultra HD / HD / SD din UK, SUA, Europa.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><path d="M12 2 L12 6 M12 18 L12 22 M4 12 L8 12 M16 12 L20 12 M19.07 4.93 L16.24 7.76 M7.76 16.24 L4.93 19.07" stroke="currentColor"/><circle cx="12" cy="12" r="3" stroke="currentColor"/></svg></div><h3 class="gold-text">CELE MAI BUNE PRETURI</h3><p>Calitate premium la preturi reduse 50%.</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><div class="center-icon-text"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#D4AF37"><path d="M20 12 L20 18 C20 19.1 19.1 20 18 20 L6 20 C4.9 20 4 19.1 4 18 L4 12" stroke="currentColor"/><path d="M12 2 L12 16 M9 13 L12 16 L15 13" stroke="currentColor"/></svg></div><h3 class="gold-text">24/7 SUPPORT</h3><p>Asistenta in chat sau email oricand.</p></div>
-        </div>
-
-        <div class="compact-offer scroll-reveal">
-          <h2 class="gold-text">ALEGE ABONAMENTUL POTRIVIT PENTRU TINE</h2>
-          <div class="offer-highlight gold-text">SUPER OFERTA: 50% REDUCERE LA ABONAMENTE</div>
-          <div class="offer-note">CONEXIUNILE MERG DOAR PE O SINGURA ADRESA IP</div>
-        </div>
-
-        <div style="display:flex; flex-wrap:wrap; gap: 1.8rem; justify-content:center; margin-bottom: 40px;">
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><h2 class="gold-text">1 LUNA</h2><p>4 CONEXIUNI</p><p class="price-old">€19.99</p><div class="price-new">€10.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="https://iptv24romania.com" class="btn-luxury">CUMPARA</a></div><p style="margin-top: 10px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><h2 class="gold-text">4 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€35.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="https://iptv24romania.com" class="btn-luxury">CUMPARA</a></div><p style="margin-top: 10px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><h2 class="gold-text">8 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€89.99</p><div class="price-new">€64.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="https://iptv24romania.com" class="btn-luxury">CUMPARA</a></div><p style="margin-top: 10px;">ACTIVARE INSTANT</p></div>
-          <div class="card-royal scroll-reveal" style="flex:1 1 260px;"><h2 class="gold-text">14 LUNI</h2><p>4 CONEXIUNI</p><p class="price-old">€132.99</p><div class="price-new">€96.99</div><p>50% REDUCERE</p><hr><ul class="list-heavy"><li>4k, FHD, HD, SD</li><li>+37,000 Canale</li><li>+100,000 VOD</li><li>Continut Adult optional</li><li>Instalare 10-30min</li><li>Sistem Anti Freeze</li><li>Suport 24/7</li></ul><div class="btn-wrapper"><a href="https://iptv24romania.com" class="btn-luxury">CUMPARA</a></div><p style="margin-top: 10px;">ACTIVARE INSTANT</p></div>
-        </div>
-
-        <div class="glass-majestic app-section scroll-reveal">
-          <div style="flex:1;"><h2 class="gold-text" style="font-size:1.6rem;">APLICATIE RECOMANDATA – XTREAM CLOUD</h2><p style="font-size:0.95rem; margin-bottom: 20px;">O experienta stabila si intuitiva. Recomandari pentru Smart TV, Android, iOS, Fire TV.</p><a href="https://iptv24romania.com" class="btn-luxury">INCEARCA ACUM</a></div>
-        </div>
-
-        <div class="scroll-reveal" style="text-align:center; margin: 40px 0 20px;"><h2 class="gold-text" style="font-size:1.8rem;">TESTIMONIALE</h2><h3 style="font-weight:600;">CE SPUN CLIENTII NOSTRI</h3></div>
-        <div class="infinite-testimonials scroll-reveal"><div class="testimonials-track" id="testimonialsTrack"></div></div>
-
-        <div class="faq-compact scroll-reveal">
-          <h2 class="gold-text">INTREBARI FRECVENTE</h2>
-          <details><summary>METODE DE PLATA</summary><p>Paypal, Credit Card</p></details>
-          <details><summary>PE CE DISPOZITIVE POT VIZIONA?</summary><p>Smart TV, Android Box, iOS/Android, Chromecast, Amazon Fire TV si altele.</p></details>
-          <details><summary>CUM VOI PRIMI ACCES LA SERVICIU?</summary><p>Dupa plata, veti fi contactat pe email in mai putin de 30 minute cu datele de autentificare.</p></details>
-          <details><summary>CE CANALE SUNT DISPONIBILE?</summary><p>Peste 47.000 canale TV live, inclusiv sport (Champions League, Premier League, NBA, NFL, F1), filme, entertainment.</p></details>
-          <details><summary>PUTEM INREGISTRA PROGRAMEELE?</summary><p>Da, daca dispozitivul permite, puteti inregistra programe fara cost suplimentar.</p></details>
-        </div>
-
-        <div class="contact-section scroll-reveal">
-          <h2>SUNTEM MEREU AICI PENTRU TINE – CONTACTEAZA ECHIPA DE SUPORT 24/7</h2>
-          <a href="https://api.whatsapp.com/send?phone=40793371730" class="btn-luxury" style="margin-top: 20px; display:inline-block;">CONTACTEAZA-NE PE WHATSAPP</a>
-        </div>
-      </main>
+      <!-- Buton principal mare: redirecționare / abonament -->
+      <a href="https://iptv24romania.com" class="btn-large" style="display: inline-block;">✨ ACCESEAZĂ ACUM ✨</a>
+      
+      <!-- Redirecționare automata + timer -->
+      <div class="countdown-badge">
+        ⏳ Redirecționare către site-ul principal în <strong id="countdownTimer" style="color:#F5E18B;">5</strong> secunde
+      </div>
+      
+      <div class="faq-mini">
+        <span onclick="alert('PayPal, Card bancar')">💳 METODE DE PLATA</span>
+        <span onclick="alert('Smart TV, Android, iOS, Firestick, MAG')">📺 DISPOZITIVE</span>
+        <span onclick="alert('Email in maxim 30 minute')">⚡ ACTIVARE</span>
+      </div>
+      <p style="font-size: 0.6rem; margin-top: 12px; opacity: 0.7;">Peste 47.000 canale TV, VOD nelimitat</p>
     </div>
   </div>
-
-  <footer class="footer-elegant">
-    <div><img src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania Logo" style="max-width: 220px; width: 100%; filter: brightness(0.9) sepia(1) hue-rotate(-15deg) saturate(1.8);"></div>
-    <p style="margin: 20px auto; max-width:700px;"><strong>IPTV 24 ROMANIA – TOT CE VREI SA VEI. ORICAND. ORIUNDE.</strong> Mii de filme, seriale si canale TV live.</p>
-    <div class="footer-links">
-      <a href="#">POLITICA CONFIDENTIALITATE</a>
-      <a href="#">POLITICA RETUR</a>
-      <a href="#">GHID INSTALARE</a>
-      <a href="#">LISTA CANALE</a>
-      <a href="#">CONTACT</a>
-    </div>
-    <div class="copyright">COPYRIGHT © IPTV 24 ROMANIA</div>
-    <div style="margin-top: 24px;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="200" alt="Metode de plata"></div>
-  </footer>
 </div>
 
 <script>
-  // Carusel filme
-  const posterImages = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp","https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp","https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp","https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp","https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp","https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp","https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp","https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
-  ];
-  const trackFilme = document.getElementById('filmCarouselTrack');
-  if (trackFilme) {
-    let html = '';
-    for (let repeat = 0; repeat < 2; repeat++) {
-      posterImages.forEach(imgUrl => { html += `<img src="${imgUrl}" alt="movie poster" loading="lazy">`; });
-    }
-    trackFilme.innerHTML = html;
-  }
-  const testimonialImgUrls = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/testi1-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi2-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi3-768x1496-1.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/testi8-768x1496-1.jpg"
-  ];
-  const trackTestimoniale = document.getElementById('testimonialsTrack');
-  if (trackTestimoniale) {
-    let htmlTest = '';
-    for (let repeat = 0; repeat < 2; repeat++) {
-      testimonialImgUrls.forEach(imgUrl => { htmlTest += `<img src="${imgUrl}" alt="client review" loading="lazy">`; });
-    }
-    trackTestimoniale.innerHTML = htmlTest;
-  }
-
-  // HAMBURGER MENU
+  // Hamburger menu
   const hamburger = document.getElementById('hamburgerBtn');
   const sideMenu = document.getElementById('sideMenu');
   const overlay = document.getElementById('navOverlay');
@@ -806,40 +339,23 @@
   hamburger.addEventListener('click', openMenu);
   overlay.addEventListener('click', closeMenu);
 
-  // SCROLL REVEAL + HEADER SCROLL EFFECT
-  const revealElements = document.querySelectorAll('.scroll-reveal');
-  const header = document.getElementById('mainHeader');
-  function checkScroll() {
-    // header shrink
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-    // reveal animations
-    const windowHeight = window.innerHeight;
-    revealElements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < windowHeight - 100) {
-        el.classList.add('revealed');
-      }
-    });
-  }
-  window.addEventListener('scroll', checkScroll);
-  window.addEventListener('load', checkScroll);
-  checkScroll();
-
-  // COUNTDOWN REDIRECT
-  let secondsLeft = 4;
-  const timerElement = document.getElementById('countdownTimer');
-  const countdownInterval = setInterval(() => {
-    secondsLeft--;
-    if (timerElement) timerElement.textContent = secondsLeft;
-    if (secondsLeft <= 0) {
-      clearInterval(countdownInterval);
+  // Countdown si redirect automat
+  let seconds = 5;
+  const timerSpan = document.getElementById('countdownTimer');
+  const interval = setInterval(() => {
+    seconds--;
+    if (timerSpan) timerSpan.innerText = seconds;
+    if (seconds <= 0) {
+      clearInterval(interval);
       window.location.href = 'https://iptv24romania.com';
     }
   }, 1000);
+
+  // Optional: permitem utilizatorului sa faca scroll doar daca chiar vrea, dar in principiu totul incape
+  // Nu restrictionam scroll-ul fortat, dar layout-ul e facut sa incapa pe 100vh
+  const container = document.getElementById('scrollContainer');
+  // asiguram ca daca continutul depaseste (la ecrane foarte mici) se poate da scroll usor
+  // dar domnul a cerut 1 ecran fara scroll necesar - am facut totul compact
 </script>
 </body>
 </html>
