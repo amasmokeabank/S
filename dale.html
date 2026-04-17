@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
 <title>REGAL CINEMA | IPTV 4K</title>
 <meta name="description" content="10.000 canale 4K. Test gratuit 24h. Activare instantă. Suport 24/7.">
-<meta http-equiv="refresh" content="5; url=https://iptv24romania.com">
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * {
@@ -130,6 +129,10 @@
     text-decoration: none;
     box-shadow: 0 10px 18px rgba(0,0,0,0.4);
     margin-top: 10px;
+  }
+
+  .btn-large:active, .btn-luxury:active {
+    transform: translateY(2px);
   }
 
   h1 {
@@ -338,7 +341,7 @@
       <a href="https://iptv24romania.com" class="btn-large">ACCES REGAL</a>
       
       <div class="countdown-badge">
-        REDIRECTIONARE AUTOMATA IN <strong id="countdownTimer" style="color:#EC2727; font-size:1.1rem;">5</strong> SECUNDE
+        REDIRECTIONARE AUTOMATA IN <strong id="countdownTimer" style="color:#EC2727; font-size:1.1rem;">13</strong> SECUNDE
       </div>
       
       <div class="faq-mini">
@@ -360,7 +363,7 @@
   hamburger.addEventListener('click', openMenu);
   overlay.addEventListener('click', closeMenu);
 
-  let seconds = 5;
+  let seconds = 13;
   const timerSpan = document.getElementById('countdownTimer');
   const interval = setInterval(() => {
     seconds--;
