@@ -300,33 +300,38 @@
     }
   }
 
-  /* Hero section */
+  /* Hero section - VERSIUNEA ACTUALIZATA CU NOUL FUNDAL */
   .hero-compact {
     margin: 0;
     margin-bottom: 30px;
     position: relative;
     border-radius: 2rem;
     overflow: hidden;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('images/iptv24romania_tvbackground-scaled.jpg') center/cover;
     display: flex;
     align-items: center;
     text-align: center;
+    /* NOUL FUNDAL */
+    background: black url('IMG_0558.jpeg') center/cover no-repeat;
   }
+  
+  /* Strat de suprapunere pentru o lizibilitate mai buna */
+  .hero-compact::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55); /* 55% opacitate pentru un contrast perfect */
+    z-index: 1;
+    border-radius: 2rem;
+  }
+  
+  /* Asiguram ca textul este deasupra suprapunerii */
   .hero-compact > div {
+    position: relative;
+    z-index: 2;
     width: 100%;
     padding: 50px 20px;
   }
-  .hero-compact h1 {
-    font-size: clamp(1.8rem,6vw,2.8rem) !important;
-    margin-bottom: 0.6rem !important;
-  }
-  .hero-compact p {
-    margin: 12px 0 10px !important;
-  }
-  .hero-compact .btn-heavy {
-    padding: 10px 28px !important;
-    font-size: 0.9rem !important;
-  }
+
   .plain-text-lines {
     margin-top: 20px;
   }
