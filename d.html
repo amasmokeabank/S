@@ -234,50 +234,58 @@
     }
   }
 
-  /* stiluri ghid */
+  /* accordion styles - fara emoticoane, doar sageata + text */
   .guide-section {
     margin: 40px 0;
   }
-  .guide-card {
-    margin-bottom: 30px;
-  }
-  .guide-card summary {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #EC2727;
-    cursor: pointer;
-    list-style: none;
-    display: block;
-    padding: 18px 20px;
-    background: rgba(20, 12, 35, 0.7);
+  .accordion-item {
+    margin-bottom: 20px;
     border-radius: 2rem;
-    border: 1px solid rgba(236,39,39,0.4);
-    transition: none;
+    background: rgba(8, 5, 18, 0.4);
+    border: 1px solid rgba(236,39,39,0.2);
+    overflow: hidden;
   }
-  .guide-card summary::-webkit-details-marker {
-    display: none;
-  }
-  .guide-card summary::before {
-    content: "▶";
+  .accordion-header {
+    background: linear-gradient(135deg, rgba(20, 12, 35, 0.9), rgba(10, 5, 20, 0.95));
+    padding: 18px 24px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.3rem;
     color: #EC2727;
-    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: none;
+    border-bottom: 1px solid transparent;
+  }
+  .accordion-header:hover {
+    background: rgba(30, 18, 48, 0.95);
+    border-bottom-color: rgba(236,39,39,0.4);
+  }
+  .accordion-arrow {
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #EC2727;
+    width: 28px;
     display: inline-block;
-    margin-right: 16px;
     transition: none;
   }
-  .guide-card[open] summary::before {
-    content: "▼";
+  .accordion-header.active .accordion-arrow {
+    transform: rotate(90deg);
   }
-  .guide-card summary:hover {
-    background: rgba(30, 20, 45, 0.9);
-    border-color: #EC2727;
+  .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+    background: rgba(5, 3, 12, 0.5);
+  }
+  .accordion-content.open {
+    max-height: 3000px;
+    transition: max-height 0.6s ease-in-out;
   }
   .guide-inner {
     padding: 28px 24px;
-    background: rgba(8, 5, 18, 0.5);
-    border-radius: 1.8rem;
-    margin-top: 16px;
-    border-left: 3px solid #EC2727;
+    border-top: 1px solid rgba(236,39,39,0.3);
   }
   .guide-inner h3 {
     color: #ffb3b3;
@@ -304,16 +312,6 @@
     display: block;
     max-width: 100%;
     margin: 12px 0;
-  }
-  .btn-small {
-    background: linear-gradient(135deg, #a11414, #EC2727);
-    padding: 8px 20px;
-    border-radius: 40px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    display: inline-block;
-    color: white;
-    text-decoration: none;
   }
   .footer-elegant {
     background: #03010a;
@@ -345,9 +343,9 @@
     margin: 1rem 0;
   }
   @media (max-width: 760px) {
-    .guide-card summary {
-      font-size: 1.2rem;
-      padding: 12px 16px;
+    .accordion-header {
+      font-size: 1rem;
+      padding: 14px 18px;
     }
     .guide-inner {
       padding: 16px;
@@ -362,11 +360,11 @@
 <div class="hfeed site" id="page">
   <div class="nav-overlay" id="navOverlay"></div>
   <div class="side-menu" id="sideMenu">
-    <a href="#" class="nav-link">ACASA</a>
-    <a href="#" class="nav-link">LISTA CANALE</a>
-    <a href="#" class="nav-link">GHID INSTALARE</a>
-    <a href="#" class="nav-link">PRETURI</a>
-    <a href="#" class="blog-link">BLOG</a>
+    <a href="#">ACASA</a>
+    <a href="#">LISTA CANALE</a>
+    <a href="#">GHID INSTALARE</a>
+    <a href="#">PRETURI</a>
+    <a href="#">BLOG</a>
   </div>
 
   <header class="header-heavy">
@@ -387,109 +385,141 @@
           <p style="margin-top: 12px;">Pregătește-te să renunți la cablu și să intri în revoluția IPTV! Acest ghid complet îți va arăta pas cu pas cum să configurezi IPTV și să începi să urmărești emisiunile și filmele preferate în doar câteva minute. Fie că ești nou în lumea IPTV sau doar cauți o configurare rapidă și simplă, acest ghid te acoperă cu tot ce ai nevoie. Hai să începem!</p>
         </div>
 
-        <!-- WINDOWS / MACBOOK -->
-        <div class="guide-card" open>
-          <summary>💻 Windows / Macbook</summary>
-          <div class="guide-inner">
-            <h3>Windows Method :</h3>
-            <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=windows" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=windows</a></p>
-            <h3>Mac Method :</h3>
-            <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=mac" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=mac</a></p>
-            <p>După instalare, deschide aplicația și folosește datele de autentificare primite (Xtream Codes API).</p>
+        <!-- ACCORDION: toate sectiunile inchise initial, se deschid individual, celelalte se inchid -->
+        <div class="guide-section" id="accordionContainer">
+          <!-- 1. Windows / Macbook -->
+          <div class="accordion-item" data-accordion="winmac">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> Windows / Macbook
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <h3>Windows Method :</h3>
+                <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=windows" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=windows</a></p>
+                <h3>Mac Method :</h3>
+                <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=mac" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=mac</a></p>
+                <p>După instalare, deschide aplicația și folosește datele de autentificare primite (Xtream Codes API).</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- FIRE TV STICK + TIVIMATE (ascuns) -->
-        <div class="guide-card">
-          <summary>🔥 Fire TV Stick Setup</summary>
-          <div class="guide-inner">
-            <ol>
-              <li>From the home screen, hover over Find option. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2.png" alt="step1" class="step-img"></li>
-              <li>Click Search. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2-1.png" alt="step2" class="step-img"></li>
-              <li>Search for and select Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-4.png" alt="step3" class="step-img"></li>
-              <li>Choose the Downloader app. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-5.png" alt="step4" class="step-img"></li>
-              <li>Click Download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-6.png" alt="step5" class="step-img"></li>
-              <li>Once installed click Open. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-8.png" alt="step6" class="step-img"></li>
-              <li>Return to home screen and open Settings. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-9.png" alt="step7" class="step-img"></li>
-              <li>Click My Fire TV. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-10.png" alt="step8" class="step-img"></li>
-              <li>Choose Developer options. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-11.png" alt="step9" class="step-img"></li>
-              <li>Click Install unknown apps. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-12.png" alt="step10" class="step-img"></li>
-              <li>Find Downloader and click it. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-13.png" alt="step11" class="step-img"></li>
-              <li>Turn Unknown Sources to On. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-14-1.png" alt="step12" class="step-img"></li>
-              <li>Launch Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/launch-downloader-app.png" alt="step13" class="step-img"></li>
-              <li>Click Allow. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-4.png" alt="step14" class="step-img"></li>
-              <li>Click OK. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-5.png" alt="step15" class="step-img"></li>
-              <li>Type URL: <strong>https://www.iptvsmarters.com/smarters.apk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/httpline.4k-turbo.comc-1-2-1536x864.png" alt="step16" class="step-img"></li>
-              <li>Wait for download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="step17" class="step-img"></li>
-              <li>Click Install. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-3.png" alt="step18" class="step-img"></li>
-              <li>Click Done. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-4.png" alt="step19" class="step-img"></li>
-              <li>Open IPTV Smarters then select Login with Xtream codes API.</li>
-              <li>Enter login details that we sent you via WhatsApp / Email / Chat.</li>
-            </ol>
+          <!-- 2. Fire TV Stick -->
+          <div class="accordion-item" data-accordion="firetv">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> Fire TV Stick Setup
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <ol>
+                  <li>From the home screen, hover over Find option. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2.png" alt="step1" class="step-img"></li>
+                  <li>Click Search. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2-1.png" alt="step2" class="step-img"></li>
+                  <li>Search for and select Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-4.png" alt="step3" class="step-img"></li>
+                  <li>Choose the Downloader app. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-5.png" alt="step4" class="step-img"></li>
+                  <li>Click Download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-6.png" alt="step5" class="step-img"></li>
+                  <li>Once installed click Open. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-8.png" alt="step6" class="step-img"></li>
+                  <li>Return to home screen and open Settings. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-9.png" alt="step7" class="step-img"></li>
+                  <li>Click My Fire TV. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-10.png" alt="step8" class="step-img"></li>
+                  <li>Choose Developer options. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-11.png" alt="step9" class="step-img"></li>
+                  <li>Click Install unknown apps. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-12.png" alt="step10" class="step-img"></li>
+                  <li>Find Downloader and click it. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-13.png" alt="step11" class="step-img"></li>
+                  <li>Turn Unknown Sources to On. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-14-1.png" alt="step12" class="step-img"></li>
+                  <li>Launch Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/launch-downloader-app.png" alt="step13" class="step-img"></li>
+                  <li>Click Allow. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-4.png" alt="step14" class="step-img"></li>
+                  <li>Click OK. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-5.png" alt="step15" class="step-img"></li>
+                  <li>Type URL: <strong>https://www.iptvsmarters.com/smarters.apk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/httpline.4k-turbo.comc-1-2-1536x864.png" alt="step16" class="step-img"></li>
+                  <li>Wait for download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="step17" class="step-img"></li>
+                  <li>Click Install. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-3.png" alt="step18" class="step-img"></li>
+                  <li>Click Done. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-4.png" alt="step19" class="step-img"></li>
+                  <li>Open IPTV Smarters then select Login with Xtream codes API.</li>
+                  <li>Enter login details that we sent you via WhatsApp / Email / Chat.</li>
+                </ol>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="guide-card">
-          <summary>📺 TiviMate pe Fire TV / Android TV</summary>
-          <div class="guide-inner">
-            <ol>
-              <li>Type URL: <strong>https://tivimates.com/tiviapk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/09/TiviMate-Firestick-APK-scaled-1-1536x691.jpeg" alt="tivimate1" class="step-img"></li>
-              <li>Wait for file to download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="tivimate2" class="step-img"></li>
-              <li>Click Install and once completed, open the app.</li>
-              <li>Click “Add Playlist” then choose “Xtream codes”.</li>
-              <li>Enter login details that we sent you via Telegram / Email / Chat.</li>
-            </ol>
+          <!-- 3. TiviMate -->
+          <div class="accordion-item" data-accordion="tivimate">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> TiviMate pe Fire TV / Android TV
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <ol>
+                  <li>Type URL: <strong>https://tivimates.com/tiviapk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/09/TiviMate-Firestick-APK-scaled-1-1536x691.jpeg" alt="tivimate1" class="step-img"></li>
+                  <li>Wait for file to download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="tivimate2" class="step-img"></li>
+                  <li>Click Install and once completed, open the app.</li>
+                  <li>Click "Add Playlist" then choose "Xtream codes".</li>
+                  <li>Enter login details that we sent you via Telegram / Email / Chat.</li>
+                </ol>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- ANDROID (ascuns) -->
-        <div class="guide-card">
-          <summary>📱 Android - IPTV Smarters Player</summary>
-          <div class="guide-inner">
-            <p><strong>Step 1:</strong> Download IPTV Smarters app: <a href="https://www.iptvsmarters.com/smarters.apk" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/smarters.apk</a></p>
-            <p><strong>Step 2:</strong> Open the app once downloaded and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="android login" class="step-img"></p>
-            <p><strong>Step 3:</strong> Enter login details provided after subscription. Click “ADD USER”.</p>
-            <p><strong>Step 4:</strong> Wait a few seconds.</p>
-            <p><strong>Step 5:</strong> Click on “Live TV” icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="dashboard" class="step-img"></p>
-            <p><strong>Step 6:</strong> Select channel group you want to watch.</p>
-            <p><strong>Step 7:</strong> Click on channel name and double click on small screen to turn into full screen.</p>
-            <p><strong>Done.</strong> Enjoy!</p>
+          <!-- 4. Android -->
+          <div class="accordion-item" data-accordion="android">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> Android - IPTV Smarters Player
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <p><strong>Step 1:</strong> Download IPTV Smarters app: <a href="https://www.iptvsmarters.com/smarters.apk" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/smarters.apk</a></p>
+                <p><strong>Step 2:</strong> Open the app once downloaded and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="android login" class="step-img"></p>
+                <p><strong>Step 3:</strong> Enter login details provided after subscription. Click "ADD USER".</p>
+                <p><strong>Step 4:</strong> Wait a few seconds.</p>
+                <p><strong>Step 5:</strong> Click on "Live TV" icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="dashboard" class="step-img"></p>
+                <p><strong>Step 6:</strong> Select channel group you want to watch.</p>
+                <p><strong>Step 7:</strong> Click on channel name and double click on small screen to turn into full screen.</p>
+                <p><strong>Done.</strong> Enjoy!</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- APPLE / iOS (ascuns) -->
-        <div class="guide-card">
-          <summary>🍏 Apple / iOS - IPTV Smarters Player</summary>
-          <div class="guide-inner">
-            <p><strong>Step 1:</strong> Download IPTV Smarters from App Store: <a href="https://apps.apple.com/in/app/smarters-player-lite/id1628995509" target="_blank" style="color:#EC2727;">https://apps.apple.com/in/app/smarters-player-lite/id1628995509</a> sau caută "Smarters Player Lite".</p>
-            <p><strong>Step 2:</strong> Open the app and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="ios login" class="step-img"></p>
-            <p><strong>Step 3:</strong> Enter login details provided. Click “ADD USER”.</p>
-            <p><strong>Step 4:</strong> Wait a few seconds.</p>
-            <p><strong>Step 5:</strong> Click “Live TV” icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="ios dashboard" class="step-img"></p>
-            <p><strong>Step 6:</strong> Select channel group.</p>
-            <p><strong>Step 7:</strong> Click channel name then double click to full screen.</p>
-            <p><strong>Step 8:</strong> To add EPG no need to add any EPG url, just click “Install EPG”. Done.</p>
+          <!-- 5. Apple / iOS -->
+          <div class="accordion-item" data-accordion="ios">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> Apple / iOS - IPTV Smarters Player
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <p><strong>Step 1:</strong> Download IPTV Smarters from App Store: <a href="https://apps.apple.com/in/app/smarters-player-lite/id1628995509" target="_blank" style="color:#EC2727;">https://apps.apple.com/in/app/smarters-player-lite/id1628995509</a> sau caută "Smarters Player Lite".</p>
+                <p><strong>Step 2:</strong> Open the app and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="ios login" class="step-img"></p>
+                <p><strong>Step 3:</strong> Enter login details provided. Click "ADD USER".</p>
+                <p><strong>Step 4:</strong> Wait a few seconds.</p>
+                <p><strong>Step 5:</strong> Click "Live TV" icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="ios dashboard" class="step-img"></p>
+                <p><strong>Step 6:</strong> Select channel group.</p>
+                <p><strong>Step 7:</strong> Click channel name then double click to full screen.</p>
+                <p><strong>Step 8:</strong> To add EPG no need to add any EPG url, just click "Install EPG". Done.</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- SMART TV -->
-        <div class="guide-card">
-          <summary>📺 Smart TV (Samsung / LG)</summary>
-          <div class="guide-inner">
-            <p><strong>Step 1:</strong> Download SetIPTV / NetIPTV / Smart IPTV from your TV store (Samsung, LG etc).</p>
-            <p><strong>Step 2:</strong> After installation, open the app and you will find MAC Address on screen. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/MAC-ADDRESS.png" alt="mac address" class="step-img"></p>
-            <p><strong>Step 3:</strong> Send us the MAC address via WhatsApp / Email / Live Chat.</p>
-            <p><strong>Step 4:</strong> After few minutes, restart/reboot your TV and open the app. Done.</p>
+          <!-- 6. Smart TV -->
+          <div class="accordion-item" data-accordion="smarttv">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> Smart TV (Samsung / LG)
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <p><strong>Step 1:</strong> Download SetIPTV / NetIPTV / Smart IPTV from your TV store (Samsung, LG etc).</p>
+                <p><strong>Step 2:</strong> After installation, open the app and you will find MAC Address on screen. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/MAC-ADDRESS.png" alt="mac address" class="step-img"></p>
+                <p><strong>Step 3:</strong> Send us the MAC address via WhatsApp / Email / Live Chat.</p>
+                <p><strong>Step 4:</strong> After few minutes, restart/reboot your TV and open the app. Done.</p>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <!-- MAG BOX -->
-        <div class="guide-card">
-          <summary>📡 MAG Box</summary>
-          <div class="guide-inner">
-            <p><strong>Step 1:</strong> Send us the MAC Address of your MAG via WhatsApp / Email / Live Chat.</p>
-            <p><strong>Step 2:</strong> After making the payment, we will send you the portal link.</p>
-            <p>Configurează portalul în setările MAG Box-ului și bucură-te de IPTV.</p>
+          <!-- 7. MAG Box -->
+          <div class="accordion-item" data-accordion="magbox">
+            <div class="accordion-header">
+              <span class="accordion-arrow">▶</span> MAG Box
+            </div>
+            <div class="accordion-content">
+              <div class="guide-inner">
+                <p><strong>Step 1:</strong> Send us the MAC Address of your MAG via WhatsApp / Email / Live Chat.</p>
+                <p><strong>Step 2:</strong> After making the payment, we will send you the portal link.</p>
+                <p>Configurează portalul în setările MAG Box-ului și bucură-te de IPTV.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -520,6 +550,38 @@
 </div>
 
 <script>
+  // accordion: la click pe header, inchide toate celelalte si deschide pe cel curent
+  const accordionItems = document.querySelectorAll('.accordion-item');
+  
+  function closeAllAccordions() {
+    accordionItems.forEach(item => {
+      const content = item.querySelector('.accordion-content');
+      const header = item.querySelector('.accordion-header');
+      if (content) content.classList.remove('open');
+      if (header) header.classList.remove('active');
+    });
+  }
+  
+  function openAccordion(item) {
+    const content = item.querySelector('.accordion-content');
+    const header = item.querySelector('.accordion-header');
+    if (content) content.classList.add('open');
+    if (header) header.classList.add('active');
+  }
+  
+  accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    header.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = item.querySelector('.accordion-content')?.classList.contains('open');
+      closeAllAccordions();
+      if (!isOpen) {
+        openAccordion(item);
+      }
+    });
+  });
+  
+  // hamburger menu functional
   const hamburger = document.getElementById('hamburgerBtn');
   const sideMenu = document.getElementById('sideMenu');
   const overlay = document.getElementById('navOverlay');
