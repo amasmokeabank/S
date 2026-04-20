@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>IPTV 24 Romania – Ghid de Instalare Pas cu Pas</title>
+<meta name="description" content="Ghid complet de configurare IPTV pentru Windows, Mac, Fire TV Stick, Android, iOS, Smart TV, MAG Box. Instalare rapidă în câteva minute.">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    background-color: #05030c;
+  }
+
+  :root {
+    --red-primary: #EC2727;
+    --red-bright: #ff4a4a;
+    --red-dark: #a11414;
+    --velvet-black: #0b0712;
+    --royal-bg: #05030c;
+    --glass-edge: rgba(236, 39, 39, 0.35);
+  }
+
+  body {
+    background: radial-gradient(circle at 25% 20%, #120d21 0%, var(--royal-bg) 100%);
+    font-family: 'Montserrat', 'Noto Sans', sans-serif;
+    color: #eee5d8;
+    line-height: 1.45;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjU1IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2YpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+');
+    background-repeat: repeat;
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: env(safe-area-inset-top);
+    background-color: #000000;
+    z-index: 2000;
+    pointer-events: none;
+  }
+
+  .glass-majestic {
+    background: rgba(8, 5, 18, 0.65);
+    backdrop-filter: blur(14px) saturate(200%);
+    border: 1px solid var(--glass-edge);
+    border-radius: 2.2rem;
+    box-shadow: 0 30px 45px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,240,180,0.15);
+    text-align: center;
+  }
+
+  .heavy-red {
+    background: linear-gradient(145deg, #ff6b6b 10%, #EC2727 45%, #a11414 70%, #ff7a7a 95%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  }
+
+  h1, h2, h3 {
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+
+  .card-royal {
+    background: linear-gradient(135deg, rgba(28, 20, 45, 0.75), rgba(12, 7, 24, 0.9));
+    border-radius: 2rem;
+    padding: 2rem 1.8rem;
+    border: 1px solid rgba(236, 39, 39, 0.3);
+    box-shadow: 0 18px 30px -12px black;
+    text-align: left;
+  }
+
+  .btn-heavy {
+    background: linear-gradient(135deg, #a11414, #EC2727, #a11414);
+    border: none;
+    padding: 14px 38px;
+    border-radius: 48px;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0 10px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,235,160,0.2);
+  }
+  .btn-heavy:hover {
+    transform: none;
+    background: linear-gradient(135deg, #a11414, #EC2727, #a11414);
+  }
+
+  .container-imperial {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flow-root;
+  }
+
+  /* header sticky */
+  .header-heavy {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 22px 40px;
+    padding-top: calc(22px + env(safe-area-inset-top));
+    margin-top: calc(-1 * env(safe-area-inset-top));
+    background: #000000;
+    border-bottom: 2px solid rgba(236, 39, 39, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .hamburger-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0;
+    z-index: 200;
+    position: relative;
+  }
+  .hamburger-btn span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, #EC2727, #ff7a7a);
+    border-radius: 6px;
+  }
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(8px);
+    z-index: 1500;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+  }
+  .nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    width: 320px;
+    height: 100%;
+    background: linear-gradient(145deg, rgba(12, 7, 24, 0.98), rgba(5, 3, 12, 0.98));
+    backdrop-filter: blur(20px);
+    border-right: 1px solid rgba(236,39,39,0.6);
+    z-index: 2000;
+    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    padding: 80px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    box-shadow: 12px 0 40px rgba(0,0,0,0.6);
+  }
+  .side-menu.open {
+    left: 0;
+  }
+  .side-menu a {
+    color: #f0e2c5;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(236,39,39,0.3);
+    display: block;
+  }
+  @media (max-width: 780px) {
+    .header-heavy {
+      padding: 12px 20px;
+      padding-top: calc(12px + env(safe-area-inset-top));
+    }
+    .hamburger-btn {
+      width: 30px;
+      height: 26px;
+    }
+    .btn-heavy {
+      padding: 8px 20px;
+      font-size: 0.75rem;
+    }
+    .side-menu {
+      width: 260px;
+      left: -260px;
+    }
+    .container-imperial {
+      padding: 0 16px;
+    }
+    .card-royal {
+      padding: 1.2rem 1rem;
+      border-radius: 1.5rem;
+    }
+  }
+  @media (min-width: 781px) {
+    .header-heavy {
+      padding: 16px 32px;
+      padding-top: calc(16px + env(safe-area-inset-top));
+    }
+  }
+
+  /* stiluri ghid */
+  .guide-section {
+    margin: 40px 0;
+  }
+  .guide-card {
+    margin-bottom: 30px;
+  }
+  .guide-card summary {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #EC2727;
+    cursor: pointer;
+    list-style: none;
+    display: block;
+    padding: 18px 20px;
+    background: rgba(20, 12, 35, 0.7);
+    border-radius: 2rem;
+    border: 1px solid rgba(236,39,39,0.4);
+    transition: none;
+  }
+  .guide-card summary::-webkit-details-marker {
+    display: none;
+  }
+  .guide-card summary::before {
+    content: "▶";
+    color: #EC2727;
+    font-size: 1.2rem;
+    display: inline-block;
+    margin-right: 16px;
+    transition: none;
+  }
+  .guide-card[open] summary::before {
+    content: "▼";
+  }
+  .guide-card summary:hover {
+    background: rgba(30, 20, 45, 0.9);
+    border-color: #EC2727;
+  }
+  .guide-inner {
+    padding: 28px 24px;
+    background: rgba(8, 5, 18, 0.5);
+    border-radius: 1.8rem;
+    margin-top: 16px;
+    border-left: 3px solid #EC2727;
+  }
+  .guide-inner h3 {
+    color: #ffb3b3;
+    font-size: 1.3rem;
+    margin: 1rem 0 0.8rem;
+  }
+  .guide-inner p, .guide-inner li {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ddd0bc;
+    margin-bottom: 0.7rem;
+  }
+  .guide-inner ol, .guide-inner ul {
+    padding-left: 1.6rem;
+    margin: 0.8rem 0;
+  }
+  .guide-inner img {
+    max-width: 100%;
+    border-radius: 1.2rem;
+    margin: 15px 0;
+    border: 1px solid rgba(236,39,39,0.3);
+  }
+  .step-img {
+    display: block;
+    max-width: 100%;
+    margin: 12px 0;
+  }
+  .btn-small {
+    background: linear-gradient(135deg, #a11414, #EC2727);
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+  }
+  .footer-elegant {
+    background: #03010a;
+    border-top: 3px solid #c93a3a;
+    padding: 45px 20px 35px;
+    padding-bottom: calc(35px + env(safe-area-inset-bottom));
+    text-align: center;
+  }
+  .footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 28px;
+    margin: 25px 0;
+  }
+  .footer-links a {
+    color: #ffa5a5;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .copyright {
+    margin-top: 20px;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #EC2727, #a11414, transparent);
+    margin: 1rem 0;
+  }
+  @media (max-width: 760px) {
+    .guide-card summary {
+      font-size: 1.2rem;
+      padding: 12px 16px;
+    }
+    .guide-inner {
+      padding: 16px;
+    }
+    .guide-inner h3 {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="hfeed site" id="page">
+  <div class="nav-overlay" id="navOverlay"></div>
+  <div class="side-menu" id="sideMenu">
+    <a href="#" class="nav-link">ACASA</a>
+    <a href="#" class="nav-link">LISTA CANALE</a>
+    <a href="#" class="nav-link">GHID INSTALARE</a>
+    <a href="#" class="nav-link">PRETURI</a>
+    <a href="#" class="blog-link">BLOG</a>
+  </div>
+
+  <header class="header-heavy">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Meniu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div><a href="https://wa.me/40793371730" class="btn-heavy">CONTACT WHATSAPP</a></div>
+  </header>
+
+  <div id="content">
+    <div class="container-imperial">
+      <main>
+        <div class="glass-majestic" style="padding: 2rem 1.5rem; margin: 30px 0 20px;">
+          <h1 class="heavy-red" style="font-size: clamp(1.8rem, 6vw, 2.8rem);">Ghid de Instalare</h1>
+          <p style="font-size: 1.2rem; margin-top: 12px;">Ghid Pas cu Pas: Cum să configurezi IPTV</p>
+          <p style="margin-top: 12px;">Pregătește-te să renunți la cablu și să intri în revoluția IPTV! Acest ghid complet îți va arăta pas cu pas cum să configurezi IPTV și să începi să urmărești emisiunile și filmele preferate în doar câteva minute. Fie că ești nou în lumea IPTV sau doar cauți o configurare rapidă și simplă, acest ghid te acoperă cu tot ce ai nevoie. Hai să începem!</p>
+        </div>
+
+        <!-- WINDOWS / MACBOOK -->
+        <div class="guide-card" open>
+          <summary>💻 Windows / Macbook</summary>
+          <div class="guide-inner">
+            <h3>Windows Method :</h3>
+            <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=windows" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=windows</a></p>
+            <h3>Mac Method :</h3>
+            <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=mac" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=mac</a></p>
+            <p>După instalare, deschide aplicația și folosește datele de autentificare primite (Xtream Codes API).</p>
+          </div>
+        </div>
+
+        <!-- FIRE TV STICK + TIVIMATE (ascuns) -->
+        <div class="guide-card">
+          <summary>🔥 Fire TV Stick Setup</summary>
+          <div class="guide-inner">
+            <ol>
+              <li>From the home screen, hover over Find option. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2.png" alt="step1" class="step-img"></li>
+              <li>Click Search. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2-1.png" alt="step2" class="step-img"></li>
+              <li>Search for and select Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-4.png" alt="step3" class="step-img"></li>
+              <li>Choose the Downloader app. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-5.png" alt="step4" class="step-img"></li>
+              <li>Click Download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-6.png" alt="step5" class="step-img"></li>
+              <li>Once installed click Open. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-8.png" alt="step6" class="step-img"></li>
+              <li>Return to home screen and open Settings. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-9.png" alt="step7" class="step-img"></li>
+              <li>Click My Fire TV. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-10.png" alt="step8" class="step-img"></li>
+              <li>Choose Developer options. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-11.png" alt="step9" class="step-img"></li>
+              <li>Click Install unknown apps. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-12.png" alt="step10" class="step-img"></li>
+              <li>Find Downloader and click it. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-13.png" alt="step11" class="step-img"></li>
+              <li>Turn Unknown Sources to On. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-14-1.png" alt="step12" class="step-img"></li>
+              <li>Launch Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/launch-downloader-app.png" alt="step13" class="step-img"></li>
+              <li>Click Allow. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-4.png" alt="step14" class="step-img"></li>
+              <li>Click OK. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-5.png" alt="step15" class="step-img"></li>
+              <li>Type URL: <strong>https://www.iptvsmarters.com/smarters.apk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/httpline.4k-turbo.comc-1-2-1536x864.png" alt="step16" class="step-img"></li>
+              <li>Wait for download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="step17" class="step-img"></li>
+              <li>Click Install. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-3.png" alt="step18" class="step-img"></li>
+              <li>Click Done. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-4.png" alt="step19" class="step-img"></li>
+              <li>Open IPTV Smarters then select Login with Xtream codes API.</li>
+              <li>Enter login details that we sent you via WhatsApp / Email / Chat.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="guide-card">
+          <summary>📺 TiviMate pe Fire TV / Android TV</summary>
+          <div class="guide-inner">
+            <ol>
+              <li>Type URL: <strong>https://tivimates.com/tiviapk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/09/TiviMate-Firestick-APK-scaled-1-1536x691.jpeg" alt="tivimate1" class="step-img"></li>
+              <li>Wait for file to download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="tivimate2" class="step-img"></li>
+              <li>Click Install and once completed, open the app.</li>
+              <li>Click “Add Playlist” then choose “Xtream codes”.</li>
+              <li>Enter login details that we sent you via Telegram / Email / Chat.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ANDROID (ascuns) -->
+        <div class="guide-card">
+          <summary>📱 Android - IPTV Smarters Player</summary>
+          <div class="guide-inner">
+            <p><strong>Step 1:</strong> Download IPTV Smarters app: <a href="https://www.iptvsmarters.com/smarters.apk" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/smarters.apk</a></p>
+            <p><strong>Step 2:</strong> Open the app once downloaded and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="android login" class="step-img"></p>
+            <p><strong>Step 3:</strong> Enter login details provided after subscription. Click “ADD USER”.</p>
+            <p><strong>Step 4:</strong> Wait a few seconds.</p>
+            <p><strong>Step 5:</strong> Click on “Live TV” icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="dashboard" class="step-img"></p>
+            <p><strong>Step 6:</strong> Select channel group you want to watch.</p>
+            <p><strong>Step 7:</strong> Click on channel name and double click on small screen to turn into full screen.</p>
+            <p><strong>Done.</strong> Enjoy!</p>
+          </div>
+        </div>
+
+        <!-- APPLE / iOS (ascuns) -->
+        <div class="guide-card">
+          <summary>🍏 Apple / iOS - IPTV Smarters Player</summary>
+          <div class="guide-inner">
+            <p><strong>Step 1:</strong> Download IPTV Smarters from App Store: <a href="https://apps.apple.com/in/app/smarters-player-lite/id1628995509" target="_blank" style="color:#EC2727;">https://apps.apple.com/in/app/smarters-player-lite/id1628995509</a> sau caută "Smarters Player Lite".</p>
+            <p><strong>Step 2:</strong> Open the app and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="ios login" class="step-img"></p>
+            <p><strong>Step 3:</strong> Enter login details provided. Click “ADD USER”.</p>
+            <p><strong>Step 4:</strong> Wait a few seconds.</p>
+            <p><strong>Step 5:</strong> Click “Live TV” icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="ios dashboard" class="step-img"></p>
+            <p><strong>Step 6:</strong> Select channel group.</p>
+            <p><strong>Step 7:</strong> Click channel name then double click to full screen.</p>
+            <p><strong>Step 8:</strong> To add EPG no need to add any EPG url, just click “Install EPG”. Done.</p>
+          </div>
+        </div>
+
+        <!-- SMART TV -->
+        <div class="guide-card">
+          <summary>📺 Smart TV (Samsung / LG)</summary>
+          <div class="guide-inner">
+            <p><strong>Step 1:</strong> Download SetIPTV / NetIPTV / Smart IPTV from your TV store (Samsung, LG etc).</p>
+            <p><strong>Step 2:</strong> After installation, open the app and you will find MAC Address on screen. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/MAC-ADDRESS.png" alt="mac address" class="step-img"></p>
+            <p><strong>Step 3:</strong> Send us the MAC address via WhatsApp / Email / Live Chat.</p>
+            <p><strong>Step 4:</strong> After few minutes, restart/reboot your TV and open the app. Done.</p>
+          </div>
+        </div>
+
+        <!-- MAG BOX -->
+        <div class="guide-card">
+          <summary>📡 MAG Box</summary>
+          <div class="guide-inner">
+            <p><strong>Step 1:</strong> Send us the MAC Address of your MAG via WhatsApp / Email / Live Chat.</p>
+            <p><strong>Step 2:</strong> After making the payment, we will send you the portal link.</p>
+            <p>Configurează portalul în setările MAG Box-ului și bucură-te de IPTV.</p>
+          </div>
+        </div>
+
+        <div class="glass-majestic" style="padding: 1.8rem; margin: 40px 0 30px;">
+          <p style="font-size: 1rem;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast</p>
+        </div>
+
+        <div style="text-align:center; margin: 20px 0 50px;">
+          <a href="https://wa.me/40793371730" class="btn-heavy">Ai nevoie de ajutor? CONTACT WHATSAPP</a>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="footer-elegant">
+    <div><img src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania Logo" style="max-width: 220px; width: 100%;"></div>
+    <p style="margin: 20px auto; max-width:700px;"><strong>IPTV 24 ROMANIA – TOT CE VREI SA VEI. ORICAND. ORIUNDE.</strong> Mii de filme, seriale si canale TV live.</p>
+    <div class="footer-links">
+      <a href="#">POLITICA CONFIDENTIALITATE</a>
+      <a href="#">POLITICA RETUR</a>
+      <a href="#">GHID INSTALARE</a>
+      <a href="#">LISTA CANALE</a>
+      <a href="#">CONTACT</a>
+    </div>
+    <div class="copyright">COPYRIGHT © IPTV 24 ROMANIA</div>
+    <div style="margin-top: 24px;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="200" alt="Metode de plata"></div>
+  </footer>
+</div>
+
+<script>
+  const hamburger = document.getElementById('hamburgerBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const overlay = document.getElementById('navOverlay');
+  function openMenu() { sideMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeMenu() { sideMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+  if(hamburger) hamburger.addEventListener('click', openMenu);
+  if(overlay) overlay.addEventListener('click', closeMenu);
+</script>
+</body>
+</html>
