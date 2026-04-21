@@ -272,7 +272,7 @@
     }
   }
 
-  /* testimoniale - cardurile centrate ca si pana acum, dar textul din interior la stanga */
+  /* testimoniale - textul din interior la stanga */
   .testimonial-row {
     display: flex;
     flex-wrap: wrap;
@@ -354,6 +354,10 @@
   .footer-links a:hover { color: var(--gold); }
 
   /* stil pentru imagini de film – rotatie zero, doar functional */
+  .film-strip-container {
+    position: relative;
+    width: 100%;
+  }
   .film-strip {
     display: flex;
     overflow-x: auto;
@@ -375,6 +379,75 @@
   }
   @media (max-width: 640px) {
     .film-strip img { height: 160px; }
+  }
+
+  /* Контейнер для подсказки */
+  .scroll-hint {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0;
+    animation: fadeInHint 2s ease forwards 1s;
+  }
+
+  /* Облако (стеклянный эффект) */
+  .hint-cloud {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(214, 181, 117, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Золотая точка с пульсацией */
+  .hint-icon {
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .hint-icon::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    animation: pulseCloud 2s infinite;
+  }
+
+  /* Текст подсказки */
+  .hint-text {
+    font-size: 0.7rem;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+  }
+
+  /* Анимации */
+  @keyframes fadeInHint {
+    to { opacity: 1; }
+  }
+
+  @keyframes pulseCloud {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  /* Исчезновение при скролле */
+  .scroll-hint.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease;
   }
 
   /* text scris de mana? nu, dar font clar si direct */
@@ -507,7 +580,15 @@
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
-      <div class="film-strip" id="filmStrip"></div>
+      <div class="film-strip-container">
+        <div class="film-strip" id="filmStrip"></div>
+        <div class="scroll-hint" id="scrollHint">
+          <div class="hint-cloud">
+            <span class="hint-icon"></span>
+            <span class="hint-text">Glisează spre stânga</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- PRICING: minimal, transparent, cinstit -->
@@ -609,6 +690,16 @@
       img.loading = "lazy";
       filmStrip.appendChild(img);
     });
+  }
+
+  // Подсказка исчезает при скролле
+  const hint = document.getElementById('scrollHint');
+  const strip = document.getElementById('filmStrip');
+
+  if(strip && hint) {
+    strip.addEventListener('scroll', () => {
+      hint.classList.add('hidden');
+    }, { once: true });
   }
 
   // mobile menu
