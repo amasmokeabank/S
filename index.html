@@ -126,14 +126,18 @@
     .nav-links { display: none; }
     .mobile-menu-btn { display: block; }
     .container { padding: 0 20px; }
-    section { margin: 60px 0; }
+    section { margin: 40px 0; }
+    .hero {
+      padding-top: 20px !important;
+    }
   }
 
-  /* HERO - gol, spațiu, text mare, un singur CTA */
+  /* HERO - redus distanta fata de bara cu oferta */
   .hero {
     text-align: center;
-    padding: 100px 0 80px;
+    padding: 30px 0 80px;
     border-bottom: 1px solid rgba(214,181,117,0.2);
+    margin-top: 0;
   }
   .hero h1 {
     font-size: clamp(2.8rem, 8vw, 5.2rem);
@@ -483,7 +487,7 @@
 
   <div class="container">
     <!-- HERO: direct, fara efecte decorative -->
-    <section class="hero fade-on-scroll">
+    <section class="hero fade-on-scroll" style="margin-top: 0; padding-top: 20px;">
       <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
       <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
       <a href="#" class="btn-primary">TESTEAZĂ GRATUIT 24h</a>
@@ -564,12 +568,29 @@
 </footer>
 
 <script>
-  // imagini pentru banda de filme
+  // imagini pentru banda de filme - toate cele 9 imagini + duplicate pentru efect continuu
   const movieImages = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp","https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp","https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp","https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp","https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp","https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp","https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp","https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
+    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
   ];
   const filmStrip = document.getElementById('filmStrip');
   if(filmStrip){
+    // adaugam toate imaginile
+    movieImages.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = "movie poster";
+      img.loading = "lazy";
+      filmStrip.appendChild(img);
+    });
+    // duplicam pentru efect de scroll continuu (ca sa nu se goleasca)
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
