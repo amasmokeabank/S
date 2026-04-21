@@ -1,594 +1,352 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
-<title>IPTV 24 Romania – Ghid de Instalare Pas cu Pas</title>
-<meta name="description" content="Ghid complet de configurare IPTV pentru Windows, Mac, Fire TV Stick, Android, iOS, Smart TV, MAG Box. Instalare rapidă în câteva minute.">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800;900&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAV.BEST | The Ultimate Archive</title>
+    <style>
+        /* LUXURY MINIMALISM & SHARP EDGES */
+        :root {
+            --pure-black: #000000;
+            --pure-white: #ffffff;
+            --muted: #555555;
+            --purple-drank: #4B0082;
+            --border-thin: 1px solid #222222;
+        }
 
-  html {
-    background-color: #05030c;
-  }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  :root {
-    --red-primary: #EC2727;
-    --red-bright: #ff4a4a;
-    --red-dark: #a11414;
-    --velvet-black: #0b0712;
-    --royal-bg: #05030c;
-    --glass-edge: rgba(236, 39, 39, 0.35);
-  }
+        body {
+            background-color: var(--pure-black);
+            color: var(--pure-white);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
 
-  body {
-    background: radial-gradient(circle at 25% 20%, #120d21 0%, var(--royal-bg) 100%);
-    font-family: 'Montserrat', 'Noto Sans', sans-serif;
-    color: #eee5d8;
-    line-height: 1.45;
-    overflow-x: hidden;
-    position: relative;
-  }
+        a { color: var(--pure-white); text-decoration: none; }
+        button { border-radius: 0; font-family: inherit; } /* Острые углы везде */
+        
+        /* LAYOUT */
+        .wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { border-bottom: var(--border-thin); padding-bottom: 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: baseline; }
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; }
 
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjU1IiBudW1PY3RhdmVzPSIzIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2YpIiBvcGFjaXR5PSIwLjA2Ii8+PC9zdmc+');
-    background-repeat: repeat;
-    mix-blend-mode: overlay;
-    opacity: 0.3;
-  }
+        /* HERO SECTION */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+        @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
 
-  body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: env(safe-area-inset-top);
-    background-color: #000000;
-    z-index: 2000;
-    pointer-events: none;
-  }
+        .preview-box { width: 100%; aspect-ratio: 1/1; background: #111; border: 1px solid #333; overflow: hidden; position: relative; }
+        .preview-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(100%); transition: 0.2s; }
+        .preview-box:hover .preview-image { filter: grayscale(0%); border-color: var(--purple-drank); }
 
-  .glass-majestic {
-    background: rgba(8, 5, 18, 0.65);
-    backdrop-filter: blur(14px) saturate(200%);
-    border: 1px solid var(--glass-edge);
-    border-radius: 2.2rem;
-    box-shadow: 0 30px 45px -20px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,240,180,0.15);
-    text-align: center;
-  }
+        .offer-details { display: flex; flex-direction: column; justify-content: center; }
+        h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
+        .price-tag { font-size: 32px; font-weight: 400; color: var(--purple-drank); margin-bottom: 30px; font-family: monospace; }
+        .desc { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
 
-  .heavy-red {
-    background: linear-gradient(145deg, #ff6b6b 10%, #EC2727 45%, #a11414 70%, #ff7a7a 95%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-weight: 900;
-    letter-spacing: -0.01em;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
-  }
+        .btn-main-buy { background: var(--pure-white); color: var(--pure-black); border: none; padding: 20px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.1s; }
+        .btn-main-buy:hover { background: var(--purple-drank); color: var(--pure-white); }
 
-  h1, h2, h3 {
-    font-weight: 800;
-    letter-spacing: -0.3px;
-  }
+        /* CATALOG / FILTER SECTION */
+        .archive-title { font-size: 18px; font-weight: 700; letter-spacing: 2px; border-bottom: var(--border-thin); padding-bottom: 10px; margin-bottom: 30px; text-transform: uppercase; }
+        
+        .catalog-container { display: grid; grid-template-columns: 250px 1fr; gap: 40px; }
+        @media (max-width: 800px) { .catalog-container { grid-template-columns: 1fr; } }
 
-  .card-royal {
-    background: linear-gradient(135deg, rgba(28, 20, 45, 0.75), rgba(12, 7, 24, 0.9));
-    border-radius: 2rem;
-    padding: 2rem 1.8rem;
-    border: 1px solid rgba(236, 39, 39, 0.3);
-    box-shadow: 0 18px 30px -12px black;
-    text-align: left;
-  }
+        /* FILTERS */
+        .filter-list { display: flex; flex-direction: column; gap: 10px; }
+        .filter-btn { background: transparent; border: none; color: var(--muted); text-align: left; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; padding: 10px 0; border-bottom: 1px solid transparent; transition: 0.1s; }
+        .filter-btn:hover { color: var(--pure-white); }
+        .filter-btn.active { color: var(--pure-white); border-bottom: 1px solid var(--purple-drank); }
 
-  .btn-heavy {
-    background: linear-gradient(135deg, #a11414, #EC2727, #a11414);
-    border: none;
-    padding: 14px 38px;
-    border-radius: 48px;
-    font-weight: 800;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #ffffff;
-    display: inline-block;
-    text-decoration: none;
-    box-shadow: 0 10px 18px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,235,160,0.2);
-  }
-  .btn-heavy:hover {
-    transform: none;
-    background: linear-gradient(135deg, #a11414, #EC2727, #a11414);
-  }
+        /* GENRE CONTENT */
+        .genre-display { border: 1px solid #222; padding: 40px; background: #050505; }
+        .genre-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 20px; }
+        @media (max-width: 600px) { .genre-header { flex-direction: column; align-items: flex-start; gap: 20px; } }
+        
+        .genre-title { font-size: 24px; font-weight: 700; text-transform: uppercase; }
+        .genre-meta { font-family: monospace; color: var(--muted); font-size: 12px; }
+        
+        /* INVENTORY LIST (KITS) */
+        .kit-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
+        .kit-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; padding-bottom: 10px; font-family: monospace; font-size: 12px; color: #888; text-transform: uppercase; }
+        .kit-item span { color: var(--pure-white); }
+        
+        .btn-play-kit { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 5px 15px; font-size: 10px; cursor: pointer; transition: 0.1s; }
+        .btn-play-kit:hover, .btn-play-kit.playing { background: var(--pure-white); color: var(--pure-black); border-color: var(--pure-white); }
 
-  .container-imperial {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 0 28px;
-    display: flow-root;
-  }
+        .btn-genre-buy { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.1s; }
+        .btn-genre-buy:hover { background: var(--pure-white); color: var(--pure-black); }
 
-  /* header sticky */
-  .header-heavy {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 22px 40px;
-    padding-top: calc(22px + env(safe-area-inset-top));
-    margin-top: calc(-1 * env(safe-area-inset-top));
-    background: #000000;
-    border-bottom: 2px solid rgba(236, 39, 39, 0.5);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-  }
-  .hamburger-btn {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    width: 36px;
-    height: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 0;
-    z-index: 200;
-    position: relative;
-  }
-  .hamburger-btn span {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background: linear-gradient(90deg, #EC2727, #ff7a7a);
-    border-radius: 6px;
-  }
-  .nav-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(8px);
-    z-index: 1500;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease;
-  }
-  .nav-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  .side-menu {
-    position: fixed;
-    top: 0;
-    left: -320px;
-    width: 320px;
-    height: 100%;
-    background: linear-gradient(145deg, rgba(12, 7, 24, 0.98), rgba(5, 3, 12, 0.98));
-    backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(236,39,39,0.6);
-    z-index: 2000;
-    transition: left 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    padding: 80px 24px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    box-shadow: 12px 0 40px rgba(0,0,0,0.6);
-  }
-  .side-menu.open {
-    left: 0;
-  }
-  .side-menu a {
-    color: #f0e2c5;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-    padding: 12px 0;
-    border-bottom: 1px solid rgba(236,39,39,0.3);
-    display: block;
-  }
-  @media (max-width: 780px) {
-    .header-heavy {
-      padding: 12px 20px;
-      padding-top: calc(12px + env(safe-area-inset-top));
-    }
-    .hamburger-btn {
-      width: 30px;
-      height: 26px;
-    }
-    .btn-heavy {
-      padding: 8px 20px;
-      font-size: 0.75rem;
-    }
-    .side-menu {
-      width: 260px;
-      left: -260px;
-    }
-    .container-imperial {
-      padding: 0 16px;
-    }
-    .card-royal {
-      padding: 1.2rem 1rem;
-      border-radius: 1.5rem;
-    }
-  }
-  @media (min-width: 781px) {
-    .header-heavy {
-      padding: 16px 32px;
-      padding-top: calc(16px + env(safe-area-inset-top));
-    }
-  }
+        /* CHECKOUT MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.2s; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-box { width: 100%; max-width: 500px; background: var(--pure-black); border: 1px solid #333; padding: 40px; position: relative; }
+        .btn-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--muted); font-size: 16px; cursor: pointer; }
+        .btn-close:hover { color: var(--pure-white); }
 
-  /* accordion styles - fara emoticoane, doar sageata + text */
-  .guide-section {
-    margin: 40px 0;
-  }
-  .accordion-item {
-    margin-bottom: 20px;
-    border-radius: 2rem;
-    background: rgba(8, 5, 18, 0.4);
-    border: 1px solid rgba(236,39,39,0.2);
-    overflow: hidden;
-  }
-  .accordion-header {
-    background: linear-gradient(135deg, rgba(20, 12, 35, 0.9), rgba(10, 5, 20, 0.95));
-    padding: 18px 24px;
-    cursor: pointer;
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: #EC2727;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: none;
-    border-bottom: 1px solid transparent;
-  }
-  .accordion-header:hover {
-    background: rgba(30, 18, 48, 0.95);
-    border-bottom-color: rgba(236,39,39,0.4);
-  }
-  .accordion-arrow {
-    font-size: 1.4rem;
-    font-weight: 900;
-    color: #EC2727;
-    width: 28px;
-    display: inline-block;
-    transition: none;
-  }
-  .accordion-header.active .accordion-arrow {
-    transform: rotate(90deg);
-  }
-  .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease-out;
-    background: rgba(5, 3, 12, 0.5);
-  }
-  .accordion-content.open {
-    max-height: 3000px;
-    transition: max-height 0.6s ease-in-out;
-  }
-  .guide-inner {
-    padding: 28px 24px;
-    border-top: 1px solid rgba(236,39,39,0.3);
-  }
-  .guide-inner h3 {
-    color: #ffb3b3;
-    font-size: 1.3rem;
-    margin: 1rem 0 0.8rem;
-  }
-  .guide-inner p, .guide-inner li {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #ddd0bc;
-    margin-bottom: 0.7rem;
-  }
-  .guide-inner ol, .guide-inner ul {
-    padding-left: 1.6rem;
-    margin: 0.8rem 0;
-  }
-  .guide-inner img {
-    max-width: 100%;
-    border-radius: 1.2rem;
-    margin: 15px 0;
-    border: 1px solid rgba(236,39,39,0.3);
-  }
-  .step-img {
-    display: block;
-    max-width: 100%;
-    margin: 12px 0;
-  }
-  .footer-elegant {
-    background: #03010a;
-    border-top: 3px solid #c93a3a;
-    padding: 45px 20px 35px;
-    padding-bottom: calc(35px + env(safe-area-inset-bottom));
-    text-align: center;
-  }
-  .footer-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 28px;
-    margin: 25px 0;
-  }
-  .footer-links a {
-    color: #ffa5a5;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-  }
-  .copyright {
-    margin-top: 20px;
-  }
-  hr {
-    border: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #EC2727, #a11414, transparent);
-    margin: 1rem 0;
-  }
-  @media (max-width: 760px) {
-    .accordion-header {
-      font-size: 1rem;
-      padding: 14px 18px;
-    }
-    .guide-inner {
-      padding: 16px;
-    }
-    .guide-inner h3 {
-      font-size: 1.1rem;
-    }
-  }
-</style>
+        .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 30px; letter-spacing: 1px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        
+        /* Modal Steps */
+        .checkout-step { display: none; flex-direction: column; gap: 20px; }
+        .checkout-step.active { display: flex; }
+
+        .summary { font-family: monospace; font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+        .summary span { color: var(--pure-white); }
+
+        input[type="email"] { width: 100%; background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-size: 14px; outline: none; font-family: monospace; }
+        input[type="email"]:focus { border-color: var(--purple-drank); }
+
+        .btn-modal { background: var(--pure-white); color: var(--pure-black); border: none; padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+        .btn-modal:hover { background: var(--purple-drank); color: var(--pure-white); }
+        
+        .btn-outline { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.1s; }
+        .btn-outline:hover { border-color: var(--pure-white); }
+
+        .crypto-address-box { padding: 20px; border: 1px dashed #444; text-align: center; font-family: monospace; word-break: break-all; color: var(--purple-drank); font-size: 14px; margin: 20px 0; }
+
+    </style>
 </head>
 <body>
-<div class="hfeed site" id="page">
-  <div class="nav-overlay" id="navOverlay"></div>
-  <div class="side-menu" id="sideMenu">
-    <a href="/index.html">ACASA</a>
-    <a href="https://iptv24romania.com/channels-list/">LISTA CANALE</a>
-    <a href="/d.html">GHID INSTALARE</a>
-    <a href="https://iptv24romania.com/shop/">PRETURI</a>
-    <a href="#">BLOG</a>
-  </div>
 
-  <header class="header-heavy">
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Meniu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <div><a href="https://wa.me/40793371730" class="btn-heavy">CONTACT WHATSAPP</a></div>
-  </header>
+    <audio id="kit-player"></audio>
 
-  <div id="content">
-    <div class="container-imperial">
-      <main>
-        <div class="glass-majestic" style="padding: 2rem 1.5rem; margin: 30px 0 20px;">
-          <h1 class="heavy-red" style="font-size: clamp(1.8rem, 6vw, 2.8rem);">Ghid de Instalare</h1>
-          <p style="font-size: 1.2rem; margin-top: 12px;">Ghid Pas cu Pas: Cum să configurezi IPTV</p>
-          <p style="margin-top: 12px;">Pregătește-te să renunți la cablu și să intri în revoluția IPTV! Acest ghid complet îți va arăta pas cu pas cum să configurezi IPTV și să începi să urmărești emisiunile și filmele preferate în doar câteva minute. Fie că ești nou în lumea IPTV sau doar cauți o configurare rapidă și simplă, acest ghid te acoperă cu tot ce ai nevoie. Hai să începem!</p>
-        </div>
+    <div class="wrapper">
+        <header>
+            <div class="logo">WAV.BEST</div>
+        </header>
 
-        <!-- ACCORDION: toate sectiunile inchise initial, se deschid individual, celelalte se inchid -->
-        <div class="guide-section" id="accordionContainer">
-          <!-- 1. Windows / Macbook -->
-          <div class="accordion-item" data-accordion="winmac">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> Windows / Macbook
+        <section class="hero">
+            <div class="preview-box">
+                <img src="bundle-cover.jpg" alt="120k Sounds Bundle" class="preview-image">
             </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <h3>Windows Method :</h3>
-                <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=windows" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=windows</a></p>
-                <h3>Mac Method :</h3>
-                <p>Download IPTV Smarters app through this URL: <a href="https://www.iptvsmarters.com/download?download=mac" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/download?download=mac</a></p>
-                <p>După instalare, deschide aplicația și folosește datele de autentificare primite (Xtream Codes API).</p>
-              </div>
-            </div>
-          </div>
 
-          <!-- 2. Fire TV Stick -->
-          <div class="accordion-item" data-accordion="firetv">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> Fire TV Stick Setup
+            <div class="offer-details">
+                <h1>120,000 SOUNDS.<br>200 KITS.</h1>
+                <div class="price-tag">$66.6</div>
+                <p class="desc">The Ultimate Archive. Instant access to all 20 genres. Pure raw audio. Provide email at checkout to receive the download link upon blockchain confirmation.</p>
+                
+                <button class="btn-main-buy" onclick="openCheckout('FULL ARCHIVE BUNDLE (200 KITS)', '66.6')">PURCHASE ENTIRE ARCHIVE</button>
             </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <ol>
-                  <li>From the home screen, hover over Find option. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2.png" alt="step1" class="step-img"></li>
-                  <li>Click Search. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-2-1.png" alt="step2" class="step-img"></li>
-                  <li>Search for and select Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-4.png" alt="step3" class="step-img"></li>
-                  <li>Choose the Downloader app. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-5.png" alt="step4" class="step-img"></li>
-                  <li>Click Download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-6.png" alt="step5" class="step-img"></li>
-                  <li>Once installed click Open. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-8.png" alt="step6" class="step-img"></li>
-                  <li>Return to home screen and open Settings. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-9.png" alt="step7" class="step-img"></li>
-                  <li>Click My Fire TV. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-10.png" alt="step8" class="step-img"></li>
-                  <li>Choose Developer options. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-11.png" alt="step9" class="step-img"></li>
-                  <li>Click Install unknown apps. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-12.png" alt="step10" class="step-img"></li>
-                  <li>Find Downloader and click it. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-13.png" alt="step11" class="step-img"></li>
-                  <li>Turn Unknown Sources to On. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/downloader-on-firestick-new-interface-14-1.png" alt="step12" class="step-img"></li>
-                  <li>Launch Downloader. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/launch-downloader-app.png" alt="step13" class="step-img"></li>
-                  <li>Click Allow. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-4.png" alt="step14" class="step-img"></li>
-                  <li>Click OK. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/mobdro-firestick-5.png" alt="step15" class="step-img"></li>
-                  <li>Type URL: <strong>https://www.iptvsmarters.com/smarters.apk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/httpline.4k-turbo.comc-1-2-1536x864.png" alt="step16" class="step-img"></li>
-                  <li>Wait for download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="step17" class="step-img"></li>
-                  <li>Click Install. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-3.png" alt="step18" class="step-img"></li>
-                  <li>Click Done. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-4.png" alt="step19" class="step-img"></li>
-                  <li>Open IPTV Smarters then select Login with Xtream codes API.</li>
-                  <li>Enter login details that we sent you via WhatsApp / Email / Chat.</li>
-                </ol>
-              </div>
-            </div>
-          </div>
+        </section>
 
-          <!-- 3. TiviMate -->
-          <div class="accordion-item" data-accordion="tivimate">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> TiviMate pe Fire TV / Android TV
-            </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <ol>
-                  <li>Type URL: <strong>https://tivimates.com/tiviapk</strong> and click Go. <img src="https://www.tvzland.com/wp-content/uploads/2022/09/TiviMate-Firestick-APK-scaled-1-1536x691.jpeg" alt="tivimate1" class="step-img"></li>
-                  <li>Wait for file to download. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/iptv-smarters-2.png" alt="tivimate2" class="step-img"></li>
-                  <li>Click Install and once completed, open the app.</li>
-                  <li>Click "Add Playlist" then choose "Xtream codes".</li>
-                  <li>Enter login details that we sent you via Telegram / Email / Chat.</li>
-                </ol>
-              </div>
-            </div>
-          </div>
+        <div class="archive-title">EXPLORE THE ARCHIVE</div>
+        
+        <section class="catalog-container">
+            <div class="filter-list" id="filter-container"></div>
 
-          <!-- 4. Android -->
-          <div class="accordion-item" data-accordion="android">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> Android - IPTV Smarters Player
-            </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <p><strong>Step 1:</strong> Download IPTV Smarters app: <a href="https://www.iptvsmarters.com/smarters.apk" target="_blank" style="color:#EC2727;">https://www.iptvsmarters.com/smarters.apk</a></p>
-                <p><strong>Step 2:</strong> Open the app once downloaded and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="android login" class="step-img"></p>
-                <p><strong>Step 3:</strong> Enter login details provided after subscription. Click "ADD USER".</p>
-                <p><strong>Step 4:</strong> Wait a few seconds.</p>
-                <p><strong>Step 5:</strong> Click on "Live TV" icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="dashboard" class="step-img"></p>
-                <p><strong>Step 6:</strong> Select channel group you want to watch.</p>
-                <p><strong>Step 7:</strong> Click on channel name and double click on small screen to turn into full screen.</p>
-                <p><strong>Done.</strong> Enjoy!</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5. Apple / iOS -->
-          <div class="accordion-item" data-accordion="ios">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> Apple / iOS - IPTV Smarters Player
-            </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <p><strong>Step 1:</strong> Download IPTV Smarters from App Store: <a href="https://apps.apple.com/in/app/smarters-player-lite/id1628995509" target="_blank" style="color:#EC2727;">https://apps.apple.com/in/app/smarters-player-lite/id1628995509</a> sau caută "Smarters Player Lite".</p>
-                <p><strong>Step 2:</strong> Open the app and enter login details. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/login-1536x710.png" alt="ios login" class="step-img"></p>
-                <p><strong>Step 3:</strong> Enter login details provided. Click "ADD USER".</p>
-                <p><strong>Step 4:</strong> Wait a few seconds.</p>
-                <p><strong>Step 5:</strong> Click "Live TV" icon. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/Dashboard-1536x710.png" alt="ios dashboard" class="step-img"></p>
-                <p><strong>Step 6:</strong> Select channel group.</p>
-                <p><strong>Step 7:</strong> Click channel name then double click to full screen.</p>
-                <p><strong>Step 8:</strong> To add EPG no need to add any EPG url, just click "Install EPG". Done.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6. Smart TV -->
-          <div class="accordion-item" data-accordion="smarttv">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> Smart TV (Samsung / LG)
-            </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <p><strong>Step 1:</strong> Download SetIPTV / NetIPTV / Smart IPTV from your TV store (Samsung, LG etc).</p>
-                <p><strong>Step 2:</strong> After installation, open the app and you will find MAC Address on screen. <img src="https://www.tvzland.com/wp-content/uploads/2022/07/MAC-ADDRESS.png" alt="mac address" class="step-img"></p>
-                <p><strong>Step 3:</strong> Send us the MAC address via WhatsApp / Email / Live Chat.</p>
-                <p><strong>Step 4:</strong> After few minutes, restart/reboot your TV and open the app. Done.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- 7. MAG Box -->
-          <div class="accordion-item" data-accordion="magbox">
-            <div class="accordion-header">
-              <span class="accordion-arrow">▶</span> MAG Box
-            </div>
-            <div class="accordion-content">
-              <div class="guide-inner">
-                <p><strong>Step 1:</strong> Send us the MAC Address of your MAG via WhatsApp / Email / Live Chat.</p>
-                <p><strong>Step 2:</strong> After making the payment, we will send you the portal link.</p>
-                <p>Configurează portalul în setările MAG Box-ului și bucură-te de IPTV.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-majestic" style="padding: 1.8rem; margin: 40px 0 30px;">
-          <p style="font-size: 1rem;">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast</p>
-        </div>
-
-        <div style="text-align:center; margin: 20px 0 50px;">
-          <a href="https://wa.me/40793371730" class="btn-heavy">Ai nevoie de ajutor? CONTACT WHATSAPP</a>
-        </div>
-      </main>
+            <div class="genre-display" id="genre-content"></div>
+        </section>
     </div>
-  </div>
 
-  <footer class="footer-elegant">
-    <div><img src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania Logo" style="max-width: 220px; width: 100%;"></div>
-    <p style="margin: 20px auto; max-width:700px;"><strong>IPTV 24 ROMANIA – TOT CE VREI SA VEI. ORICAND. ORIUNDE.</strong> Mii de filme, seriale si canale TV live.</p>
-    <div class="footer-links">
-      <a href="/p.html">POLITICA CONFIDENTIALITATE</a>
-      <a href="/p.html">POLITICA RETUR</a>
-      <a href="/d.html">GHID INSTALARE</a>
-      <a href="https://iptv24romania.com/channels-list">LISTA CANALE</a>
-      <a href="https://api.whatsapp.com/send?phone=40793371730">CONTACT</a>
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <button class="btn-close" onclick="closeCheckout()">✕</button>
+            <div class="modal-title">SECURE CHECKOUT</div>
+
+            <div class="checkout-step active" id="step-1">
+                <div class="summary">
+                    ITEM: <span id="checkout-item-name">...</span><br>
+                    TOTAL: <span id="checkout-item-price">...</span>
+                </div>
+                <input type="email" id="user-email" placeholder="ENTER EMAIL FOR DELIVERY" required>
+                <button class="btn-modal" onclick="goToStep2()">CONTINUE TO PAYMENT</button>
+            </div>
+
+            <div class="checkout-step" id="step-2">
+                <div class="summary">SELECT CRYPTOCURRENCY:</div>
+                <button class="btn-outline" onclick="goToStep3('SOLANA', 'Gx1iDY6nh7mz2QSFFGcViBtGs1HwMZYZWxJHbNAwVUSw')">PAY WITH SOLANA (SOL/USDC)</button>
+                <button class="btn-outline" onclick="goToStep3('BITCOIN', 'bc1qv5ch8gj7x04ufnyfaehrj3vfkmazpwqrrzwtm0')">PAY WITH BITCOIN (BTC)</button>
+            </div>
+
+            <div class="checkout-step" id="step-3">
+                <div class="summary" style="text-align: center; color: var(--pure-white);">
+                    SEND EXACTLY <b id="final-price" style="color: var(--purple-drank); font-size: 16px;"></b> VIA <b id="final-network"></b> TO:
+                </div>
+                
+                <div class="crypto-address-box" id="crypto-address">...</div>
+                
+                <button class="btn-modal" id="btn-copy" onclick="copyAddress()">COPY ADDRESS</button>
+                <div style="font-family: monospace; font-size: 10px; color: var(--muted); text-align: center; margin-top: 15px; line-height: 1.6;">
+                    <span style="color: #ff3333; font-weight: 700; font-size: 11px;">WARNING: SEND EXACTLY THIS AMOUNT.<br>TIME LIMIT FOR PAYMENT: 120 MINUTES.</span><br><br>
+                    Confirmation usually takes 1-4 minutes.<br>
+                    Download link will be sent to <span id="display-email" style="color: #fff;"></span> after 1 network confirmation.
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="copyright">COPYRIGHT © IPTV 24 ROMANIA</div>
-    <div style="margin-top: 24px;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="200" alt="Metode de plata"></div>
-  </footer>
-</div>
 
-<script>
-  // accordion: la click pe header, inchide toate celelalte si deschide pe cel curent
-  const accordionItems = document.querySelectorAll('.accordion-item');
-  
-  function closeAllAccordions() {
-    accordionItems.forEach(item => {
-      const content = item.querySelector('.accordion-content');
-      const header = item.querySelector('.accordion-header');
-      if (content) content.classList.remove('open');
-      if (header) header.classList.remove('active');
-    });
-  }
-  
-  function openAccordion(item) {
-    const content = item.querySelector('.accordion-content');
-    const header = item.querySelector('.accordion-header');
-    if (content) content.classList.add('open');
-    if (header) header.classList.add('active');
-  }
-  
-  accordionItems.forEach(item => {
-    const header = item.querySelector('.accordion-header');
-    header.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = item.querySelector('.accordion-content')?.classList.contains('open');
-      closeAllAccordions();
-      if (!isOpen) {
-        openAccordion(item);
-      }
-    });
-  });
-  
-  // hamburger menu functional
-  const hamburger = document.getElementById('hamburgerBtn');
-  const sideMenu = document.getElementById('sideMenu');
-  const overlay = document.getElementById('navOverlay');
-  function openMenu() { sideMenu.classList.add('open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeMenu() { sideMenu.classList.remove('open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
-  if(hamburger) hamburger.addEventListener('click', openMenu);
-  if(overlay) overlay.addEventListener('click', closeMenu);
-</script>
+    <script>
+        // --- DATA GENERATION ---
+        const genres = [
+            "Trap", "Drill", "Amapiano", "Plugg", "R&B", 
+            "Boom Bap", "Reggaeton", "Pop", "Lo-Fi", "Afrobeats", 
+            "Dancehall", "Rage", "Phonk", "Techno", "Jersey Club", 
+            "Grime", "Synthwave", "G-Funk", "Emo Trap", "Hyperpop"
+        ];
+
+        // Генерируем рандомное количество звуков (от 6346 до 7399) для каждого жанра один раз
+        const genreData = genres.map(name => {
+            const soundsCount = Math.floor(Math.random() * (7399 - 6346 + 1)) + 6346;
+            return { name, soundsCount };
+        });
+
+        // --- AUDIO LOGIC ---
+        const kitPlayer = document.getElementById('kit-player');
+        let currentPlayingBtn = null;
+
+        function playKitAudio(btn, audioSrc) {
+            // Если нажимаем на ту же кнопку, которая сейчас играет - ставим на паузу
+            if (currentPlayingBtn === btn && !kitPlayer.paused) {
+                kitPlayer.pause();
+                btn.innerText = '▶ PLAY';
+                btn.classList.remove('playing');
+                return;
+            }
+
+            // Сбрасываем предыдущую кнопку
+            if (currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+            }
+
+            // Запускаем новый трек
+            kitPlayer.src = audioSrc;
+            kitPlayer.play().catch(() => alert('Please add a valid MP3 path in the JS code.'));
+            
+            btn.innerText = '|| PAUSE';
+            btn.classList.add('playing');
+            currentPlayingBtn = btn;
+        }
+
+        kitPlayer.addEventListener('ended', () => {
+            if (currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+            }
+        });
+
+        // --- RENDER LOGIC ---
+        const filterContainer = document.getElementById('filter-container');
+        const genreContent = document.getElementById('genre-content');
+
+        genreData.forEach((genre, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            if(index === 0) btn.classList.add('active');
+            btn.innerText = genre.name;
+            btn.onclick = () => renderGenre(genre, btn);
+            filterContainer.appendChild(btn);
+        });
+
+        function renderGenre(genreObj, activeBtn) {
+            // Update active state
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(activeBtn) activeBtn.classList.add('active');
+
+            // Generate 10 kits list
+            let kitsHTML = '';
+            for(let i = 1; i <= 10; i++) {
+                // Путь к файлу превью. Назови их в папке, например: trap_1.mp3
+                let mockAudioPath = `previews/${genreObj.name.toLowerCase()}_${i}.mp3`;
+                
+                kitsHTML += `
+                <div class="kit-item">
+                    <span>${genreObj.name} Vol. ${i}</span>
+                    <button class="btn-play-kit" onclick="playKitAudio(this, '${mockAudioPath}')">▶ PLAY</button>
+                </div>`;
+            }
+
+            genreContent.innerHTML = `
+                <div class="genre-header">
+                    <div class="genre-title">${genreObj.name} BUNDLE</div>
+                    <div class="genre-meta">10 KITS / ${genreObj.soundsCount.toLocaleString()} SOUNDS</div>
+                </div>
+                <div class="kit-list">
+                    ${kitsHTML}
+                </div>
+                <button class="btn-genre-buy" onclick="openCheckout('${genreObj.name.toUpperCase()} BUNDLE (10 KITS)', '9.99')">PURCHASE GENRE FOR $9.99</button>
+            `;
+        }
+
+        // Render first on load
+        renderGenre(genreData[0], filterContainer.firstChild);
+
+        // --- CHECKOUT LOGIC ---
+        const modal = document.getElementById('modal-overlay');
+        let currentPrice = '';
+        
+        // Exchange rates set directly into logic
+        const SOL_RATE = 84.53;
+        const BTC_RATE = 74950.00;
+
+        function openCheckout(itemName, price) {
+            currentPrice = price;
+            document.getElementById('checkout-item-name').innerText = itemName;
+            document.getElementById('checkout-item-price').innerText = '$' + price;
+            document.getElementById('user-email').value = ''; // Clear email
+            
+            // Reset steps
+            document.querySelectorAll('.checkout-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-1').classList.add('active');
+            
+            modal.classList.add('active');
+            
+            // Pause audio if playing
+            if(!kitPlayer.paused) kitPlayer.pause();
+            if(currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+            }
+        }
+
+        function closeCheckout() {
+            modal.classList.remove('active');
+        }
+
+        function goToStep2() {
+            const email = document.getElementById('user-email').value;
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email to receive the files.');
+                return;
+            }
+            document.getElementById('display-email').innerText = email;
+            document.getElementById('step-1').classList.remove('active');
+            document.getElementById('step-2').classList.add('active');
+        }
+
+        function goToStep3(networkName, address) {
+            let cryptoAmount = 0;
+            let ticker = '';
+            
+            // Calculate exact amount based on rates
+            if (networkName === 'SOLANA') {
+                cryptoAmount = (parseFloat(currentPrice) / SOL_RATE).toFixed(5);
+                ticker = 'SOL';
+            } else if (networkName === 'BITCOIN') {
+                cryptoAmount = (parseFloat(currentPrice) / BTC_RATE).toFixed(8);
+                ticker = 'BTC';
+            }
+
+            document.getElementById('final-network').innerText = ticker;
+            document.getElementById('final-price').innerText = cryptoAmount; // Setting the crypto amount, not the USD price
+            document.getElementById('crypto-address').innerText = address;
+            
+            document.getElementById('step-2').classList.remove('active');
+            document.getElementById('step-3').classList.add('active');
+            document.getElementById('btn-copy').innerText = 'COPY ADDRESS';
+        }
+
+        function copyAddress() {
+            const address = document.getElementById('crypto-address').innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                document.getElementById('btn-copy').innerText = 'COPIED!';
+            });
+        }
+    </script>
 </body>
 </html>
