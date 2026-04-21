@@ -8,7 +8,6 @@
 <meta name="description" content="10.000+ canale, filme și seriale nelimitat. Test gratuit 24h. Activare instant. Prețuri exclusive.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* RESET + BARE MINIMUM */
   * {
     margin: 0;
     padding: 0;
@@ -35,26 +34,22 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* typography - serif pentru autoritate */
   h1, h2, h3, .serif {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
-  /* layout ultra clean */
   .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* efecte lipsă - nimic inutil, doar spațiu și contrast */
   section {
     margin: 80px 0;
   }
 
-  /* butonul clasic direct */
   .btn-primary {
     display: inline-block;
     background: var(--gold);
@@ -77,7 +72,6 @@
     letter-spacing: 2.5px;
   }
 
-  /* header minimal, aproape invizibil */
   .site-header {
     position: sticky;
     top: 0;
@@ -129,7 +123,6 @@
     section { margin: 60px 0; }
   }
 
-  /* HERO - gol, spațiu, text mare, un singur CTA */
   .hero {
     text-align: center;
     padding: 100px 0 80px;
@@ -163,7 +156,22 @@
     color: #9b8e72;
   }
 
-  /* grid features extrem de direct */
+  .urgency-bar {
+    background: #000;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 12px 0;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .urgency-bar span {
+    color: var(--gold);
+    font-weight: 800;
+  }
+
   .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -185,7 +193,6 @@
     color: #b8aa8c;
   }
 
-  /* carduri pret - absolut minimal, fara umbre false, doar linie si contrast */
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -240,36 +247,20 @@
     color: black;
   }
 
-  /* bara de incredere - tehnica veche: "GRATUIT 24h" */
-  .urgency-bar {
-    background: #000;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 12px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .urgency-bar span {
-    color: var(--gold);
-    font-weight: 800;
-  }
-
-  /* testimoniale - imagine reala, fara efecte inutile */
+  /* testimonialele aliniate la stanga (fara centrare) */
   .testimonial-row {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 40px 0;
   }
   .testimonial-card {
     background: #0c0c0c;
     padding: 24px;
-    width: 280px;
+    width: 300px;
     border-left: 3px solid var(--gold);
+    text-align: left;
   }
   .testimonial-card p {
     font-style: normal;
@@ -283,7 +274,6 @@
     color: var(--gold);
   }
 
-  /* FAQ - niciun efect de umbra, doar spatiu si claritate */
   .faq-list details {
     border-bottom: 1px solid rgba(214,181,117,0.2);
     padding: 20px 0;
@@ -314,7 +304,6 @@
     padding-right: 24px;
   }
 
-  /* footer extrem de simplu */
   .footer {
     border-top: 1px solid rgba(214,181,117,0.3);
     padding: 48px 0 32px;
@@ -335,31 +324,40 @@
   }
   .footer-links a:hover { color: var(--gold); }
 
-  /* stil pentru imagini de film – rotatie zero, doar functional */
+  /* carusel infinit / film strip */
+  .film-strip-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin: 30px 0 20px;
+  }
   .film-strip {
     display: flex;
-    overflow-x: auto;
-    gap: 16px;
-    padding: 20px 0;
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold) #1a1a1a;
+    gap: 20px;
+    width: max-content;
+    animation: scrollInfinite 40s linear infinite;
+    will-change: transform;
   }
   .film-strip img {
-    height: 220px;
+    height: 240px;
     width: auto;
-    border-radius: 4px;
+    border-radius: 6px;
     filter: grayscale(20%);
     transition: var(--transition);
+    flex-shrink: 0;
   }
   .film-strip img:hover {
     filter: grayscale(0%);
     transform: scale(1.02);
   }
+  @keyframes scrollInfinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
   @media (max-width: 640px) {
     .film-strip img { height: 160px; }
   }
 
-  /* text scris de mana? nu, dar font clar si direct */
   .stat-badge {
     font-size: 0.7rem;
     background: #1e1b12;
@@ -368,7 +366,6 @@
     letter-spacing: 1px;
   }
 
-  /* mobile menu */
   .mobile-nav {
     position: fixed;
     top: 0;
@@ -419,7 +416,6 @@
     visibility: visible;
   }
 
-  /* animatie la scroll simpla (opacitate) */
   .fade-on-scroll {
     opacity: 0;
     transform: translateY(15px);
@@ -462,36 +458,38 @@
 </header>
 
 <main>
-  <!-- BARA URGENTA - tehnica veche si eficientă -->
+  <!-- BARA OFERTĂ FĂRĂ EMOJI -->
   <div class="urgency-bar">
-    <span>🔥 OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24h GRATUIT 🔥</span>
+    <span>OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT</span>
   </div>
 
   <div class="container">
-    <!-- HERO: direct, fara efecte decorative -->
+    <!-- HERO (fară săgeată și fără elementul mutat) -->
     <section class="hero fade-on-scroll">
-      <div class="stat-badge">Peste 47.000 canale + VOD 4K</div>
       <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
       <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
-      <a href="#" class="btn-primary">TESTEAZĂ GRATUIT 24h →</a>
-      <div class="micro-offer">Activare în maxim 30 minute • Suport 24/7</div>
+      <a href="#" class="btn-primary">TESTEAZĂ GRATUIT 24H</a>
+      <div class="micro-offer">ACTIVARE ÎN MAXIM 30 MINUTE • SUPORT 24/7</div>
     </section>
 
-    <!-- 3 argumente esențiale (fără iconuri inutile) -->
+    <!-- Elementul mutat mai sus: "Peste 47.000 canale + VOD 4K" lângă carusel -->
+    <div class="fade-on-scroll" style="margin-top: -20px; margin-bottom: 20px;">
+      <div class="stat-badge">Peste 47.000 canale + VOD 4K</div>
+    </div>
+
+    <!-- Carusel infinit (filme + duplicate) -->
+    <div class="fade-on-scroll film-strip-wrapper">
+      <div class="film-strip" id="filmStrip"></div>
+    </div>
+
+    <!-- 3 argumente -->
     <div class="features-grid fade-on-scroll">
       <div class="feature-item"><h3>+10.000 conținut</h3><p>Filme, seriale, documentare, evenimente sportive în 4K și Full HD.</p></div>
       <div class="feature-item"><h3>Activare instant</h3><p>Plătești o dată, primești accesul în mai puțin de o oră. Fără întârzieri.</p></div>
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel simplu, doar html/js) -->
-    <div class="fade-on-scroll">
-      <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
-      <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
-      <div class="film-strip" id="filmStrip"></div>
-    </div>
-
-    <!-- PRICING: minimal, transparent, cinstit -->
+    <!-- PRICING -->
     <div class="fade-on-scroll">
       <h2 style="text-align:center; margin-bottom: 40px;">PREȚURI FĂRĂ SURPRIZE</h2>
       <div class="pricing-grid">
@@ -500,12 +498,12 @@
         <div class="price-card"><h3>8 luni</h3><div class="price-old">€129.98</div><div class="price-new">€64.99</div><ul><li>Cel mai bun raport</li><li>+37.000 canale</li><li>Catch-up 7 zile</li><li>Gratuit 24h test</li></ul><a href="https://iptv24romania.com/product/abonament-8-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
         <div class="price-card"><h3>14 luni</h3><div class="price-old">€193.98</div><div class="price-new">€96.99</div><ul><li>Economie 50%</li><li>2 luni bonus</li><li>Toate opțiunile premium</li><li>Instalare gratuită</li></ul><a href="https://iptv24romania.com/product/abonament-14-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
       </div>
-      <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">🔒 Plăți securizate: PayPal / Card bancar</p>
+      <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
     </div>
 
-    <!-- SECȚIUNE TESTIMONIALE reale -->
+    <!-- TESTIMONIALE (aliniate la stânga, nu centrate) -->
     <div class="fade-on-scroll">
-      <h2 style="text-align:center;">Clienții noștri vorbesc</h2>
+      <h2 style="text-align:left;">Clienții noștri vorbesc</h2>
       <div class="testimonial-row">
         <div class="testimonial-card"><p>"Imagine perfectă, suport rapid. Am trecut de la Digi la ei și nu regret. Test gratuit chiar functionează."</p><div class="author">— Andrei, București</div></div>
         <div class="testimonial-card"><p>"Cele mai stabile servere. Nu am avut niciodată buffering la meciurile de fotbal. Recomand 8 luni."</p><div class="author">— Cristina, Cluj</div></div>
@@ -513,7 +511,7 @@
       </div>
     </div>
 
-    <!-- FAQ secțiune fără efecte, doar informatii -->
+    <!-- FAQ -->
     <div class="fade-on-scroll">
       <h2 style="text-align:center;">Întrebări frecvente</h2>
       <div class="faq-list" style="margin-top: 32px;">
@@ -525,11 +523,11 @@
       </div>
     </div>
 
-    <!-- ULTIMUL CTA direct, agresiv dar elegant -->
+    <!-- CTA final -->
     <div style="text-align: center; margin: 80px 0 60px;" class="fade-on-scroll">
       <div class="stat-badge">Oferta se încheie în curând</div>
       <h2 style="font-size: 2.2rem; margin: 16px 0;">Începe testul gratuit<br>acum.</h2>
-      <a href="#" class="btn-primary" style="margin-top: 12px;">SOLICITĂ ACCES GRATUIT →</a>
+      <a href="#" class="btn-primary" style="margin-top: 12px;">SOLICITĂ ACCES GRATUIT</a>
       <p style="margin-top: 20px; font-size: 0.7rem;">Fără obligații. Fără card. Doar 24 ore de conținut premium.</p>
     </div>
   </div>
@@ -546,17 +544,26 @@
       <a href="https://wa.me/40793371730">WhatsApp suport</a>
     </div>
     <div style="margin: 20px 0;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="180" alt="Metode de plata"></div>
-    <div>© 2025 IPTV 24 ROMANIA – Toate drepturile rezervate</div>
+    <div>2025 IPTV 24 ROMANIA – Toate drepturile rezervate</div>
   </div>
 </footer>
 
 <script>
-  // imagini pentru banda de filme
+  // Imagini pentru caruselul infinit de filme
   const movieImages = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp","https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp","https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp","https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp","https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp","https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp","https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp","https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
+    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp",
+    "https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
   ];
   const filmStrip = document.getElementById('filmStrip');
-  if(filmStrip){
+  if (filmStrip) {
+    // populam o singura data cu setul complet, apoi duplicam continutul pentru efect infinit
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -564,14 +571,16 @@
       img.loading = "lazy";
       filmStrip.appendChild(img);
     });
-    // duplicare pentru efect continuu (optional)
-    movieImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "movie poster";
-      img.loading = "lazy";
-      filmStrip.appendChild(img);
-    });
+    // duplicam (clone) pentru a crea continuitate infinita
+    const cloneItems = () => {
+      const items = filmStrip.children;
+      const itemsArray = Array.from(items);
+      itemsArray.forEach(item => {
+        const clone = item.cloneNode(true);
+        filmStrip.appendChild(clone);
+      });
+    };
+    cloneItems(); // dublam continutul pentru a asigura scroll infinit
   }
 
   // mobile menu
@@ -585,17 +594,14 @@
   if(closeNavBtn) closeNavBtn.addEventListener('click', closeMobileMenu);
   if(overlayDiv) overlayDiv.addEventListener('click', closeMobileMenu);
 
-  // fade on scroll (tehnica veche dar eficienta)
+  // fade on scroll
   const fadeElements = document.querySelectorAll('.fade-on-scroll');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if(entry.isIntersecting) entry.target.classList.add('visible');
     });
   }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
   fadeElements.forEach(el => observer.observe(el));
-  // pentru elemente deja vizibile
   setTimeout(() => {
     fadeElements.forEach(el => {
       if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
