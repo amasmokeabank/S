@@ -240,24 +240,35 @@
     color: black;
   }
 
-  /* bara de incredere - tehnica veche: "GRATUIT 24h" */
+  /* bara de incredere -滚动 infinit, text bold, o singură linie */
   .urgency-bar {
     background: #000;
     border-top: 1px solid var(--gold);
     border-bottom: 1px solid var(--gold);
     padding: 12px 0;
-    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scrollText 20s linear infinite;
     font-size: 0.85rem;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    font-weight: 500;
-  }
-  .urgency-bar span {
-    color: var(--gold);
     font-weight: 800;
+    color: var(--gold);
+  }
+  @keyframes scrollText {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
   }
 
-  /* testimoniale - aliniate la stanga */
+  /* testimoniale - centrate */
   .testimonial-row {
     display: flex;
     flex-wrap: wrap;
@@ -277,13 +288,11 @@
     font-size: 0.85rem;
     line-height: 1.4;
     margin-bottom: 16px;
-    text-align: left;
   }
   .testimonial-card .author {
     font-size: 0.7rem;
     text-transform: uppercase;
     color: var(--gold);
-    text-align: left;
   }
 
   /* FAQ - niciun efect de umbra, doar spatiu si claritate */
@@ -338,21 +347,14 @@
   }
   .footer-links a:hover { color: var(--gold); }
 
-  /* carusel infinit */
-  .film-strip-container {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-  }
+  /* stil pentru imagini de film – rotatie zero, doar functional */
   .film-strip {
     display: flex;
+    overflow-x: auto;
     gap: 16px;
     padding: 20px 0;
-    width: max-content;
-    animation: scrollFilms 30s linear infinite;
-  }
-  .film-strip:hover {
-    animation-play-state: paused;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) #1a1a1a;
   }
   .film-strip img {
     height: 220px;
@@ -364,14 +366,6 @@
   .film-strip img:hover {
     filter: grayscale(0%);
     transform: scale(1.02);
-  }
-  @keyframes scrollFilms {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
   }
   @media (max-width: 640px) {
     .film-strip img { height: 160px; }
@@ -480,13 +474,15 @@
 </header>
 
 <main>
-  <!-- BARA URGENTA - fara emoticoane -->
+  <!-- BARA URGENTA -滚动 infinit, text bold, o singură linie -->
   <div class="urgency-bar">
-    <span>OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT</span>
+    <div class="scrolling-text">
+      OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp; OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp;
+    </div>
   </div>
 
   <div class="container">
-    <!-- HERO: direct, fara efecte decorative, fara "Peste 47.000 canale + VOD 4K" -->
+    <!-- HERO: direct, fara efecte decorative -->
     <section class="hero fade-on-scroll">
       <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
       <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
@@ -501,13 +497,11 @@
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel infinit) -->
+    <!-- SECȚIUNE FILME + SERIALE (carusel simplu, doar html/js) -->
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
-      <div class="film-strip-container">
-        <div class="film-strip" id="filmStrip"></div>
-      </div>
+      <div class="film-strip" id="filmStrip"></div>
     </div>
 
     <!-- PRICING: minimal, transparent, cinstit -->
@@ -522,7 +516,7 @@
       <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
     </div>
 
-    <!-- SECȚIUNE TESTIMONIALE reale, aliniate stanga -->
+    <!-- SECȚIUNE TESTIMONIALE centrate -->
     <div class="fade-on-scroll">
       <h2 style="text-align:center;">Clienții noștri vorbesc</h2>
       <div class="testimonial-row">
@@ -576,15 +570,6 @@
   ];
   const filmStrip = document.getElementById('filmStrip');
   if(filmStrip){
-    // adaugam imaginile o data
-    movieImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "movie poster";
-      img.loading = "lazy";
-      filmStrip.appendChild(img);
-    });
-    // duplicare pentru efect infinit
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
