@@ -272,7 +272,7 @@
     }
   }
 
-  /* testimoniale - centrate */
+  /* testimoniale - cardurile centrate ca si pana acum, dar textul din interior la stanga */
   .testimonial-row {
     display: flex;
     flex-wrap: wrap;
@@ -292,11 +292,13 @@
     font-size: 0.85rem;
     line-height: 1.4;
     margin-bottom: 16px;
+    text-align: left;
   }
   .testimonial-card .author {
     font-size: 0.7rem;
     text-transform: uppercase;
     color: var(--gold);
+    text-align: left;
   }
 
   /* FAQ - niciun efect de umbra, doar spatiu si claritate */
@@ -520,13 +522,22 @@
       <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
     </div>
 
-    <!-- SECȚIUNE TESTIMONIALE centrate -->
+    <!-- SECȚIUNE TESTIMONIALE - textul din interior la stanga -->
     <div class="fade-on-scroll">
       <h2 style="text-align:center;">Clienții noștri vorbesc</h2>
       <div class="testimonial-row">
-        <div class="testimonial-card"><p>"Imagine perfectă, suport rapid. Am trecut de la Digi la ei și nu regret. Test gratuit chiar functionează."</p><div class="author">— Andrei, București</div></div>
-        <div class="testimonial-card"><p>"Cele mai stabile servere. Nu am avut niciodată buffering la meciurile de fotbal. Recomand 8 luni."</p><div class="author">— Cristina, Cluj</div></div>
-        <div class="testimonial-card"><p>"Am încercat 3 furnizori, ăsta e singurul care oferă canale 4K reale și VOD fără reclame."</p><div class="author">— Mihai, Timișoara</div></div>
+        <div class="testimonial-card">
+          <p>"Imagine perfectă, suport rapid. Am trecut de la Digi la ei și nu regret. Test gratuit chiar functionează."</p>
+          <div class="author">— Andrei, București</div>
+        </div>
+        <div class="testimonial-card">
+          <p>"Cele mai stabile servere. Nu am avut niciodată buffering la meciurile de fotbal. Recomand 8 luni."</p>
+          <div class="author">— Cristina, Cluj</div>
+        </div>
+        <div class="testimonial-card">
+          <p>"Am încercat 3 furnizori, ăsta e singurul care oferă canale 4K reale și VOD fără reclame."</p>
+          <div class="author">— Mihai, Timișoara</div>
+        </div>
       </div>
     </div>
 
