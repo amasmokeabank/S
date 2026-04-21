@@ -123,13 +123,67 @@
     section { margin: 60px 0; }
   }
 
+  /* Bara oferta direct sub header - prima linie */
+  .urgency-bar {
+    background: #000000;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 14px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #f5e7c8;
+  }
+  .urgency-bar span {
+    color: var(--gold);
+    font-weight: 800;
+  }
+
+  /* caruselul foto — imediat sub bara de ofertă, lipit de sus */
+  .film-strip-wrapper {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 20px 0 30px;
+    background: var(--black-rich);
+  }
+  .film-strip {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    animation: scrollInfinite 45s linear infinite;
+    will-change: transform;
+  }
+  .film-strip img {
+    height: 250px;
+    width: auto;
+    border-radius: 8px;
+    filter: grayscale(20%);
+    transition: var(--transition);
+    flex-shrink: 0;
+  }
+  .film-strip img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.02);
+  }
+  @keyframes scrollInfinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (max-width: 640px) {
+    .film-strip img { height: 160px; }
+  }
+
   .hero {
     text-align: center;
-    padding: 100px 0 80px;
-    border-bottom: 1px solid rgba(214,181,117,0.2);
+    padding: 60px 0 40px;
+    border-bottom: none;
   }
   .hero h1 {
-    font-size: clamp(2.8rem, 8vw, 5.2rem);
+    font-size: clamp(2.6rem, 7vw, 4.8rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.1;
@@ -139,37 +193,21 @@
     color: var(--gold);
   }
   .hero p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     max-width: 600px;
-    margin: 0 auto 32px;
+    margin: 0 auto 28px;
     color: #cdc6b8;
   }
   .hero .btn-primary {
     font-size: 1rem;
-    padding: 16px 44px;
+    padding: 14px 38px;
   }
   .micro-offer {
-    margin-top: 28px;
-    font-size: 0.75rem;
+    margin-top: 24px;
+    font-size: 0.7rem;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: #9b8e72;
-  }
-
-  .urgency-bar {
-    background: #000;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 12px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .urgency-bar span {
-    color: var(--gold);
-    font-weight: 800;
   }
 
   .features-grid {
@@ -247,13 +285,21 @@
     color: black;
   }
 
-  /* testimonialele aliniate la stanga (fara centrare) */
+  /* testimoniale centrate (titlu centrat, carduri centrate grup) */
+  .testimonial-section {
+    text-align: center;
+    margin: 80px 0;
+  }
+  .testimonial-section h2 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
   .testimonial-row {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: flex-start;
-    margin: 40px 0;
+    justify-content: center;
+    margin: 0 auto;
   }
   .testimonial-card {
     background: #0c0c0c;
@@ -323,40 +369,6 @@
     text-decoration: none;
   }
   .footer-links a:hover { color: var(--gold); }
-
-  /* carusel infinit / film strip */
-  .film-strip-wrapper {
-    overflow: hidden;
-    width: 100%;
-    position: relative;
-    margin: 30px 0 20px;
-  }
-  .film-strip {
-    display: flex;
-    gap: 20px;
-    width: max-content;
-    animation: scrollInfinite 40s linear infinite;
-    will-change: transform;
-  }
-  .film-strip img {
-    height: 240px;
-    width: auto;
-    border-radius: 6px;
-    filter: grayscale(20%);
-    transition: var(--transition);
-    flex-shrink: 0;
-  }
-  .film-strip img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.02);
-  }
-  @keyframes scrollInfinite {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-  @media (max-width: 640px) {
-    .film-strip img { height: 160px; }
-  }
 
   .stat-badge {
     font-size: 0.7rem;
@@ -458,13 +470,18 @@
 </header>
 
 <main>
-  <!-- BARA OFERTĂ FĂRĂ EMOJI -->
+  <!-- BARA OFERTĂ direct sub header - PRIMA LINIE, fără emoji -->
   <div class="urgency-bar">
     <span>OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT</span>
   </div>
 
+  <!-- CARUSEL FOTO imediat sub bara de ofertă, lipit sus -->
+  <div class="film-strip-wrapper">
+    <div class="film-strip" id="filmStrip"></div>
+  </div>
+
   <div class="container">
-    <!-- HERO (fară săgeată și fără elementul mutat) -->
+    <!-- Hero section mutat mai jos dar păstrat -->
     <section class="hero fade-on-scroll">
       <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
       <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
@@ -472,17 +489,7 @@
       <div class="micro-offer">ACTIVARE ÎN MAXIM 30 MINUTE • SUPORT 24/7</div>
     </section>
 
-    <!-- Elementul mutat mai sus: "Peste 47.000 canale + VOD 4K" lângă carusel -->
-    <div class="fade-on-scroll" style="margin-top: -20px; margin-bottom: 20px;">
-      <div class="stat-badge">Peste 47.000 canale + VOD 4K</div>
-    </div>
-
-    <!-- Carusel infinit (filme + duplicate) -->
-    <div class="fade-on-scroll film-strip-wrapper">
-      <div class="film-strip" id="filmStrip"></div>
-    </div>
-
-    <!-- 3 argumente -->
+    <!-- 3 argumente principale -->
     <div class="features-grid fade-on-scroll">
       <div class="feature-item"><h3>+10.000 conținut</h3><p>Filme, seriale, documentare, evenimente sportive în 4K și Full HD.</p></div>
       <div class="feature-item"><h3>Activare instant</h3><p>Plătești o dată, primești accesul în mai puțin de o oră. Fără întârzieri.</p></div>
@@ -501,9 +508,9 @@
       <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
     </div>
 
-    <!-- TESTIMONIALE (aliniate la stânga, nu centrate) -->
-    <div class="fade-on-scroll">
-      <h2 style="text-align:left;">Clienții noștri vorbesc</h2>
+    <!-- TESTIMONIALE cu titlu centrat și carduri centrate -->
+    <div class="testimonial-section fade-on-scroll">
+      <h2>Clienții noștri vorbesc</h2>
       <div class="testimonial-row">
         <div class="testimonial-card"><p>"Imagine perfectă, suport rapid. Am trecut de la Digi la ei și nu regret. Test gratuit chiar functionează."</p><div class="author">— Andrei, București</div></div>
         <div class="testimonial-card"><p>"Cele mai stabile servere. Nu am avut niciodată buffering la meciurile de fotbal. Recomand 8 luni."</p><div class="author">— Cristina, Cluj</div></div>
@@ -549,7 +556,7 @@
 </footer>
 
 <script>
-  // Imagini pentru caruselul infinit de filme
+  // imagini pentru caruselul infinit de filme (același set)
   const movieImages = [
     "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
     "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
@@ -563,7 +570,7 @@
   ];
   const filmStrip = document.getElementById('filmStrip');
   if (filmStrip) {
-    // populam o singura data cu setul complet, apoi duplicam continutul pentru efect infinit
+    // populare initiala
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -571,16 +578,13 @@
       img.loading = "lazy";
       filmStrip.appendChild(img);
     });
-    // duplicam (clone) pentru a crea continuitate infinita
-    const cloneItems = () => {
-      const items = filmStrip.children;
-      const itemsArray = Array.from(items);
-      itemsArray.forEach(item => {
-        const clone = item.cloneNode(true);
-        filmStrip.appendChild(clone);
-      });
-    };
-    cloneItems(); // dublam continutul pentru a asigura scroll infinit
+    // duplicare pentru continuitate infinita
+    const items = filmStrip.children;
+    const itemsArray = Array.from(items);
+    itemsArray.forEach(item => {
+      const clone = item.cloneNode(true);
+      filmStrip.appendChild(clone);
+    });
   }
 
   // mobile menu
