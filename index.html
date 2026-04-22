@@ -77,7 +77,7 @@
     letter-spacing: 2.5px;
   }
 
-  /* header minimal, logo cu filtru special: converteste roșu in auriu #d6b575 1:1 */
+  /* header minimal - logo culoare originală (fără filtru, imaginea așa cum e) */
   .site-header {
     position: sticky;
     top: 0;
@@ -97,23 +97,16 @@
     align-items: center;
   }
   
-  /* FILTRU MAGIC: transformă roșul în auriu #d6b575 fără a afecta transparența. 
-     Matrix personalizat pentru a mapa roșu spre nuanța exactă de aur, 
-     păstrând alb/negru/transparență aproape intacte. */
+  /* Logo fără niciun filtru - culoarea originală a imaginii */
   .logo-img {
     height: 44px;
     width: auto;
     display: block;
     transition: var(--transition);
-    /* Combinație de filtre: brightness + sepia + hue-rotate + saturate 
-       pentru a transforma roșul în #d6b575 (auriu cald) */
-    filter: brightness(0.9) sepia(1) saturate(2.5) hue-rotate(350deg) brightness(1.1);
-    /* Asigură că zonele albe/rămân naturale, iar roșul devine #d6b575 */
   }
   .logo-img:hover {
     opacity: 0.9;
     transform: scale(1.02);
-    filter: brightness(0.95) sepia(1) saturate(2.8) hue-rotate(348deg) brightness(1.15);
   }
   
   .nav-links {
@@ -264,7 +257,7 @@
     color: black;
   }
 
-  /* bara de incredere -滚动 infinit, text bold, o singură linie */
+  /* bara de incredere - scrolling infinit */
   .urgency-bar {
     background: #000;
     border-top: 1px solid var(--gold);
@@ -321,7 +314,7 @@
     text-align: left;
   }
 
-  /* FAQ - niciun efect de umbra, doar spatiu si claritate */
+  /* FAQ */
   .faq-list details {
     border-bottom: 1px solid rgba(214,181,117,0.2);
     padding: 20px 0;
@@ -352,7 +345,7 @@
     padding-right: 24px;
   }
 
-  /* footer extrem de simplu, exact ca in original, fara logo duplicat */
+  /* footer extrem de simplu */
   .footer {
     border-top: 1px solid rgba(214,181,117,0.3);
     padding: 48px 0 32px;
@@ -373,62 +366,71 @@
   }
   .footer-links a:hover { color: var(--gold); }
 
-  /* stil pentru imagini de film – BARA DE DERULARE VIZIBILĂ, GROASĂ, AURIE, NU DISPARE NICIODATĂ */
+  /* ========== SECȚIUNE FILME - BARĂ DE DERRULARE (SWIPE) VIZIBILĂ ȘI AURIE ========== */
   .film-strip-container {
     position: relative;
     width: 100%;
   }
+  
   .film-strip {
     display: flex;
-    overflow-x: auto;
+    overflow-x: auto;      /* Permite derularea orizontală */
     gap: 16px;
-    padding: 20px 0 28px 0; /* spatiu extra jos pentru bara de scroll */
+    padding-bottom: 15px;  /* Spațiu pentru bara de derulare, astfel încât să fie vizibilă și să nu se lipească de imagini */
+    
+    /* Pentru Firefox: bară subțire, culoare aurie (#d6b575) pe fond închis */
     scrollbar-width: thin;
-    scrollbar-color: var(--gold) #1a1a1a;
+    scrollbar-color: #d6b575 #1a1a1a;
   }
-  /* Personalizare pentru Chrome/Safari/Edge (Webkit) – bara aurie vizibila, nu dispare */
-  .film-strip::-webkit-scrollbar {
-    height: 8px;
-    background-color: #1a1a1a;
-    border-radius: 10px;
-  }
-  .film-strip::-webkit-scrollbar-track {
-    background: #1a1a1a;
-    border-radius: 10px;
-  }
-  .film-strip::-webkit-scrollbar-thumb {
-    background: var(--gold);
-    border-radius: 10px;
-    transition: background 0.2s;
-  }
-  .film-strip::-webkit-scrollbar-thumb:hover {
-    background: #e6c48b;
-  }
-  /* Asigurăm că bara este întotdeauna vizibilă (nu dispare după oprirea scrollului) */
-  .film-strip {
-    scrollbar-width: thin;
-  }
+  
+  /* Împiedică imaginile să se micșoreze – forțează lățimea naturală și creează nevoia de scroll */
   .film-strip img {
+    flex-shrink: 0;       /* Imagina nu se comprimă, rămân la dimensiunea lor originală, astfel scroll-ul apare garantat */
     height: 220px;
     width: auto;
     border-radius: 4px;
     filter: grayscale(20%);
     transition: var(--transition);
   }
+  
   .film-strip img:hover {
     filter: grayscale(0%);
     transform: scale(1.02);
   }
+  
+  /* STILURI PENTRU CHROME, SAFARI, EDGE (Webkit) - BARA AURIE VIZIBILĂ, NU DISPARE NICIODATĂ */
+  .film-strip::-webkit-scrollbar {
+    height: 8px;               /* Înălțimea barei de derulare orizontale */
+    display: block;           /* Asigură vizibilitatea permanentă */
+  }
+  
+  .film-strip::-webkit-scrollbar-track {
+    background: #1a1a1a;      /* Culoarea fundalului (șinei) – închis pentru contrast */
+    border-radius: 10px;
+  }
+  
+  .film-strip::-webkit-scrollbar-thumb {
+    background: #d6b575;      /* CULOAREA AURIE (IDENTICĂ CU VARIABILA --gold) */
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.3); /* Contur subtil pentru definiție */
+  }
+  
+  .film-strip::-webkit-scrollbar-thumb:hover {
+    background: #e6c48b;      /* Nuanță aurie mai deschisă la hover */
+  }
+  
+  /* Adaptare pentru ecrane mici (mobile) – bară puțin mai mică, dar la fel de vizibilă */
   @media (max-width: 640px) {
-    .film-strip img { height: 160px; }
+    .film-strip img {
+      height: 160px;
+    }
     .film-strip::-webkit-scrollbar {
       height: 6px;
     }
   }
-
-  /* Eliminat complet orice element de tip hint / cloud / sugestie */
-
-  /* text scris de mana? nu, dar font clar si direct */
+  
+  /* NICIUN ELEMENT DE TIP HINT / CLOUD / SUGESTIE DE GLISARE – eliminat complet */
+  
   .stat-badge {
     font-size: 0.7rem;
     background: #1e1b12;
@@ -519,7 +521,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <div class="logo-area">
-      <!-- Logo imagine: filtrul CSS transformă roșul în auriu #d6b575 (1:1) fără a altera fundalul -->
+      <!-- Logo imagine: fără niciun filtru, culoarea originală a imaginii (așa cum a fost încărcată) -->
       <img class="logo-img" src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania">
     </div>
     <ul class="nav-links">
@@ -563,7 +565,7 @@
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
       <div class="film-strip-container">
         <div class="film-strip" id="filmStrip"></div>
-        <!-- ABSOLUT NICIUN ELEMENT DE TIP HINT / CLOUD / SUGESTIE. Bara de scroll este întotdeauna vizibilă, aurie -->
+        <!-- ABSOLUT NICIUN HINT / CLOUD / TEXT DE GLISARE. Bara de scroll este complet vizibilă și aurie -->
       </div>
     </div>
 
@@ -636,7 +638,7 @@
 </footer>
 
 <script>
-  // imagini pentru banda de filme
+  // imagini pentru banda de filme - doar setul original, fără duplicate pentru a menține scroll-ul natural și nevoia de derulare
   const movieImages = [
     "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
     "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
@@ -650,14 +652,7 @@
   ];
   const filmStrip = document.getElementById('filmStrip');
   if(filmStrip){
-    movieImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "movie poster";
-      img.loading = "lazy";
-      filmStrip.appendChild(img);
-    });
-    // duplicate pentru continuitate
+    // adăugăm o singură dată imaginile (fără duplicate) – scroll-ul apare datorită flex-shrink:0 și dimensiunilor naturale
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
