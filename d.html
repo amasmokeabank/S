@@ -1,735 +1,774 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=yes">
-<meta name="theme-color" content="#000000">
-<title>IPTV 24 Romania | Experiență regală 4K</title>
-<meta name="description" content="10.000+ canale, filme și seriale nelimitat. Test gratuit 24h. Activare instant. Prețuri exclusive.">
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>WAV.BEST // PS2 PURPLE POOSE EDITION</title>
+    <style>
+        /* ========== PS2 CODIENE PURPLE / RETRO 3D CONTOUR STYLE ========== */
+        /* Стиль: фиолетовый дым, обводки создают объём, анимации пульсации и ретро-мерцание */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  :root {
-    --black: #0a0a0a;
-    --black-rich: #050505;
-    --white: #f5f2eb;
-    --gold: #d6b575;
-    --gold-dark: #997f4b;
-    --gray-mute: #2a2a2a;
-    --border-gold: rgba(214, 181, 117, 0.25);
-    --transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-  }
+        body {
+            background: #05000b;
+            background-image: radial-gradient(circle at 20% 30%, rgba(75, 0, 130, 0.2) 1px, transparent 1px);
+            background-size: 28px 28px;
+            font-family: 'Courier New', 'VT323', 'Press Start 2P', monospace;
+            color: #e2c8ff;
+            padding: 20px;
+            overflow-x: hidden;
+        }
 
-  body {
-    background-color: var(--black-rich);
-    color: var(--white);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-  }
+        /* CRT-шум + анимированное свечение */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.25) 0px, rgba(0, 0, 0, 0.25) 2px, transparent 2px, transparent 6px);
+            pointer-events: none;
+            z-index: 999;
+        }
 
-  h1, h2, h3, .serif {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
+        /* анимированная пульсирующая тень / "ламповый" эффект */
+        @keyframes purplePulse {
+            0% { text-shadow: 0 0 2px #b77eff, 0 0 5px #6a0dad; }
+            100% { text-shadow: 0 0 6px #c08aff, 0 0 12px #8a2be2; }
+        }
 
-  .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+        @keyframes borderGlow {
+            0% { border-color: #4b0082; box-shadow: 0 0 0 0 rgba(75, 0, 130, 0.3); }
+            100% { border-color: #b77eff; box-shadow: 0 0 8px 1px #8a2be2; }
+        }
 
-  section {
-    margin: 80px 0;
-  }
+        /* глобальные 3D обводки: эффект выдавливания через многослойные тени */
+        .wrapper, .preview-box, .genre-display, .modal-box, button, .kit-item, .filter-btn {
+            transition: all 0.1s ease;
+        }
 
-  .btn-primary {
-    display: inline-block;
-    background: var(--gold);
-    color: #000;
-    text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: 0.85rem;
-    padding: 14px 32px;
-    border: none;
-    transition: var(--transition);
-    text-align: center;
-    border-radius: 0px;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-  }
-  .btn-primary:hover {
-    background: #fff2e0;
-    transform: scale(0.98);
-    letter-spacing: 2.5px;
-  }
+        /* 3D-контур (faux extrusion) */
+        .btn-main-buy, .btn-genre-buy, .btn-modal, .btn-outline {
+            position: relative;
+            box-shadow: 3px 3px 0 #2a0044, 6px 6px 0 rgba(0,0,0,0.6);
+            transition: 0.08s linear;
+            border: 1px solid #b77eff;
+        }
 
-  .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(5,5,5,0.92);
-    backdrop-filter: blur(8px);
-    border-bottom: 0.5px solid var(--border-gold);
-    padding: 18px 0;
-  }
-  .header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo-area {
-    font-weight: 500;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
-  .nav-links a {
-    color: var(--white);
-    text-decoration: none;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 1px;
-    transition: var(--transition);
-    text-transform: uppercase;
-  }
-  .nav-links a:hover { color: var(--gold); }
-  .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--gold);
-    font-size: 28px;
-    cursor: pointer;
-  }
-  @media (max-width: 760px) {
-    .nav-links { display: none; }
-    .mobile-menu-btn { display: block; }
-    .container { padding: 0 20px; }
-    section { margin: 60px 0; }
-  }
+        .btn-main-buy:active, .btn-genre-buy:active, .btn-modal:active, .btn-outline:active {
+            transform: translate(3px, 3px);
+            box-shadow: 1px 1px 0 #2a0044;
+        }
 
-  .hero {
-    text-align: center;
-    padding: 100px 0 80px;
-    border-bottom: 1px solid rgba(214,181,117,0.2);
-  }
-  .hero h1 {
-    font-size: clamp(2.8rem, 8vw, 5.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 24px;
-  }
-  .hero-gold {
-    color: var(--gold);
-  }
-  .hero p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 32px;
-    color: #cdc6b8;
-  }
-  .hero .btn-primary {
-    font-size: 1rem;
-    padding: 16px 44px;
-  }
-  .micro-offer {
-    margin-top: 28px;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #9b8e72;
-  }
+        /* обводки для элементов */
+        .preview-box, .genre-display, .filter-list button, .kit-item, .crypto-address-box {
+            border: 2px solid #5e2a8c;
+            outline: 1px solid #b87eff40;
+            box-shadow: 4px 4px 0 #1e0033;
+        }
 
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 40px;
-    text-align: center;
-    margin: 70px 0;
-  }
-  .feature-item {
-    border-top: 2px solid var(--gold);
-    padding-top: 24px;
-  }
-  .feature-item h3 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    letter-spacing: 1px;
-  }
-  .feature-item p {
-    font-size: 0.85rem;
-    color: #b8aa8c;
-  }
+        /* анимация входа: ретро-появление */
+        @keyframes glitchIn {
+            0% { opacity: 0; transform: skewX(5deg) translateY(20px); filter: blur(2px);}
+            100% { opacity: 1; transform: skewX(0deg) translateY(0); filter: blur(0);}
+        }
 
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1px;
-    background: var(--border-gold);
-    border: 1px solid var(--border-gold);
-  }
-  .price-card {
-    background: var(--black-rich);
-    padding: 32px 24px;
-    text-align: center;
-    transition: var(--transition);
-  }
-  .price-card:hover {
-    background: #0f0f0f;
-  }
-  .price-card h3 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .price-old {
-    text-decoration: line-through;
-    color: #6a5e46;
-    font-size: 0.9rem;
-  }
-  .price-new {
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--gold);
-    font-family: 'Inter', sans-serif;
-    margin: 12px 0;
-  }
-  .price-card ul {
-    list-style: none;
-    margin: 20px 0;
-  }
-  .price-card li {
-    font-size: 0.8rem;
-    padding: 6px 0;
-    border-bottom: 0.5px solid rgba(214,181,117,0.2);
-  }
-  .price-card .btn-primary {
-    margin-top: 16px;
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 10px 20px;
-  }
-  .price-card .btn-primary:hover {
-    background: var(--gold);
-    color: black;
-  }
+        .wrapper, .hero, .catalog-container {
+            animation: glitchIn 0.35s cubic-bezier(0.2, 1.2, 0.8, 1) forwards;
+        }
 
-  .urgency-bar {
-    background: #000;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 12px 0;
-    text-align: center;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-  .urgency-bar span {
-    color: var(--gold);
-    font-weight: 800;
-  }
+        /* универсальный стиль */
+        a, button {
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
 
-  /* TESTIMONIALE — mutate la stanga (static, fara carusel) */
-  .testimonials-wrapper {
-    width: 100%;
-    overflow-x: visible;
-  }
-  .testimonial-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: flex-start;
-    margin: 40px 0;
-    padding-left: 0;
-  }
-  .testimonial-card {
-    background: #0c0c0c;
-    padding: 24px;
-    width: 280px;
-    border-left: 3px solid var(--gold);
-    flex-shrink: 0;
-  }
-  .testimonial-card p {
-    font-style: normal;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 16px;
-  }
-  .testimonial-card .author {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--gold);
-  }
+        .wrapper {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: rgba(5, 0, 15, 0.7);
+            padding: 20px 30px;
+            border: 2px solid #6a0dad;
+            box-shadow: 8px 8px 0 #2a0044;
+            backdrop-filter: blur(1px);
+        }
 
-  .faq-list details {
-    border-bottom: 1px solid rgba(214,181,117,0.2);
-    padding: 20px 0;
-  }
-  .faq-list summary {
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: "+";
-    color: var(--gold);
-    font-size: 1.4rem;
-  }
-  details[open] summary::after {
-    content: "−";
-  }
-  .faq-list p {
-    margin-top: 16px;
-    color: #b8aa8c;
-    font-size: 0.85rem;
-    padding-right: 24px;
-  }
+        header {
+            border-bottom: 3px solid #8a2be2;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
 
-  .footer {
-    border-top: 1px solid rgba(214,181,117,0.3);
-    padding: 48px 0 32px;
-    text-align: center;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
-  }
-  .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-    margin: 20px 0;
-  }
-  .footer-links a {
-    color: #a68f60;
-    text-decoration: none;
-  }
-  .footer-links a:hover { color: var(--gold); }
+        .logo {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #d4b5ff, #9b4dff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 0 #3a0066;
+            animation: purplePulse 1.2s infinite alternate;
+        }
 
-  .film-strip {
-    display: flex;
-    overflow-x: auto;
-    gap: 16px;
-    padding: 20px 0;
-    scrollbar-width: thin;
-    scrollbar-color: var(--gold) #1a1a1a;
-  }
-  .film-strip img {
-    height: 220px;
-    width: auto;
-    border-radius: 4px;
-    filter: grayscale(20%);
-    transition: var(--transition);
-  }
-  .film-strip img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.02);
-  }
-  @media (max-width: 640px) {
-    .film-strip img { height: 160px; }
-  }
+        /* HERO секция */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 70px;
+        }
 
-  .stat-badge {
-    font-size: 0.7rem;
-    background: #1e1b12;
-    display: inline-block;
-    padding: 4px 12px;
-    letter-spacing: 1px;
-  }
+        @media (max-width: 800px) {
+            .hero {
+                grid-template-columns: 1fr;
+            }
+        }
 
-  .mobile-nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 80%;
-    max-width: 300px;
-    height: 100%;
-    background: #000000e6;
-    backdrop-filter: blur(20px);
-    z-index: 200;
-    padding: 80px 24px;
-    transition: 0.3s;
-    border-right: 1px solid var(--gold);
-  }
-  .mobile-nav.open {
-    left: 0;
-  }
-  .mobile-nav a {
-    display: block;
-    color: var(--white);
-    text-decoration: none;
-    padding: 16px 0;
-    border-bottom: 0.5px solid rgba(214,181,117,0.2);
-    font-size: 1rem;
-    text-transform: uppercase;
-  }
-  .close-nav {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: var(--gold);
-    font-size: 28px;
-    cursor: pointer;
-  }
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 150;
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.2s;
-  }
-  .overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
+        .preview-box {
+            background: #0a0014;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            position: relative;
+            transition: 0.15s;
+        }
 
-  .fade-on-scroll {
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-  .fade-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+        .preview-box:hover {
+            animation: borderGlow 0.3s forwards;
+            transform: scale(1.01);
+        }
 
-  /* ========= DETROIT BECOME HUMAN STYLE SWIPE HINT ========= */
-  .swipe-hint {
-    position: fixed;
-    bottom: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.4s ease;
-    opacity: 0.92;
-  }
-  .swipe-hint.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transform: translateX(-50%) translateY(20px);
-  }
-  .swipe-container {
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(12px);
-    border: 0.5px solid var(--gold);
-    border-radius: 60px;
-    padding: 10px 28px 10px 24px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 1.5px;
-    box-shadow: 0 0 18px rgba(214, 181, 117, 0.2);
-  }
-  .swipe-icon {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    animation: swipePulse 1.8s infinite ease-in-out;
-  }
-  .swipe-icon span {
-    font-size: 22px;
-    display: inline-block;
-    color: var(--gold);
-  }
-  .swipe-text {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--white);
-    background: none;
-    letter-spacing: 2px;
-  }
-  .swipe-text strong {
-    color: var(--gold);
-    font-weight: 700;
-  }
-  @keyframes swipePulse {
-    0% { opacity: 0.5; transform: translateX(-3px); }
-    50% { opacity: 1; transform: translateX(5px); }
-    100% { opacity: 0.5; transform: translateX(-3px); }
-  }
+        .preview-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(40%) contrast(120%) brightness(0.8);
+            transition: 0.2s;
+            image-rendering: crisp-edges;
+        }
 
-  /* pentru desktop hint-ul apare doar daca nu s-a facut swipe vreodata */
-  @media (max-width: 760px) {
-    .swipe-hint {
-      bottom: 24px;
-    }
-    .swipe-container {
-      padding: 8px 22px 8px 18px;
-    }
-  }
+        .preview-box:hover .preview-image {
+            filter: grayscale(0%) contrast(110%) brightness(1.05);
+        }
 
-  @media (min-width: 761px) {
-    .mobile-nav, .overlay, .mobile-menu-btn { display: none; }
-  }
-</style>
+        .offer-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: clamp(34px, 6vw, 56px);
+            font-weight: 900;
+            line-height: 0.9;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 #3a0066;
+            letter-spacing: -2px;
+        }
+
+        .price-tag {
+            font-size: 38px;
+            font-weight: bold;
+            color: #c37eff;
+            margin-bottom: 25px;
+            font-family: monospace;
+            text-shadow: 0 0 5px #b77eff;
+            display: inline-block;
+            border-left: 4px solid #b87eff;
+            padding-left: 15px;
+        }
+
+        .desc {
+            color: #b38fcf;
+            font-size: 14px;
+            margin-bottom: 35px;
+            line-height: 1.5;
+            border-left: 2px solid #632c9e;
+            padding-left: 15px;
+        }
+
+        .btn-main-buy {
+            background: #17002b;
+            color: #eaceff;
+            border: 2px solid #b77eff;
+            padding: 16px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            width: 100%;
+            max-width: 320px;
+            transition: 0.07s linear;
+            font-family: monospace;
+        }
+
+        .btn-main-buy:hover {
+            background: #6a0dad;
+            color: #ffffff;
+            border-color: #ffb7ff;
+            box-shadow: 5px 5px 0 #2a0044;
+        }
+
+        .archive-title {
+            font-size: 20px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            border-bottom: 4px double #9b4dff;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            color: #e5bdff;
+            text-shadow: 2px 2px 0 #32004e;
+        }
+
+        .catalog-container {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 800px) {
+            .catalog-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* FILTERS в стиле PS2 меню */
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            background: #080011;
+            padding: 15px 10px;
+            border: 2px solid #551a8b;
+            box-shadow: inset 0 0 10px #1f0033, 5px 5px 0 #1f0033;
+        }
+
+        .filter-btn {
+            background: #0e001c;
+            border: 1px solid #5e2a8c;
+            color: #bca5e0;
+            text-align: left;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 14px;
+            font-weight: bold;
+            transition: 0.05s linear;
+            box-shadow: 2px 2px 0 #1f0033;
+        }
+
+        .filter-btn:hover {
+            background: #4b0082;
+            color: white;
+            border-color: #e2aaff;
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0 #000;
+        }
+
+        .filter-btn.active {
+            background: #7b2fbe;
+            color: white;
+            border-left: 6px solid #ffb3ff;
+            text-shadow: 0 0 3px white;
+            box-shadow: inset 0 0 8px #c792ff;
+        }
+
+        .genre-display {
+            background: #06000e;
+            padding: 30px 25px;
+            border: 2px solid #864cbf;
+            transition: all 0.2s;
+        }
+
+        .genre-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #7733aa;
+            padding-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .genre-title {
+            font-size: 28px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #e2bcff, #b47cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 6px #a855f0;
+        }
+
+        .genre-meta {
+            font-family: monospace;
+            color: #b87eff;
+            font-size: 13px;
+            border: 1px solid #632c9e;
+            padding: 4px 8px;
+        }
+
+        .kit-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .kit-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a0014;
+            padding: 10px 15px;
+            border: 1px solid #6a2faf;
+            font-family: monospace;
+            font-size: 13px;
+            color: #be9eff;
+            text-transform: uppercase;
+            transition: 0.08s;
+        }
+
+        .kit-item span {
+            font-weight: bold;
+            color: #eacdff;
+            letter-spacing: 1px;
+        }
+
+        .btn-play-kit {
+            background: #120024;
+            border: 1px solid #a062e0;
+            color: #e2b9ff;
+            padding: 5px 16px;
+            font-size: 11px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.05s linear;
+            box-shadow: 2px 2px 0 #2f004d;
+            font-family: monospace;
+        }
+
+        .btn-play-kit:hover {
+            background: #7b2fbe;
+            color: white;
+            border-color: #ffb3ff;
+            transform: scale(0.98);
+        }
+
+        .btn-play-kit.playing {
+            background: #b77eff;
+            color: #110022;
+            box-shadow: inset 0 0 5px white;
+            border-color: white;
+        }
+
+        .btn-genre-buy {
+            width: 100%;
+            background: #1e0033;
+            border: 2px solid #b176e6;
+            color: #f0e2ff;
+            padding: 16px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: 0.07s;
+            box-shadow: 4px 4px 0 #1f0033;
+        }
+
+        .btn-genre-buy:hover {
+            background: #8a3de0;
+            border-color: #ffccff;
+            color: black;
+        }
+
+        /* MODAL — 3D CONTOUR PS2 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.2s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 550px;
+            background: #0b0016;
+            border: 3px solid #a455e0;
+            padding: 35px;
+            position: relative;
+            box-shadow: 12px 12px 0 #2f004d;
+            animation: glitchIn 0.2s ease-out;
+        }
+
+        .btn-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            background: transparent;
+            border: 1px solid #a25be0;
+            color: #e2b0ff;
+            font-size: 18px;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-close:hover {
+            background: #8a2be2;
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            border-left: 5px solid #c47eff;
+            padding-left: 15px;
+            text-transform: uppercase;
+        }
+
+        .checkout-step {
+            display: none;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .checkout-step.active {
+            display: flex;
+        }
+
+        .summary {
+            font-family: monospace;
+            font-size: 14px;
+            color: #b481f0;
+            background: #140021;
+            padding: 10px;
+            border: 1px dashed #b77eff;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            background: #0e001c;
+            border: 2px solid #8040c0;
+            color: #ffffff;
+            padding: 14px;
+            font-size: 15px;
+            font-family: monospace;
+            outline: none;
+        }
+
+        input[type="email"]:focus {
+            border-color: #e5b3ff;
+            box-shadow: 0 0 10px #b87eff;
+        }
+
+        .btn-modal, .btn-outline {
+            background: #1e0030;
+            border: 2px solid #bc7eff;
+            color: #f2e2ff;
+            padding: 14px;
+            font-weight: bold;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: 0.06s linear;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background: #00000070;
+        }
+
+        .btn-modal:hover, .btn-outline:hover {
+            background: #8a2be2;
+            color: black;
+            border-color: white;
+        }
+
+        .crypto-address-box {
+            padding: 20px;
+            border: 2px dashed #c180ff;
+            background: #0c0017;
+            text-align: center;
+            font-family: monospace;
+            word-break: break-all;
+            color: #e2b9ff;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        /* ретро-мигание текста */
+        .warning-text {
+            color: #ff66cc;
+            animation: blinkText 1.2s step-end infinite;
+        }
+
+        @keyframes blinkText {
+            0%, 100% { opacity: 1; text-shadow: 0 0 3px #ff33aa; }
+            50% { opacity: 0.7; text-shadow: 0 0 8px #ff55ff; }
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 10px;
+            color: #664488;
+            border-top: 1px solid #3a1f5e;
+            padding-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-<div class="overlay" id="overlay"></div>
-<div class="mobile-nav" id="mobileNav">
-  <button class="close-nav" id="closeNavBtn">✕</button>
-  <a href="#">ACASĂ</a>
-  <a href="https://iptv24romania.com/channels-list/">LISTA CANALE</a>
-  <a href="/d.html">GHID INSTALARE</a>
-  <a href="https://iptv24romania.com/shop/">PREȚURI</a>
-  <a href="#">BLOG</a>
-</div>
+    <audio id="kit-player"></audio>
 
-<header class="site-header">
-  <div class="container header-inner">
-    <div class="logo-area">IPTV 24 ROMANIA</div>
-    <ul class="nav-links">
-      <li><a href="#">ACASĂ</a></li>
-      <li><a href="https://iptv24romania.com/channels-list/">CANALE</a></li>
-      <li><a href="/d.html">GHID</a></li>
-      <li><a href="https://iptv24romania.com/shop/">ABONAMENTE</a></li>
-      <li><a href="#">BLOG</a></li>
-    </ul>
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
-  </div>
-</header>
+    <div class="wrapper">
+        <header>
+            <div class="logo">WAV.BEST // PS2</div>
+        </header>
 
-<main>
-  <div class="urgency-bar">
-    <span>🔥 OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24h GRATUIT 🔥</span>
-  </div>
+        <section class="hero">
+            <div class="preview-box">
+                <img src="bundle-cover.jpg" alt="120k Sounds Bundle" class="preview-image" onerror="this.src='https://placehold.co/600x600/2a0044/ffffff?text=120K+ARCHIVE'">
+            </div>
 
-  <div class="container">
-    <section class="hero fade-on-scroll">
-      <div class="stat-badge">Peste 47.000 canale + VOD 4K</div>
-      <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
-      <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
-      <a href="#" class="btn-primary">TESTEAZĂ GRATUIT 24h →</a>
-      <div class="micro-offer">Activare în maxim 30 minute • Suport 24/7</div>
-    </section>
+            <div class="offer-details">
+                <h1>120,000 SOUNDS.<br>200 KITS.</h1>
+                <div class="price-tag">$66.6</div>
+                <p class="desc">The Ultimate Archive. Instant access to all 20 genres. Pure raw audio. Provide email at checkout to receive the download link upon blockchain confirmation.</p>
+                
+                <button class="btn-main-buy" onclick="openCheckout('FULL ARCHIVE BUNDLE (200 KITS)', '66.6')">PURCHASE ENTIRE ARCHIVE</button>
+            </div>
+        </section>
 
-    <div class="features-grid fade-on-scroll">
-      <div class="feature-item"><h3>+10.000 conținut</h3><p>Filme, seriale, documentare, evenimente sportive în 4K și Full HD.</p></div>
-      <div class="feature-item"><h3>Activare instant</h3><p>Plătești o dată, primești accesul în mai puțin de o oră. Fără întârzieri.</p></div>
-      <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
+        <div class="archive-title">EXPLORE THE ARCHIVE</div>
+        
+        <section class="catalog-container">
+            <div class="filter-list" id="filter-container"></div>
+
+            <div class="genre-display" id="genre-content"></div>
+        </section>
+        <footer>PS2 PURPLE POOSE EDITION // 3D CONTOUR AUDIO VAULT</footer>
     </div>
 
-    <div class="fade-on-scroll">
-      <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
-      <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
-      <div class="film-strip" id="filmStrip"></div>
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box">
+            <button class="btn-close" onclick="closeCheckout()">✕</button>
+            <div class="modal-title">SECURE CHECKOUT</div>
+
+            <div class="checkout-step active" id="step-1">
+                <div class="summary">
+                    ITEM: <span id="checkout-item-name">...</span><br>
+                    TOTAL: <span id="checkout-item-price">...</span>
+                </div>
+                <input type="email" id="user-email" placeholder="ENTER EMAIL FOR DELIVERY" required>
+                <button class="btn-modal" onclick="goToStep2()">CONTINUE TO PAYMENT</button>
+            </div>
+
+            <div class="checkout-step" id="step-2">
+                <div class="summary">SELECT CRYPTOCURRENCY:</div>
+                <button class="btn-outline" onclick="goToStep3('SOLANA', 'Gx1iDY6nh7mz2QSFFGcViBtGs1HwMZYZWxJHbNAwVUSw')">PAY WITH SOLANA (SOL/USDC)</button>
+                <button class="btn-outline" onclick="goToStep3('BITCOIN', 'bc1qv5ch8gj7x04ufnyfaehrj3vfkmazpwqrrzwtm0')">PAY WITH BITCOIN (BTC)</button>
+            </div>
+
+            <div class="checkout-step" id="step-3">
+                <div class="summary" style="text-align: center;">
+                    SEND EXACTLY <b id="final-price" style="color: #d69eff; font-size: 18px;"></b> VIA <b id="final-network"></b> TO:
+                </div>
+                
+                <div class="crypto-address-box" id="crypto-address">...</div>
+                
+                <button class="btn-modal" id="btn-copy" onclick="copyAddress()">COPY ADDRESS</button>
+                <div style="font-family: monospace; font-size: 10px; color: #a772df; text-align: center; margin-top: 15px;">
+                    <span class="warning-text">⚠️ WARNING: SEND EXACTLY THIS AMOUNT. TIME LIMIT: 120 MINUTES.</span><br><br>
+                    Confirmation usually takes 1-4 minutes.<br>
+                    Download link will be sent to <span id="display-email" style="color:#ffc8ff; font-weight:bold;"></span> after 1 network confirmation.
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="fade-on-scroll">
-      <h2 style="text-align:center; margin-bottom: 40px;">PREȚURI FĂRĂ SURPRIZE</h2>
-      <div class="pricing-grid">
-        <div class="price-card"><h3>1 lună</h3><div class="price-old">€21.98</div><div class="price-new">€10.99</div><ul><li>4 conexiuni simultane</li><li>Toate canalele HD/4K</li><li>VOD nelimitat</li><li>Suport prioritar</li></ul><a href="https://iptv24romania.com/product/abonament-1-luna/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
-        <div class="price-card"><h3>4 luni</h3><div class="price-old">€71.98</div><div class="price-new">€35.99</div><ul><li>4 conexiuni simultane</li><li>Anti-freeze + EPG</li><li>Toate sporturile</li><li>Asistență 24/7</li></ul><a href="https://iptv24romania.com/product/abonament-4-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
-        <div class="price-card"><h3>8 luni</h3><div class="price-old">€129.98</div><div class="price-new">€64.99</div><ul><li>Cel mai bun raport</li><li>+37.000 canale</li><li>Catch-up 7 zile</li><li>Gratuit 24h test</li></ul><a href="https://iptv24romania.com/product/abonament-8-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
-        <div class="price-card"><h3>14 luni</h3><div class="price-old">€193.98</div><div class="price-new">€96.99</div><ul><li>Economie 50%</li><li>2 luni bonus</li><li>Toate opțiunile premium</li><li>Instalare gratuită</li></ul><a href="https://iptv24romania.com/product/abonament-14-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
-      </div>
-      <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">🔒 Plăți securizate: PayPal / Card bancar</p>
-    </div>
+    <script>
+        // ========== 1:1 DATA & LOGIC, ТОЛЬКО ДИЗАЙН УЛУЧШЕН ==========
+        const genres = [
+            "Trap", "Drill", "Amapiano", "Plugg", "R&B", 
+            "Boom Bap", "Reggaeton", "Pop", "Lo-Fi", "Afrobeats", 
+            "Dancehall", "Rage", "Phonk", "Techno", "Jersey Club", 
+            "Grime", "Synthwave", "G-Funk", "Emo Trap", "Hyperpop"
+        ];
 
-    <!-- TESTIMONIALE: doar mutate la stanga (justify-content: flex-start) si static, fara carusel -->
-    <div class="fade-on-scroll testimonials-wrapper">
-      <h2 style="text-align:center;">Clienții noștri vorbesc</h2>
-      <div class="testimonial-row">
-        <div class="testimonial-card"><p>"Imagine perfectă, suport rapid. Am trecut de la Digi la ei și nu regret. Test gratuit chiar functionează."</p><div class="author">— Andrei, București</div></div>
-        <div class="testimonial-card"><p>"Cele mai stabile servere. Nu am avut niciodată buffering la meciurile de fotbal. Recomand 8 luni."</p><div class="author">— Cristina, Cluj</div></div>
-        <div class="testimonial-card"><p>"Am încercat 3 furnizori, ăsta e singurul care oferă canale 4K reale și VOD fără reclame."</p><div class="author">— Mihai, Timișoara</div></div>
-      </div>
-    </div>
+        const genreData = genres.map(name => {
+            const soundsCount = Math.floor(Math.random() * (7399 - 6346 + 1)) + 6346;
+            return { name, soundsCount };
+        });
 
-    <div class="fade-on-scroll">
-      <h2 style="text-align:center;">Întrebări frecvente</h2>
-      <div class="faq-list" style="margin-top: 32px;">
-        <details><summary>Ce metode de plată acceptați?</summary><p>PayPal, card bancar (Visa/Mastercard) – toate tranzacțiile sunt sigure și instant.</p></details>
-        <details><summary>Cum primesc datele de acces?</summary><p>După confirmarea plății, vei primi pe email toate informațiile (link, user, parolă) în maxim 30 minute.</p></details>
-        <details><summary>Pe ce dispozitive rulează?</summary><p>Smart TV (Samsung, LG, Android TV), Xiaomi Box, Apple TV, iPhone, Android, PC, MAC, Firestick, MAG.</p></details>
-        <details><summary>Am nevoie de abilități tehnice?</summary><p>Deloc. Ghidul de instalare este pas cu pas, iar suportul nostru te ajută gratuit.</p></details>
-        <details><summary>Pot să înghețe sau să facă buffering?</summary><p>Avem servere enterprise cu uptime 99.9% și tehnologie anti-freeze. Testează gratuit 24h și verifici singur.</p></details>
-      </div>
-    </div>
+        const kitPlayer = document.getElementById('kit-player');
+        let currentPlayingBtn = null;
 
-    <div style="text-align: center; margin: 80px 0 60px;" class="fade-on-scroll">
-      <div class="stat-badge">Oferta se încheie în curând</div>
-      <h2 style="font-size: 2.2rem; margin: 16px 0;">Începe testul gratuit<br>acum.</h2>
-      <a href="#" class="btn-primary" style="margin-top: 12px;">SOLICITĂ ACCES GRATUIT →</a>
-      <p style="margin-top: 20px; font-size: 0.7rem;">Fără obligații. Fără card. Doar 24 ore de conținut premium.</p>
-    </div>
-  </div>
-</main>
+        function playKitAudio(btn, audioSrc) {
+            if (currentPlayingBtn === btn && !kitPlayer.paused) {
+                kitPlayer.pause();
+                btn.innerText = '▶ PLAY';
+                btn.classList.remove('playing');
+                currentPlayingBtn = null;
+                return;
+            }
+            if (currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+            }
+            kitPlayer.src = audioSrc;
+            kitPlayer.play().catch(() => console.warn("preview audio not found, add mp3s to /previews/"));
+            btn.innerText = '|| PAUSE';
+            btn.classList.add('playing');
+            currentPlayingBtn = btn;
+        }
 
-<footer class="footer">
-  <div class="container">
-    <div class="logo-area" style="margin-bottom: 16px;">IPTV 24 ROMANIA</div>
-    <div class="footer-links">
-      <a href="/p.html">Confidențialitate</a>
-      <a href="/p.html">Politică retur</a>
-      <a href="/d.html">Ghid instalare</a>
-      <a href="https://iptv24romania.com/channels-list/">Listă canale</a>
-      <a href="https://wa.me/40793371730">WhatsApp suport</a>
-    </div>
-    <div style="margin: 20px 0;"><img src="https://iptv24romania.com/wp-content/uploads/2024/09/pay.svg" width="180" alt="Metode de plata"></div>
-    <div>© 2025 IPTV 24 ROMANIA – Toate drepturile rezervate</div>
-  </div>
-</footer>
+        kitPlayer.addEventListener('ended', () => {
+            if (currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = null;
+            }
+        });
 
-<script>
-  // movie strip
-  const movieImages = [
-    "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp","https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg","https://iptv24romania.com/wp-content/uploads/2024/09/a-man-called-otto.webp","https://iptv24romania.com/wp-content/uploads/2024/09/Scream-6.webp","https://iptv24romania.com/wp-content/uploads/2024/09/quantumania.webp","https://iptv24romania.com/wp-content/uploads/2024/09/oppenheimer.webp","https://iptv24romania.com/wp-content/uploads/2024/09/megan.webp","https://iptv24romania.com/wp-content/uploads/2024/09/magic-mikes.webp","https://iptv24romania.com/wp-content/uploads/2024/09/jhon-wick-4.webp"
-  ];
-  const filmStrip = document.getElementById('filmStrip');
-  if(filmStrip){
-    movieImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "movie poster";
-      img.loading = "lazy";
-      filmStrip.appendChild(img);
-    });
-    movieImages.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = "movie poster";
-      img.loading = "lazy";
-      filmStrip.appendChild(img);
-    });
-  }
+        const filterContainer = document.getElementById('filter-container');
+        const genreContent = document.getElementById('genre-content');
 
-  // mobile menu
-  const menuBtn = document.getElementById('mobileMenuBtn');
-  const mobileNav = document.getElementById('mobileNav');
-  const overlayDiv = document.getElementById('overlay');
-  const closeNavBtn = document.getElementById('closeNavBtn');
-  function openMobileMenu() { mobileNav.classList.add('open'); overlayDiv.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeMobileMenu() { mobileNav.classList.remove('open'); overlayDiv.classList.remove('active'); document.body.style.overflow = ''; }
-  if(menuBtn) menuBtn.addEventListener('click', openMobileMenu);
-  if(closeNavBtn) closeNavBtn.addEventListener('click', closeMobileMenu);
-  if(overlayDiv) overlayDiv.addEventListener('click', closeMobileMenu);
+        genreData.forEach((genre, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'filter-btn';
+            if(index === 0) btn.classList.add('active');
+            btn.innerText = genre.name;
+            btn.onclick = () => renderGenre(genre, btn);
+            filterContainer.appendChild(btn);
+        });
 
-  // fade on scroll
-  const fadeElements = document.querySelectorAll('.fade-on-scroll');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
-  fadeElements.forEach(el => observer.observe(el));
-  setTimeout(() => {
-    fadeElements.forEach(el => {
-      if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
-    });
-  }, 150);
+        function renderGenre(genreObj, activeBtn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(activeBtn) activeBtn.classList.add('active');
 
-  // ========= DETROIT BECOME HUMAN SWIPE HINT — DISAPPEARS FOREVER AFTER FIRST SWIPE =========
-  const swipeHint = document.createElement('div');
-  swipeHint.className = 'swipe-hint';
-  swipeHint.innerHTML = `
-    <div class="swipe-container">
-      <div class="swipe-icon">
-        <span>←</span><span>☰</span><span>→</span>
-      </div>
-      <div class="swipe-text"><strong>SWIPE</strong> · INTERFACE ACTIVE</div>
-    </div>
-  `;
-  document.body.appendChild(swipeHint);
+            let kitsHTML = '';
+            for(let i = 1; i <= 10; i++) {
+                let mockAudioPath = `previews/${genreObj.name.toLowerCase()}_${i}.mp3`;
+                kitsHTML += `
+                <div class="kit-item">
+                    <span>${genreObj.name} Vol. ${i}</span>
+                    <button class="btn-play-kit" onclick="playKitAudio(this, '${mockAudioPath}')">▶ PLAY</button>
+                </div>`;
+            }
 
-  let swipeConsumed = false;
-  let hintRemoved = false;
+            genreContent.innerHTML = `
+                <div class="genre-header">
+                    <div class="genre-title">${genreObj.name} BUNDLE</div>
+                    <div class="genre-meta">10 KITS / ${genreObj.soundsCount.toLocaleString()} SOUNDS</div>
+                </div>
+                <div class="kit-list">
+                    ${kitsHTML}
+                </div>
+                <button class="btn-genre-buy" onclick="openCheckout('${genreObj.name.toUpperCase()} BUNDLE (10 KITS)', '9.99')">PURCHASE GENRE FOR $9.99</button>
+            `;
+        }
 
-  function removeHintForever() {
-    if (hintRemoved) return;
-    hintRemoved = true;
-    swipeHint.classList.add('hidden');
-    // after transition, completely remove from DOM (optional but clean)
-    setTimeout(() => {
-      if(swipeHint && swipeHint.parentNode) swipeHint.remove();
-    }, 500);
-  }
+        renderGenre(genreData[0], filterContainer.firstChild);
 
-  // detect any swipe-like interaction on the whole page (touchmove, wheel, or drag)
-  function onSwipeDetected(e) {
-    if (swipeConsumed) return;
-    // we consider any touch movement or mouse wheel / drag as "swipe" in detroit style minimalism
-    // even a small scroll counts as human interaction
-    swipeConsumed = true;
-    removeHintForever();
-    // cleanup listeners after first swipe
-    window.removeEventListener('wheel', onSwipeDetected);
-    window.removeEventListener('touchmove', onSwipeDetected);
-    document.removeEventListener('mousedown', onMouseSwipeStart);
-    document.removeEventListener('mousemove', onMouseMoveSwipe);
-    document.removeEventListener('mouseup', onMouseUpSwipe);
-  }
+        // CHECKOUT LOGIC (unchanged content, just style)
+        const modal = document.getElementById('modal-overlay');
+        let currentPrice = '';
+        const SOL_RATE = 84.53;
+        const BTC_RATE = 74950.00;
 
-  let mouseDownFlag = false;
-  function onMouseSwipeStart(e) {
-    if (swipeConsumed) return;
-    mouseDownFlag = true;
-  }
-  function onMouseMoveSwipe(e) {
-    if (!mouseDownFlag || swipeConsumed) return;
-    // if mouse moves while button down, it's a drag gesture (swipe)
-    onSwipeDetected(e);
-    mouseDownFlag = false;
-  }
-  function onMouseUpSwipe() {
-    mouseDownFlag = false;
-  }
+        function openCheckout(itemName, price) {
+            currentPrice = price;
+            document.getElementById('checkout-item-name').innerText = itemName;
+            document.getElementById('checkout-item-price').innerText = '$' + price;
+            document.getElementById('user-email').value = '';
+            document.querySelectorAll('.checkout-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step-1').classList.add('active');
+            modal.classList.add('active');
+            if(!kitPlayer.paused) kitPlayer.pause();
+            if(currentPlayingBtn) {
+                currentPlayingBtn.innerText = '▶ PLAY';
+                currentPlayingBtn.classList.remove('playing');
+                currentPlayingBtn = null;
+            }
+        }
 
-  // attach listeners only if hint exists
-  if (swipeHint) {
-    // touch devices: any touchmove
-    window.addEventListener('touchmove', onSwipeDetected, { passive: false });
-    // desktop: wheel scroll
-    window.addEventListener('wheel', onSwipeDetected, { passive: true });
-    // also mouse drag gesture
-    document.addEventListener('mousedown', onMouseSwipeStart);
-    document.addEventListener('mousemove', onMouseMoveSwipe);
-    document.addEventListener('mouseup', onMouseUpSwipe);
-    
-    // additionally, if user clicks anywhere (sometimes counts as activation)
-    // but to be precise: we keep swipe-only. However detroit style: "swipe" is key. we also remove if any significant scroll.
-    // we'll also remove on any keydown arrow just for extra (optional)
-    window.addEventListener('keydown', function(e) {
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-        if (!swipeConsumed) onSwipeDetected(e);
-      }
-    });
-  }
-</script>
+        function closeCheckout() {
+            modal.classList.remove('active');
+        }
+
+        function goToStep2() {
+            const email = document.getElementById('user-email').value;
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email to receive the files.');
+                return;
+            }
+            document.getElementById('display-email').innerText = email;
+            document.getElementById('step-1').classList.remove('active');
+            document.getElementById('step-2').classList.add('active');
+        }
+
+        function goToStep3(networkName, address) {
+            let cryptoAmount = 0;
+            let ticker = '';
+            if (networkName === 'SOLANA') {
+                cryptoAmount = (parseFloat(currentPrice) / SOL_RATE).toFixed(5);
+                ticker = 'SOL';
+            } else if (networkName === 'BITCOIN') {
+                cryptoAmount = (parseFloat(currentPrice) / BTC_RATE).toFixed(8);
+                ticker = 'BTC';
+            }
+            document.getElementById('final-network').innerText = ticker;
+            document.getElementById('final-price').innerText = cryptoAmount;
+            document.getElementById('crypto-address').innerText = address;
+            document.getElementById('step-2').classList.remove('active');
+            document.getElementById('step-3').classList.add('active');
+            document.getElementById('btn-copy').innerText = 'COPY ADDRESS';
+        }
+
+        function copyAddress() {
+            const address = document.getElementById('crypto-address').innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                document.getElementById('btn-copy').innerText = 'COPIED!';
+                setTimeout(() => { document.getElementById('btn-copy').innerText = 'COPY ADDRESS'; }, 1500);
+            });
+        }
+    </script>
 </body>
 </html>
