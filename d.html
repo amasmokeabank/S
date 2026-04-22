@@ -3,18 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAV.BEST | PS2 PURPLE POOSE // LUXURY MINIMAL</title>
+    <title>WAV.BEST | The Ultimate Archive</title>
     <style>
-        /* ========== PS2 "PURPLE POOSE" STYLE — SUPER MINIMAL LUXURY ========== */
-        /* Сохраняем все исходные переменные и базовую структуру, добавляем только анимации, свечение, 3D-обводки в стиле PS2 */
+        /* LUXURY MINIMALISM & SHARP EDGES */
         :root {
             --pure-black: #000000;
             --pure-white: #ffffff;
-            --muted: #888888;
-            --purple-drank: #9b4dff;
-            --purple-glow: #c08aff;
-            --border-thin: 1px solid #2a2a2a;
-            --ps2-shadow: 4px 4px 0 rgba(155, 77, 255, 0.25);
+            --muted: #555555;
+            --purple-drank: #4B0082;
+            --border-thin: 1px solid #222222;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,369 +23,92 @@
             -webkit-font-smoothing: antialiased;
             line-height: 1.5;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* PS2 ретро-шум поверх всего (очень тонкий, luxury) */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(155, 77, 255, 0.02) 0px, rgba(155, 77, 255, 0.02) 2px, transparent 2px, transparent 6px);
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        /* тонкое анимированное свечение для главных блоков — PS2 атмосфера */
-        @keyframes ps2Pulse {
-            0% { box-shadow: 0 0 0px rgba(155, 77, 255, 0), 4px 4px 0 rgba(155, 77, 255, 0.15); }
-            100% { box-shadow: 0 0 12px rgba(155, 77, 255, 0.4), 4px 4px 0 rgba(155, 77, 255, 0.3); }
-        }
-
-        @keyframes subtleGlitch {
-            0% { text-shadow: 0 0 0 #9b4dff; }
-            100% { text-shadow: 0 0 3px #9b4dff, 0 0 1px #c08aff; }
         }
 
         a { color: var(--pure-white); text-decoration: none; }
-        button { 
-            border-radius: 0; 
-            font-family: inherit; 
-            transition: all 0.12s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-        }
-
-        /* LAYOUT — полная сохранность сетки */
+        button { border-radius: 0; font-family: inherit; } /* Острые углы везде */
+        
+        /* LAYOUT */
         .wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
         
         header { border-bottom: var(--border-thin); padding-bottom: 20px; margin-bottom: 40px; display: flex; justify-content: space-between; align-items: baseline; }
-        .logo { 
-            font-size: 24px; 
-            font-weight: 900; 
-            letter-spacing: -2px; 
-            text-transform: uppercase;
-            animation: subtleGlitch 2s infinite alternate;
-            color: var(--purple-drank);
-        }
+        .logo { font-size: 24px; font-weight: 900; letter-spacing: -2px; text-transform: uppercase; }
 
-        /* HERO SECTION — добавляем 3D эффект через обводку и псевдо-тень */
+        /* HERO SECTION */
         .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
         @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
 
-        .preview-box { 
-            width: 100%; 
-            aspect-ratio: 1/1; 
-            background: #050505; 
-            border: 1px solid #2a2a2a; 
-            overflow: hidden; 
-            position: relative;
-            transition: 0.2s ease;
-            box-shadow: var(--ps2-shadow);
-        }
-        .preview-box:hover {
-            border-color: var(--purple-drank);
-            box-shadow: 6px 6px 0 rgba(155, 77, 255, 0.4);
-            transform: translate(-2px, -2px);
-        }
-        .preview-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.85; filter: grayscale(100%); transition: 0.25s; }
-        .preview-box:hover .preview-image { filter: grayscale(20%) brightness(1.05); opacity: 1; }
+        .preview-box { width: 100%; aspect-ratio: 1/1; background: #111; border: 1px solid #333; overflow: hidden; position: relative; }
+        .preview-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(100%); transition: 0.2s; }
+        .preview-box:hover .preview-image { filter: grayscale(0%); border-color: var(--purple-drank); }
 
         .offer-details { display: flex; flex-direction: column; justify-content: center; }
-        h1 { 
-            font-size: clamp(32px, 5vw, 48px); 
-            font-weight: 900; 
-            line-height: 1; 
-            letter-spacing: -1px; 
-            text-transform: uppercase; 
-            margin-bottom: 10px;
-            background: linear-gradient(135deg, #fff, #c08aff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 8px rgba(155,77,255,0.3);
-        }
-        .price-tag { 
-            font-size: 32px; 
-            font-weight: 500; 
-            color: var(--purple-drank); 
-            margin-bottom: 30px; 
-            font-family: monospace;
-            text-shadow: 0 0 5px #9b4dff40;
-            letter-spacing: 1px;
-        }
-        .desc { color: var(--muted); font-size: 14px; margin-bottom: 40px; border-left: 2px solid #9b4dff; padding-left: 16px; }
+        h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
+        .price-tag { font-size: 32px; font-weight: 400; color: var(--purple-drank); margin-bottom: 30px; font-family: monospace; }
+        .desc { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
 
-        .btn-main-buy { 
-            background: transparent; 
-            color: var(--pure-white); 
-            border: 1.5px solid var(--purple-drank); 
-            padding: 20px; 
-            font-size: 14px; 
-            font-weight: 700; 
-            letter-spacing: 3px; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            transition: 0.12s;
-            box-shadow: 3px 3px 0 rgba(155, 77, 255, 0.3);
-            position: relative;
-        }
-        .btn-main-buy:hover { 
-            background: var(--purple-drank); 
-            color: var(--pure-black); 
-            box-shadow: 6px 6px 0 rgba(155, 77, 255, 0.6);
-            transform: translate(-2px, -2px);
-            border-color: var(--pure-white);
-        }
+        .btn-main-buy { background: var(--pure-white); color: var(--pure-black); border: none; padding: 20px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.1s; }
+        .btn-main-buy:hover { background: var(--purple-drank); color: var(--pure-white); }
 
-        /* CATALOG SECTION — акцент на анимацию и 3D-обводку */
-        .archive-title { 
-            font-size: 18px; 
-            font-weight: 700; 
-            letter-spacing: 3px; 
-            border-bottom: 2px solid var(--purple-drank); 
-            padding-bottom: 10px; 
-            margin-bottom: 30px; 
-            text-transform: uppercase;
-            color: var(--purple-drank);
-            display: inline-block;
-        }
+        /* CATALOG / FILTER SECTION */
+        .archive-title { font-size: 18px; font-weight: 700; letter-spacing: 2px; border-bottom: var(--border-thin); padding-bottom: 10px; margin-bottom: 30px; text-transform: uppercase; }
         
         .catalog-container { display: grid; grid-template-columns: 250px 1fr; gap: 40px; }
         @media (max-width: 800px) { .catalog-container { grid-template-columns: 1fr; } }
 
-        /* FILTERS — стиль PS2 меню */
-        .filter-list { display: flex; flex-direction: column; gap: 10px; background: #030303; padding: 12px 0; }
-        .filter-btn { 
-            background: transparent; 
-            border: none; 
-            color: #5a5a5a; 
-            text-align: left; 
-            font-size: 12px; 
-            letter-spacing: 1.5px; 
-            text-transform: uppercase; 
-            cursor: pointer; 
-            padding: 12px 10px; 
-            border-left: 2px solid transparent; 
-            transition: 0.1s;
-            font-weight: 500;
-        }
-        .filter-btn:hover { color: var(--pure-white); background: rgba(155,77,255,0.1); }
-        .filter-btn.active { 
-            color: var(--purple-drank); 
-            border-left: 2px solid var(--purple-drank);
-            background: rgba(155,77,255,0.05);
-            text-shadow: 0 0 4px #9b4dff;
-        }
+        /* FILTERS */
+        .filter-list { display: flex; flex-direction: column; gap: 10px; }
+        .filter-btn { background: transparent; border: none; color: var(--muted); text-align: left; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; padding: 10px 0; border-bottom: 1px solid transparent; transition: 0.1s; }
+        .filter-btn:hover { color: var(--pure-white); }
+        .filter-btn.active { color: var(--pure-white); border-bottom: 1px solid var(--purple-drank); }
 
-        /* GENRE CONTENT — добавляем объёмную рамку */
-        .genre-display { 
-            border: 1px solid #2a2a2a; 
-            padding: 40px; 
-            background: #030303;
-            transition: 0.2s;
-            box-shadow: 3px 3px 0 rgba(155, 77, 255, 0.2);
-        }
-        .genre-display:hover {
-            box-shadow: 5px 5px 0 rgba(155, 77, 255, 0.3);
-        }
-        .genre-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; border-bottom: 1px solid #2a2a2a; padding-bottom: 20px; }
+        /* GENRE CONTENT */
+        .genre-display { border: 1px solid #222; padding: 40px; background: #050505; }
+        .genre-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 20px; }
         @media (max-width: 600px) { .genre-header { flex-direction: column; align-items: flex-start; gap: 20px; } }
         
-        .genre-title { 
-            font-size: 24px; 
-            font-weight: 700; 
-            text-transform: uppercase;
-            background: linear-gradient(120deg, #fff, #b87eff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .genre-meta { font-family: monospace; color: #9b4dff; font-size: 12px; letter-spacing: 1px; border: 0.5px solid #9b4dff40; padding: 4px 8px; }
+        .genre-title { font-size: 24px; font-weight: 700; text-transform: uppercase; }
+        .genre-meta { font-family: monospace; color: var(--muted); font-size: 12px; }
         
-        /* KIT LIST — стилизованные элементы с 3D касанием */
+        /* INVENTORY LIST (KITS) */
         .kit-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 40px; }
-        .kit-item { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-bottom: 1px solid #1a1a1a; 
-            padding: 12px 8px; 
-            font-family: monospace; 
-            font-size: 12px; 
-            color: #9b9b9b; 
-            text-transform: uppercase;
-            transition: 0.08s linear;
-        }
-        .kit-item span { color: var(--pure-white); font-weight: 500; letter-spacing: 0.5px; }
-        .kit-item:hover {
-            background: rgba(155,77,255,0.05);
-            border-left: 2px solid var(--purple-drank);
-            padding-left: 12px;
-        }
+        .kit-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; padding-bottom: 10px; font-family: monospace; font-size: 12px; color: #888; text-transform: uppercase; }
+        .kit-item span { color: var(--pure-white); }
         
-        .btn-play-kit { 
-            background: transparent; 
-            border: 1px solid #3a3a3a; 
-            color: var(--pure-white); 
-            padding: 5px 15px; 
-            font-size: 10px; 
-            cursor: pointer; 
-            transition: 0.08s;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-        .btn-play-kit:hover, .btn-play-kit.playing { 
-            background: var(--purple-drank); 
-            color: var(--pure-black); 
-            border-color: var(--purple-drank);
-            box-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-            transform: scale(0.97);
-        }
+        .btn-play-kit { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 5px 15px; font-size: 10px; cursor: pointer; transition: 0.1s; }
+        .btn-play-kit:hover, .btn-play-kit.playing { background: var(--pure-white); color: var(--pure-black); border-color: var(--pure-white); }
 
-        .btn-genre-buy { 
-            width: 100%; 
-            background: #0a0a0a; 
-            border: 1px solid #3a2a4a; 
-            color: #fff; 
-            padding: 18px; 
-            font-size: 12px; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            cursor: pointer; 
-            transition: 0.12s;
-            box-shadow: 2px 2px 0 rgba(155,77,255,0.3);
-        }
-        .btn-genre-buy:hover { 
-            background: var(--purple-drank); 
-            color: var(--pure-black); 
-            border-color: var(--pure-white);
-            box-shadow: 5px 5px 0 rgba(155,77,255,0.5);
-            transform: translate(-2px, -2px);
-        }
+        .btn-genre-buy { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.1s; }
+        .btn-genre-buy:hover { background: var(--pure-white); color: var(--pure-black); }
 
-        /* MODAL — полностью сохраняем структуру, улучшаем визуал PS2 */
-        .modal-overlay { 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0,0,0,0.96); 
-            backdrop-filter: blur(6px); 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 1000; 
-            opacity: 0; 
-            pointer-events: none; 
-            transition: 0.2s; 
-        }
+        /* CHECKOUT MODAL */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.2s; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
         
-        .modal-box { 
-            width: 100%; 
-            max-width: 500px; 
-            background: #010101; 
-            border: 1px solid #9b4dff; 
-            padding: 40px; 
-            position: relative;
-            box-shadow: 12px 12px 0 rgba(155, 77, 255, 0.2);
-            animation: ps2Pulse 1.2s infinite alternate;
-        }
-        .btn-close { 
-            position: absolute; 
-            top: 20px; 
-            right: 20px; 
-            background: transparent; 
-            border: none; 
-            color: #9b4dff; 
-            font-size: 20px; 
-            cursor: pointer; 
-            font-weight: bold;
-            transition: 0.1s;
-        }
-        .btn-close:hover { color: var(--pure-white); transform: scale(1.1); }
+        .modal-box { width: 100%; max-width: 500px; background: var(--pure-black); border: 1px solid #333; padding: 40px; position: relative; }
+        .btn-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--muted); font-size: 16px; cursor: pointer; }
+        .btn-close:hover { color: var(--pure-white); }
 
-        .modal-title { 
-            font-size: 18px; 
-            font-weight: 700; 
-            margin-bottom: 30px; 
-            letter-spacing: 2px; 
-            border-bottom: 1px solid #9b4dff; 
-            padding-bottom: 10px;
-            color: var(--purple-drank);
-        }
+        .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 30px; letter-spacing: 1px; border-bottom: 1px solid #222; padding-bottom: 10px; }
         
+        /* Modal Steps */
         .checkout-step { display: none; flex-direction: column; gap: 20px; }
         .checkout-step.active { display: flex; }
 
-        .summary { font-family: monospace; font-size: 12px; color: #b87eff; margin-bottom: 20px; background: #0b0b0b; padding: 12px; border-left: 2px solid #9b4dff; }
-        .summary span { color: var(--pure-white); font-weight: bold; }
+        .summary { font-family: monospace; font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+        .summary span { color: var(--pure-white); }
 
-        input[type="email"] { 
-            width: 100%; 
-            background: #0a0a0a; 
-            border: 1px solid #3a3a6a; 
-            color: var(--pure-white); 
-            padding: 15px; 
-            font-size: 14px; 
-            outline: none; 
-            font-family: monospace;
-            transition: 0.1s;
-        }
-        input[type="email"]:focus { border-color: var(--purple-drank); box-shadow: 0 0 6px #9b4dff; }
+        input[type="email"] { width: 100%; background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-size: 14px; outline: none; font-family: monospace; }
+        input[type="email"]:focus { border-color: var(--purple-drank); }
 
-        .btn-modal { 
-            background: transparent; 
-            color: var(--purple-drank); 
-            border: 1.5px solid var(--purple-drank); 
-            padding: 15px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            font-size: 12px; 
-            letter-spacing: 2px;
-            transition: 0.1s;
-        }
-        .btn-modal:hover { background: var(--purple-drank); color: var(--pure-black); border-color: white; box-shadow: 3px 3px 0 black; }
+        .btn-modal { background: var(--pure-white); color: var(--pure-black); border: none; padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; }
+        .btn-modal:hover { background: var(--purple-drank); color: var(--pure-white); }
         
-        .btn-outline { 
-            background: transparent; 
-            border: 1px solid #4a4a6a; 
-            color: var(--pure-white); 
-            padding: 15px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            font-size: 12px; 
-            transition: 0.1s;
-        }
-        .btn-outline:hover { border-color: var(--purple-drank); color: var(--purple-drank); background: rgba(155,77,255,0.1); }
+        .btn-outline { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.1s; }
+        .btn-outline:hover { border-color: var(--pure-white); }
 
-        .crypto-address-box { 
-            padding: 20px; 
-            border: 1px dashed #9b4dff; 
-            text-align: center; 
-            font-family: monospace; 
-            word-break: break-all; 
-            color: var(--purple-drank); 
-            font-size: 14px; 
-            margin: 20px 0;
-            background: #080808;
-            box-shadow: inset 0 0 8px rgba(155,77,255,0.1);
-        }
+        .crypto-address-box { padding: 20px; border: 1px dashed #444; text-align: center; font-family: monospace; word-break: break-all; color: var(--purple-drank); font-size: 14px; margin: 20px 0; }
 
-        /* анимация предупреждения */
-        @keyframes warningBlink {
-            0% { opacity: 0.7; text-shadow: 0 0 0px #ff3366; }
-            100% { opacity: 1; text-shadow: 0 0 3px #ff66cc; }
-        }
-        .warning-text-ps2 {
-            animation: warningBlink 1s infinite alternate;
-        }
     </style>
 </head>
 <body>
@@ -451,17 +171,17 @@
                 <div class="crypto-address-box" id="crypto-address">...</div>
                 
                 <button class="btn-modal" id="btn-copy" onclick="copyAddress()">COPY ADDRESS</button>
-                <div style="font-family: monospace; font-size: 10px; color: #9b9bff; text-align: center; margin-top: 15px; line-height: 1.6;">
-                    <span class="warning-text-ps2" style="color: #ff66aa; font-weight: 700; font-size: 11px;">WARNING: SEND EXACTLY THIS AMOUNT.<br>TIME LIMIT FOR PAYMENT: 120 MINUTES.</span><br><br>
+                <div style="font-family: monospace; font-size: 10px; color: var(--muted); text-align: center; margin-top: 15px; line-height: 1.6;">
+                    <span style="color: #ff3333; font-weight: 700; font-size: 11px;">WARNING: SEND EXACTLY THIS AMOUNT.<br>TIME LIMIT FOR PAYMENT: 120 MINUTES.</span><br><br>
                     Confirmation usually takes 1-4 minutes.<br>
-                    Download link will be sent to <span id="display-email" style="color: #c08aff;"></span> after 1 network confirmation.
+                    Download link will be sent to <span id="display-email" style="color: #fff;"></span> after 1 network confirmation.
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // ===== АБСОЛЮТНО ТА ЖЕ ЛОГИКА, НИЧЕГО НЕ ИЗМЕНЕНО — ТОЛЬКО СТИЛЬ PS2 =====
+        // --- DATA GENERATION ---
         const genres = [
             "Trap", "Drill", "Amapiano", "Plugg", "R&B", 
             "Boom Bap", "Reggaeton", "Pop", "Lo-Fi", "Afrobeats", 
@@ -469,28 +189,35 @@
             "Grime", "Synthwave", "G-Funk", "Emo Trap", "Hyperpop"
         ];
 
+        // Генерируем рандомное количество звуков (от 6346 до 7399) для каждого жанра один раз
         const genreData = genres.map(name => {
             const soundsCount = Math.floor(Math.random() * (7399 - 6346 + 1)) + 6346;
             return { name, soundsCount };
         });
 
+        // --- AUDIO LOGIC ---
         const kitPlayer = document.getElementById('kit-player');
         let currentPlayingBtn = null;
 
         function playKitAudio(btn, audioSrc) {
+            // Если нажимаем на ту же кнопку, которая сейчас играет - ставим на паузу
             if (currentPlayingBtn === btn && !kitPlayer.paused) {
                 kitPlayer.pause();
                 btn.innerText = '▶ PLAY';
                 btn.classList.remove('playing');
-                currentPlayingBtn = null;
                 return;
             }
+
+            // Сбрасываем предыдущую кнопку
             if (currentPlayingBtn) {
                 currentPlayingBtn.innerText = '▶ PLAY';
                 currentPlayingBtn.classList.remove('playing');
             }
+
+            // Запускаем новый трек
             kitPlayer.src = audioSrc;
-            kitPlayer.play().catch(() => console.warn("preview audio not found — add mp3s to /previews/"));
+            kitPlayer.play().catch(() => alert('Please add a valid MP3 path in the JS code.'));
+            
             btn.innerText = '|| PAUSE';
             btn.classList.add('playing');
             currentPlayingBtn = btn;
@@ -500,10 +227,10 @@
             if (currentPlayingBtn) {
                 currentPlayingBtn.innerText = '▶ PLAY';
                 currentPlayingBtn.classList.remove('playing');
-                currentPlayingBtn = null;
             }
         });
 
+        // --- RENDER LOGIC ---
         const filterContainer = document.getElementById('filter-container');
         const genreContent = document.getElementById('genre-content');
 
@@ -517,12 +244,16 @@
         });
 
         function renderGenre(genreObj, activeBtn) {
+            // Update active state
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             if(activeBtn) activeBtn.classList.add('active');
 
+            // Generate 10 kits list
             let kitsHTML = '';
             for(let i = 1; i <= 10; i++) {
+                // Путь к файлу превью. Назови их в папке, например: trap_1.mp3
                 let mockAudioPath = `previews/${genreObj.name.toLowerCase()}_${i}.mp3`;
+                
                 kitsHTML += `
                 <div class="kit-item">
                     <span>${genreObj.name} Vol. ${i}</span>
@@ -542,10 +273,14 @@
             `;
         }
 
+        // Render first on load
         renderGenre(genreData[0], filterContainer.firstChild);
 
+        // --- CHECKOUT LOGIC ---
         const modal = document.getElementById('modal-overlay');
         let currentPrice = '';
+        
+        // Exchange rates set directly into logic
         const SOL_RATE = 84.53;
         const BTC_RATE = 74950.00;
 
@@ -553,15 +288,19 @@
             currentPrice = price;
             document.getElementById('checkout-item-name').innerText = itemName;
             document.getElementById('checkout-item-price').innerText = '$' + price;
-            document.getElementById('user-email').value = '';
+            document.getElementById('user-email').value = ''; // Clear email
+            
+            // Reset steps
             document.querySelectorAll('.checkout-step').forEach(s => s.classList.remove('active'));
             document.getElementById('step-1').classList.add('active');
+            
             modal.classList.add('active');
+            
+            // Pause audio if playing
             if(!kitPlayer.paused) kitPlayer.pause();
             if(currentPlayingBtn) {
                 currentPlayingBtn.innerText = '▶ PLAY';
                 currentPlayingBtn.classList.remove('playing');
-                currentPlayingBtn = null;
             }
         }
 
@@ -583,6 +322,8 @@
         function goToStep3(networkName, address) {
             let cryptoAmount = 0;
             let ticker = '';
+            
+            // Calculate exact amount based on rates
             if (networkName === 'SOLANA') {
                 cryptoAmount = (parseFloat(currentPrice) / SOL_RATE).toFixed(5);
                 ticker = 'SOL';
@@ -590,9 +331,11 @@
                 cryptoAmount = (parseFloat(currentPrice) / BTC_RATE).toFixed(8);
                 ticker = 'BTC';
             }
+
             document.getElementById('final-network').innerText = ticker;
-            document.getElementById('final-price').innerText = cryptoAmount;
+            document.getElementById('final-price').innerText = cryptoAmount; // Setting the crypto amount, not the USD price
             document.getElementById('crypto-address').innerText = address;
+            
             document.getElementById('step-2').classList.remove('active');
             document.getElementById('step-3').classList.add('active');
             document.getElementById('btn-copy').innerText = 'COPY ADDRESS';
@@ -602,7 +345,6 @@
             const address = document.getElementById('crypto-address').innerText;
             navigator.clipboard.writeText(address).then(() => {
                 document.getElementById('btn-copy').innerText = 'COPIED!';
-                setTimeout(() => { document.getElementById('btn-copy').innerText = 'COPY ADDRESS'; }, 1500);
             });
         }
     </script>
