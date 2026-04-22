@@ -77,7 +77,7 @@
     letter-spacing: 2.5px;
   }
 
-  /* header minimal, aproape invizibil */
+  /* header minimal, acum cu logo imagine culoare site (gold) */
   .site-header {
     position: sticky;
     top: 0;
@@ -98,6 +98,20 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--gold);
+    display: flex;
+    align-items: center;
+  }
+  /* logo imagine stilizat in culorile site-ului (gold / alb) */
+  .logo-img {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(350deg) brightness(0.9);
+    /* efect gold elegant: culoarea principala a site-ului */
+    transition: var(--transition);
+  }
+  /* pe hover pastram eleganta */
+  .logo-img:hover {
+    filter: brightness(0) invert(1) sepia(1) saturate(8) hue-rotate(345deg) brightness(1);
   }
   .nav-links {
     display: flex;
@@ -129,6 +143,9 @@
     section { margin: 40px 0; }
     .hero {
       padding-top: 20px !important;
+    }
+    .logo-img {
+      height: 34px;
     }
   }
 
@@ -353,7 +370,7 @@
   }
   .footer-links a:hover { color: var(--gold); }
 
-  /* stil pentru imagini de film – rotatie zero, doar functional */
+  /* stil pentru imagini de film – rotatie zero, doar functional, fără hint/cloud */
   .film-strip-container {
     position: relative;
     width: 100%;
@@ -381,74 +398,7 @@
     .film-strip img { height: 160px; }
   }
 
-  /* Контейнер для подсказки */
-  .scroll-hint {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    z-index: 10;
-    opacity: 0;
-    animation: fadeInHint 2s ease forwards 1s;
-  }
-
-  /* Облако (стеклянный эффект) */
-  .hint-cloud {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 12px 20px;
-    border-radius: 100px;
-    border: 1px solid rgba(214, 181, 117, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-
-  /* Золотая точка с пульсацией */
-  .hint-icon {
-    width: 6px;
-    height: 6px;
-    background: var(--gold);
-    border-radius: 50%;
-    position: relative;
-  }
-
-  .hint-icon::after {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    border: 1px solid var(--gold);
-    border-radius: 50%;
-    animation: pulseCloud 2s infinite;
-  }
-
-  /* Текст подсказки */
-  .hint-text {
-    font-size: 0.7rem;
-    color: var(--white);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 400;
-  }
-
-  /* Анимации */
-  @keyframes fadeInHint {
-    to { opacity: 1; }
-  }
-
-  @keyframes pulseCloud {
-    0% { transform: scale(1); opacity: 0.8; }
-    100% { transform: scale(2.5); opacity: 0; }
-  }
-
-  /* Исчезновение при скролле */
-  .scroll-hint.hidden {
-    opacity: 0;
-    transition: opacity 0.5s ease;
-  }
+  /* NICIUN ELEMENT DE GENUL .scroll-hint, .hint-cloud, .hint-icon, .hint-text — complet eliminate */
 
   /* text scris de mana? nu, dar font clar si direct */
   .stat-badge {
@@ -540,7 +490,10 @@
 
 <header class="site-header">
   <div class="container header-inner">
-    <div class="logo-area">IPTV 24 ROMANIA</div>
+    <div class="logo-area">
+      <!-- LOGO imagine în culorile site-ului (auriu / alb) -->
+      <img class="logo-img" src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania">
+    </div>
     <ul class="nav-links">
       <li><a href="#">ACASĂ</a></li>
       <li><a href="https://iptv24romania.com/channels-list/">CANALE</a></li>
@@ -576,18 +529,13 @@
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel simplu, doar html/js) -->
+    <!-- SECȚIUNE FILME + SERIALE (carusel simplu, doar html/js) - FĂRĂ NICIUN HINT / CLOUD / SUGESTIE. Bara este mereu vizibilă, completă. -->
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
       <div class="film-strip-container">
         <div class="film-strip" id="filmStrip"></div>
-        <div class="scroll-hint" id="scrollHint">
-          <div class="hint-cloud">
-            <span class="hint-icon"></span>
-            <span class="hint-text">Glisează spre stânga</span>
-          </div>
-        </div>
+        <!-- NU EXISTĂ ELEMENT CU CLASA scroll-hint / hint-cloud / etc. Eliminat complet -->
       </div>
     </div>
 
@@ -646,7 +594,9 @@
 
 <footer class="footer">
   <div class="container">
-    <div class="logo-area" style="margin-bottom: 16px;">IPTV 24 ROMANIA</div>
+    <div class="logo-area" style="margin-bottom: 16px; justify-content: center;">
+      <img class="logo-img" src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania" style="filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(350deg) brightness(0.9); height: 32px;">
+    </div>
     <div class="footer-links">
       <a href="/p.html">Confidențialitate</a>
       <a href="/p.html">Politică retur</a>
@@ -674,7 +624,7 @@
   ];
   const filmStrip = document.getElementById('filmStrip');
   if(filmStrip){
-    // adaugam toate imaginile
+    // adaugam toate imaginile (strip complet vizibil, fără niciun indicator)
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -682,7 +632,7 @@
       img.loading = "lazy";
       filmStrip.appendChild(img);
     });
-    // duplicam pentru efect de scroll continuu (ca sa nu se goleasca)
+    // duplicam pentru efect de continuitate la scroll, asigurăm senzație de bibliotecă bogată
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -692,15 +642,8 @@
     });
   }
 
-  // Подсказка исчезает при скролле
-  const hint = document.getElementById('scrollHint');
-  const strip = document.getElementById('filmStrip');
-
-  if(strip && hint) {
-    strip.addEventListener('scroll', () => {
-      hint.classList.add('hidden');
-    }, { once: true });
-  }
+  // NICIUN COD PENTRU HINT SAU ASCUNDEREA UNUI ELEMENT DE TIP CLOUD.
+  // Eliminat orice referință la scroll-hint sau evenimente legate de ascundere.
 
   // mobile menu
   const menuBtn = document.getElementById('mobileMenuBtn');
