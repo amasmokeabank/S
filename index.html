@@ -366,26 +366,56 @@
   }
   .footer-links a:hover { color: var(--gold); }
 
-  /* ========== SECȚIUNE FILME - BARĂ DE DERRULARE (SWIPE) VIZIBILĂ ȘI AURIE ========== */
+  /* ========== SECȚIUNE FILME - BARĂ DE DERRULARE (SWIPE) VIZIBILĂ, SUBȚIRE ȘI AURIE ========== */
+  
+  /* Containerul principal - nu modificăm nimic în plus */
   .film-strip-container {
     position: relative;
     width: 100%;
   }
-  
+
+  /* Conform cerinței: înlocuit complet blocul .film-strip */
   .film-strip {
     display: flex;
-    overflow-x: auto;      /* Permite derularea orizontală */
+    overflow-x: scroll; /* Forțează afișarea barei de derulare permanent */
+    -webkit-overflow-scrolling: touch;
     gap: 16px;
-    padding-bottom: 15px;  /* Spațiu pentru bara de derulare, astfel încât să fie vizibilă și să nu se lipească de imagini */
+    padding-bottom: 12px; /* Spațiu subțire sub imagini pentru bara de scroll */
     
-    /* Pentru Firefox: bară subțire, culoare aurie (#d6b575) pe fond închis */
+    /* Pentru Firefox: bară subțire, culoare aurie */
     scrollbar-width: thin;
     scrollbar-color: #d6b575 #1a1a1a;
   }
-  
-  /* Împiedică imaginile să se micșoreze – forțează lățimea naturală și creează nevoia de scroll */
+
+  /* Stiluri pentru Chrome, Safari, Edge (Webkit) – bară foarte subțire, aurie, mereu vizibilă */
+  .film-strip::-webkit-scrollbar {
+    height: 4px !important;        /* Înălțime mică și elegantă */
+    display: block !important;     /* Asigură vizibilitatea permanentă */
+  }
+
+  /* Fundalul (șina) – aproape invizibil, doar pentru contrast */
+  .film-strip::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+
+  /* Bara de derulare (thumb) – culoare aurie exactă #d6b575 */
+  .film-strip::-webkit-scrollbar-thumb {
+    background-color: #d6b575 !important;
+    border-radius: 10px;
+    /* Umbra subtilă forțează redarea constantă și previne dispariția în unele browsere mobile */
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Pseudoelement pentru a asigura că ultima imagine nu este tăiată și scroll-ul apare corect */
+  .film-strip::after {
+    content: "";
+    padding-right: 20px;
+  }
+
+  /* Interzicem comprimarea imaginilor – astfel scroll-ul orizontal este întotdeauna necesar */
   .film-strip img {
-    flex-shrink: 0;       /* Imagina nu se comprimă, rămân la dimensiunea lor originală, astfel scroll-ul apare garantat */
+    flex-shrink: 0 !important;
     height: 220px;
     width: auto;
     border-radius: 4px;
@@ -397,39 +427,18 @@
     filter: grayscale(0%);
     transform: scale(1.02);
   }
-  
-  /* STILURI PENTRU CHROME, SAFARI, EDGE (Webkit) - BARA AURIE VIZIBILĂ, NU DISPARE NICIODATĂ */
-  .film-strip::-webkit-scrollbar {
-    height: 8px;               /* Înălțimea barei de derulare orizontale */
-    display: block;           /* Asigură vizibilitatea permanentă */
-  }
-  
-  .film-strip::-webkit-scrollbar-track {
-    background: #1a1a1a;      /* Culoarea fundalului (șinei) – închis pentru contrast */
-    border-radius: 10px;
-  }
-  
-  .film-strip::-webkit-scrollbar-thumb {
-    background: #d6b575;      /* CULOAREA AURIE (IDENTICĂ CU VARIABILA --gold) */
-    border-radius: 10px;
-    border: 1px solid rgba(0,0,0,0.3); /* Contur subtil pentru definiție */
-  }
-  
-  .film-strip::-webkit-scrollbar-thumb:hover {
-    background: #e6c48b;      /* Nuanță aurie mai deschisă la hover */
-  }
-  
-  /* Adaptare pentru ecrane mici (mobile) – bară puțin mai mică, dar la fel de vizibilă */
+
+  /* Adaptare pentru ecrane mici (mobile) – bară și mai subțire */
   @media (max-width: 640px) {
     .film-strip img {
       height: 160px;
     }
     .film-strip::-webkit-scrollbar {
-      height: 6px;
+      height: 3px !important;   /* Extra-subțire pe mobil */
     }
   }
   
-  /* NICIUN ELEMENT DE TIP HINT / CLOUD / SUGESTIE DE GLISARE – eliminat complet */
+  /* Eliminat complet orice element de tip hint / cloud / sugestie de glisare */
   
   .stat-badge {
     font-size: 0.7rem;
@@ -521,7 +530,7 @@
 <header class="site-header">
   <div class="container header-inner">
     <div class="logo-area">
-      <!-- Logo imagine: fără niciun filtru, culoarea originală a imaginii (așa cum a fost încărcată) -->
+      <!-- Logo imagine: culoare originală, fără niciun filtru -->
       <img class="logo-img" src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania">
     </div>
     <ul class="nav-links">
@@ -559,13 +568,13 @@
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel cu bara de derulare aurie mereu vizibilă) -->
+    <!-- SECȚIUNE FILME + SERIALE (carusel cu bara de derulare aurie subțire, mereu vizibilă) -->
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
       <div class="film-strip-container">
         <div class="film-strip" id="filmStrip"></div>
-        <!-- ABSOLUT NICIUN HINT / CLOUD / TEXT DE GLISARE. Bara de scroll este complet vizibilă și aurie -->
+        <!-- Niciun element de tip hint / cloud / sugestie – doar bara de scroll permanentă -->
       </div>
     </div>
 
@@ -638,7 +647,7 @@
 </footer>
 
 <script>
-  // imagini pentru banda de filme - doar setul original, fără duplicate pentru a menține scroll-ul natural și nevoia de derulare
+  // imagini pentru banda de filme - doar setul original (fără duplicate) pentru a păstra scroll-ul natural
   const movieImages = [
     "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
     "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
@@ -652,7 +661,6 @@
   ];
   const filmStrip = document.getElementById('filmStrip');
   if(filmStrip){
-    // adăugăm o singură dată imaginile (fără duplicate) – scroll-ul apare datorită flex-shrink:0 și dimensiunilor naturale
     movieImages.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
