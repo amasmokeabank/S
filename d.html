@@ -69,7 +69,7 @@
         .offer-details { display: flex; flex-direction: column; justify-content: center; }
         h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
         .price-tag { font-size: 32px; font-weight: 400; color: var(--purple-drank); margin-bottom: 30px; font-family: monospace; }
-        .desc { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
+        .desc { color: var(--muted); font-size: 14px; margin-bottom: 40px; line-height: 1.6; }
 
         .btn-main-buy { background: var(--pure-white); color: var(--pure-black); border: none; padding: 20px; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.1s; }
         .btn-main-buy:hover { background: var(--purple-drank); color: var(--pure-white); }
@@ -129,14 +129,12 @@
 
         .footer-royalty {
             text-align: center;
-            padding: 40px 20px 20px;
+            padding: 15px 20px 20px;
             font-family: monospace, 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1px;
             color: var(--pure-white);
-            border-top: 1px solid #111;
-            margin-top: 60px;
         }
     </style>
 </head>
@@ -188,7 +186,7 @@
             <div class="offer-details">
                 <h1>120,000 SOUNDS.<br>200 KITS.</h1>
                 <div class="price-tag">$66.6</div>
-                <p class="desc">The Ultimate Archive. Instant access to all 20 genres. Pure raw audio. Provide email at checkout to receive the download link upon blockchain confirmation.</p>
+                <p class="desc">BRILLIANT ARCHIVE ACCESS<br>100% ROYALTY FREE.<br>Studio Grade Audio. Maximum Fidelity.<br>9 Genres + 109 Hidden Vault Kits (200 Total).<br>Pure Raw Quality. Industry Standard.<br>Pay with SOL / BTC. Instant delivery to your email.</p>
                 
                 <button class="btn-main-buy" onclick="openCheckout('FULL ARCHIVE BUNDLE (200 KITS)', '66.6')">PURCHASE ENTIRE ARCHIVE</button>
             </div>
@@ -265,7 +263,7 @@
         });
 
         // --- АУДИО ПЛЕЙЛИСТ И АВТОПЕРЕКЛЮЧЕНИЕ ---
-        let allTracks = []; // массив { genreName, kitNumber, displayName, filePath }
+        let allTracks = [];
         
         genreData.forEach((genre) => {
             for (let i = 1; i <= genre.kitsAmount; i++) {
@@ -310,7 +308,6 @@
             currentTrackIndex = index;
             
             const targetGenreName = track.genreName;
-            const targetKitNumber = track.kitNumber;
             
             const filterBtns = document.querySelectorAll('.filter-btn');
             let genreBtn = null;
