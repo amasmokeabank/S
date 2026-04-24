@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WAV.BEST | The Ultimate Archive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>sap@jajaja.cc | The Ultimate Archive</title>
     <style>
         /* LUXURY MINIMALISM & SHARP EDGES */
         :root {
@@ -38,9 +38,37 @@
         .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
         @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
 
-        .preview-box { width: 100%; aspect-ratio: 1/1; background: #111; border: 1px solid #333; overflow: hidden; position: relative; }
-        .preview-image { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; filter: grayscale(100%); transition: 0.2s; }
-        .preview-box:hover .preview-image { filter: grayscale(0%); border-color: var(--purple-drank); }
+        /* Убираем полностью серый квадрат, обводку и фон — арт на чистом чёрном фоне */
+        .preview-box { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: var(--pure-black); 
+            border: none; 
+            overflow: hidden; 
+            position: relative; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            box-shadow: none;
+            outline: none;
+        }
+        /* ASCII-арт на чистом чёрном, без обводки и контуров */
+        .ascii-art {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(4px, 1.8vw, 7px);
+            line-height: 1.2;
+            color: #ffffff;
+            background: transparent;
+            text-align: center;
+            word-break: keep-all;
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
 
         .offer-details { display: flex; flex-direction: column; justify-content: center; }
         h1 { font-size: clamp(32px, 5vw, 48px); font-weight: 900; line-height: 1; letter-spacing: -1px; text-transform: uppercase; margin-bottom: 10px; }
@@ -117,12 +145,44 @@
 
     <div class="wrapper">
         <header>
-            <div class="logo">WAV.BEST</div>
+            <div class="logo">sap@jajaja.cc</div>
         </header>
 
         <section class="hero">
             <div class="preview-box">
-                <img src="bundle-cover.jpg" alt="120k Sounds Bundle" class="preview-image">
+                <!-- ASCII-арт без серого квадрата и обводки (чистый чёрный фон) -->
+                <pre class="ascii-art">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⠀⠀⢀⣠⣤⣶⣶⣶⣶⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡔⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢟⣫⣯⣷⣾⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣷⡙⢿⣿⣿⣿⣿⣿⣿⡿⢋⣵⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣙⠿⠿⠿⢟⣫⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢹⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⡏⠉⠙⢿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⡿⡍⠳⣄⡀⢀⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⢿⡄⠸⡿⢄⠛⣘⢠⣼⣿⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀
+⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡞⣼⡻⡄⠳⡤⠽⠾⠿⠿⠿⢛⣻⣿⣿⣿⣷⡀⠀⠀⠀
+⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣄⠙⢶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀
+⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⢉⣁⣀⣀⣀⣀⣀⣉⡉⠙⠛⠻⢿⣿⣿⣿⣿⣿⣯⣻⣍⡲⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
+⠀⢀⡀⣶⣤⣌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣁⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣈⠛⢿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⣿⣿⡿⠟⠛⠛⠁⠀⠀
+⣰⣿⣿⣿⣿⣿⣿⣿⣝⢿⣿⣿⣿⣿⣿⣿⣟⣡⣶⠿⢛⣛⣉⣭⣭⣤⣤⡴⠶⠶⠶⠶⢲⣴⣤⠭⠭⡭⣟⠻⠦⣝⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢉⣀⣠⣶⣿⣆⠀⠀
+⠹⣿⣿⣿⣿⣿⣿⣙⠻⣿⣮⣛⠿⣿⣿⣿⣫⣵⡶⠟⣛⣋⣭⣭⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣮⣽⣿⣿⣿⠿⠟⠛⠉⢀⣴⣿⣿⣿⣿⣿⣿⣶⡀
+⠀⠈⠙⠋⠁⠀⠈⠉⠛⠳⣭⣛⢷⣦⣸⣿⣯⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⣿⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⡟⣿⣿⣿⣿⡇
+⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⠿⠿⢿⣹⣿⣧⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⡏⣀⣴⣾⣿⣿⠿⠛⠉⠀⠀⠀⠈⠛⠛⠉⠀
+⠀⠀⠀⠀⢀⣴⠿⠛⠋⠁⠀⠀⠀⢀⣯⢿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⠣⣟⡻⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⢀⣀⣴⣾⣿⠈⡿⣿⠃⠀⠀⠀⠈⠉⠛⠻⠿⣿⣿⣿⣿⣿⠿⠛⠉⠉⠀⠈⠉⠛⣿⣽⡟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣀⣼⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⣹⡟⣻⣿⡋⠀⠀⠀⠀⠀⠀⠀⠀⢹⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⢹⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⣰⣿⢣⡇⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠟⠋⠙⠛⠻⣿⣿⣿⣿⣿⠏⠀⠈⢿⣿⣿⣿⣦⣄⣀⣀⣀⣠⣴⣿⣏⡞⢻⣸⣿⣷⣄⠀⠀⣀⣤⠴⣾⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⠃⠀⠀⠀⠈⢿⣿⣵⣾⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣶⠾⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣏⠀⡀⠀⢠⠀⣀⣼⣿⡛⢿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⠟⣡⣾⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠸⣠⣶⣿⣿⣯⣿⡇⠀⢹⣿⣿⣿⣿⣷⣤⣤⣦⣶⣿⣿⣿⣿⣿⡇⠀⣿⣿⢸⣿⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⣠⣴⣿⣿⣿⣿⠟⠁⣿⡇⠀⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⡇⢀⣿⣿⠙⢮⣛⠿⣷⣦⣄⣀⣀⣀⣠⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣴⣶⣶⣾⣿⣿⡿⣛⣿⣞⠋⠀⠀⠀⣿⣷⠀⣍⠇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠉⡄⣸⣿⡿⠀⠀⠈⠙⠮⣟⠿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣹⣿⣿⣿⢵⣿⠋⢠⡌⠀⠀⠀⠀⢿⣿⣦⣿⡷⣄⠙⠿⣿⢹⣿⣿⢼⡿⠋⣡⣶⣳⣿⣿⣿⠃⠀⠀⠀⠀⠀⠈⠿⠬⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠸⣿⣿⣿⣿⠟⢸⠀⠆⠊⡀⠀⠀⠀⠀⠻⣿⣿⣷⣻⢿⣶⣬⣈⣉⣉⣤⣴⣿⣻⣾⣿⣿⠟⠁⠀⠀⠀⠤⠄⠂⠁⠁⠁⢿⣿⣿⡿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠙⠋⠁⠀⢘⢸⠬⠀⡀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⡇⣿⣇⣿⢹⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⢘⡁⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⢝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
             </div>
 
             <div class="offer-details">
@@ -181,18 +241,25 @@
     </div>
 
     <script>
-        // --- DATA GENERATION ---
+        // --- ТОЛЬКО УКАЗАННЫЕ ЖАНРЫ: AFROBEATS (11 VOL), AFROSWING, AMAPIANO, DANCEHALL, DRILLATON, DUB, REGGAE, REGGAETON, SHATTA ---
         const genres = [
-            "Trap", "Drill", "Amapiano", "Plugg", "R&B", 
-            "Boom Bap", "Reggaeton", "Pop", "Lo-Fi", "Afrobeats", 
-            "Dancehall", "Rage", "Phonk", "Techno", "Jersey Club", 
-            "Grime", "Synthwave", "G-Funk", "Emo Trap", "Hyperpop"
+            "AFROBEATS",
+            "AFROSWING",
+            "AMAPIANO",
+            "DANCEHALL",
+            "DRILLATON",
+            "DUB",
+            "REGGAE",
+            "REGGAETON",
+            "SHATTA"
         ];
 
-        // Генерируем рандомное количество звуков (от 6346 до 7399) для каждого жанра один раз
+        // Генерация количества звуков (от 6346 до 7399) + для AFROBEATS количество китов = 11, для остальных 10
         const genreData = genres.map(name => {
             const soundsCount = Math.floor(Math.random() * (7399 - 6346 + 1)) + 6346;
-            return { name, soundsCount };
+            let kitsAmount = 10;
+            if (name === "AFROBEATS") kitsAmount = 11;
+            return { name, soundsCount, kitsAmount };
         });
 
         // --- AUDIO LOGIC ---
@@ -200,24 +267,18 @@
         let currentPlayingBtn = null;
 
         function playKitAudio(btn, audioSrc) {
-            // Если нажимаем на ту же кнопку, которая сейчас играет - ставим на паузу
             if (currentPlayingBtn === btn && !kitPlayer.paused) {
                 kitPlayer.pause();
                 btn.innerText = '▶ PLAY';
                 btn.classList.remove('playing');
                 return;
             }
-
-            // Сбрасываем предыдущую кнопку
             if (currentPlayingBtn) {
                 currentPlayingBtn.innerText = '▶ PLAY';
                 currentPlayingBtn.classList.remove('playing');
             }
-
-            // Запускаем новый трек
             kitPlayer.src = audioSrc;
             kitPlayer.play().catch(() => alert('Please add a valid MP3 path in the JS code.'));
-            
             btn.innerText = '|| PAUSE';
             btn.classList.add('playing');
             currentPlayingBtn = btn;
@@ -244,16 +305,13 @@
         });
 
         function renderGenre(genreObj, activeBtn) {
-            // Update active state
             document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
             if(activeBtn) activeBtn.classList.add('active');
 
-            // Generate 10 kits list
             let kitsHTML = '';
-            for(let i = 1; i <= 10; i++) {
-                // Путь к файлу превью. Назови их в папке, например: trap_1.mp3
+            const totalKits = genreObj.kitsAmount;
+            for(let i = 1; i <= totalKits; i++) {
                 let mockAudioPath = `previews/${genreObj.name.toLowerCase()}_${i}.mp3`;
-                
                 kitsHTML += `
                 <div class="kit-item">
                     <span>${genreObj.name} Vol. ${i}</span>
@@ -264,23 +322,22 @@
             genreContent.innerHTML = `
                 <div class="genre-header">
                     <div class="genre-title">${genreObj.name} BUNDLE</div>
-                    <div class="genre-meta">10 KITS / ${genreObj.soundsCount.toLocaleString()} SOUNDS</div>
+                    <div class="genre-meta">${totalKits} KITS / ${genreObj.soundsCount.toLocaleString()} SOUNDS</div>
                 </div>
                 <div class="kit-list">
                     ${kitsHTML}
                 </div>
-                <button class="btn-genre-buy" onclick="openCheckout('${genreObj.name.toUpperCase()} BUNDLE (10 KITS)', '9.99')">PURCHASE GENRE FOR $9.99</button>
+                <button class="btn-genre-buy" onclick="openCheckout('${genreObj.name.toUpperCase()} BUNDLE (${totalKits} KITS)', '9.99')">PURCHASE GENRE FOR $9.99</button>
             `;
         }
 
-        // Render first on load
+        // Загрузка первого жанра (AFROBEATS)
         renderGenre(genreData[0], filterContainer.firstChild);
 
-        // --- CHECKOUT LOGIC ---
+        // --- CHECKOUT LOGIC (без изменений, только базовая логика)---
         const modal = document.getElementById('modal-overlay');
         let currentPrice = '';
         
-        // Exchange rates set directly into logic
         const SOL_RATE = 84.53;
         const BTC_RATE = 74950.00;
 
@@ -288,15 +345,13 @@
             currentPrice = price;
             document.getElementById('checkout-item-name').innerText = itemName;
             document.getElementById('checkout-item-price').innerText = '$' + price;
-            document.getElementById('user-email').value = ''; // Clear email
+            document.getElementById('user-email').value = '';
             
-            // Reset steps
             document.querySelectorAll('.checkout-step').forEach(s => s.classList.remove('active'));
             document.getElementById('step-1').classList.add('active');
             
             modal.classList.add('active');
             
-            // Pause audio if playing
             if(!kitPlayer.paused) kitPlayer.pause();
             if(currentPlayingBtn) {
                 currentPlayingBtn.innerText = '▶ PLAY';
@@ -323,7 +378,6 @@
             let cryptoAmount = 0;
             let ticker = '';
             
-            // Calculate exact amount based on rates
             if (networkName === 'SOLANA') {
                 cryptoAmount = (parseFloat(currentPrice) / SOL_RATE).toFixed(5);
                 ticker = 'SOL';
@@ -333,7 +387,7 @@
             }
 
             document.getElementById('final-network').innerText = ticker;
-            document.getElementById('final-price').innerText = cryptoAmount; // Setting the crypto amount, not the USD price
+            document.getElementById('final-price').innerText = cryptoAmount;
             document.getElementById('crypto-address').innerText = address;
             
             document.getElementById('step-2').classList.remove('active');
