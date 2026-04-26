@@ -8,7 +8,6 @@
 <meta name="description" content="10.000+ canale, filme și seriale nelimitat. Test gratuit 24h. Activare instant. Prețuri exclusive.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* RESET + BARE MINIMUM */
   * {
     margin: 0;
     padding: 0;
@@ -35,26 +34,22 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* typography - serif pentru autoritate */
   h1, h2, h3, .serif {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
-  /* layout ultra clean */
   .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* efecte lipsă - nimic inutil, doar spațiu și contrast */
   section {
     margin: 80px 0;
   }
 
-  /* butonul clasic direct */
   .btn-primary {
     display: inline-block;
     background: var(--gold);
@@ -70,6 +65,7 @@
     text-align: center;
     border-radius: 0px;
     font-family: 'Inter', sans-serif;
+    cursor: pointer;
   }
   .btn-primary:hover {
     background: #fff2e0;
@@ -77,13 +73,12 @@
     letter-spacing: 2.5px;
   }
 
-  /* header minimal - logo culoare originală (fără filtru, imaginea așa cum e) */
+  /* HEADER - fără transparenta, complet opac */
   .site-header {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(5,5,5,0.92);
-    backdrop-filter: blur(8px);
+    background: #050505; /* Complet opac, fără blur */
     border-bottom: 0.5px solid var(--border-gold);
     padding: 18px 0;
   }
@@ -97,7 +92,6 @@
     align-items: center;
   }
   
-  /* Logo fără niciun filtru - culoarea originală a imaginii */
   .logo-img {
     height: 44px;
     width: auto;
@@ -137,77 +131,109 @@
     .mobile-menu-btn { display: block; }
     .container { padding: 0 20px; }
     section { margin: 40px 0; }
-    .hero {
-      padding-top: 20px !important;
-    }
-    .logo-img {
-      height: 36px;
-    }
+    .logo-img { height: 36px; }
   }
 
-  /* --- NOU: BANNER STICKY SUB HEDER (foto fixa la scroll, dar initial sub header) --- */
-  .sticky-banner {
+  /* URGENCY BAR - oferta agresiva */
+  .urgency-bar {
+    background: #000;
+    border-top: 1px solid var(--gold);
+    border-bottom: 1px solid var(--gold);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
     position: sticky;
-    top: 80px; /* inaltimea header-ului sticky (aprox) */
-    z-index: 99;
+    top: 80px; /* Sub header, dar dispare la scroll normal (nu sticky in sine) */
+    z-index: 90;
+  }
+  /* De fapt pentru a dispărea la scroll, nu o facem sticky prea sus, dar lasam comportament natural */
+  .scrolling-text {
+    display: inline-block;
+    white-space: nowrap;
+    animation: scrollText 20s linear infinite;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--gold);
+  }
+  @keyframes scrollText {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* BANNER IMAGINE - exact sub bara de oferta, dispare la scroll la fel ca bara (comportament normal) */
+  .promo-banner {
     width: 100%;
     background: #000;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-    border-bottom: 1px solid var(--gold);
+    border-bottom: 1px solid rgba(214,181,117,0.3);
   }
-  .sticky-banner img {
+  .promo-banner img {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
-    max-height: 320px;
-  }
-  /* compensare pentru ecrane mici */
-  @media (max-width: 760px) {
-    .sticky-banner {
-      top: 70px;
-    }
-    .sticky-banner img {
-      max-height: 200px;
-    }
+    max-height: 400px;
   }
 
-  /* HERO - distanta redusa acum avem banner sticky sub header */
-  .hero {
+  /* HERO nou V2 - extrem de direct, minimalist, conversie */
+  .hero-conversion {
     text-align: center;
-    padding: 30px 0 80px;
+    padding: 40px 0 60px;
     border-bottom: 1px solid rgba(214,181,117,0.2);
-    margin-top: 0;
   }
-  .hero h1 {
-    font-size: clamp(2.8rem, 8vw, 5.2rem);
+  .hero-conversion h1 {
+    font-size: clamp(2.8rem, 8vw, 5rem);
     font-weight: 700;
-    letter-spacing: -0.02em;
     line-height: 1.1;
     margin-bottom: 24px;
   }
-  .hero-gold {
+  .hero-conversion .hero-gold {
     color: var(--gold);
   }
-  .hero p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: 0 auto 32px;
+  .hero-conversion .price-ultra {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--gold);
+    margin: 20px 0;
+    letter-spacing: -1px;
+  }
+  .hero-conversion p {
+    font-size: 1rem;
+    max-width: 550px;
+    margin: 0 auto 24px;
     color: #cdc6b8;
   }
-  .hero .btn-primary {
-    font-size: 1rem;
-    padding: 16px 44px;
-  }
-  .micro-offer {
-    margin-top: 28px;
-    font-size: 0.75rem;
-    letter-spacing: 1px;
+  .wa-button {
+    background: #25D366;
+    color: #000;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    font-weight: 800;
     text-transform: uppercase;
-    color: #9b8e72;
+    letter-spacing: 1.5px;
+    font-size: 1rem;
+    border: none;
+    margin-right: 16px;
+    transition: 0.2s;
+  }
+  .wa-button:hover {
+    background: #20b859;
+    transform: scale(0.98);
+  }
+  .btn-outline-light {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+  }
+  .btn-outline-light:hover {
+    background: var(--gold);
+    color: #000;
   }
 
-  /* grid features extrem de direct */
+  /* features grid */
   .features-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -229,7 +255,7 @@
     color: #b8aa8c;
   }
 
-  /* carduri pret - absolut minimal, fara umbre false, doar linie si contrast */
+  /* pricing grid */
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -284,219 +310,7 @@
     color: black;
   }
 
-  /* bara de incredere - scrolling infinit */
-  .urgency-bar {
-    background: #000;
-    border-top: 1px solid var(--gold);
-    border-bottom: 1px solid var(--gold);
-    padding: 12px 0;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-  .scrolling-text {
-    display: inline-block;
-    white-space: nowrap;
-    animation: scrollText 20s linear infinite;
-    font-size: 0.85rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-weight: 800;
-    color: var(--gold);
-  }
-  @keyframes scrollText {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  /* testimoniale - textul din interior la stanga */
-  .testimonial-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    justify-content: center;
-    margin: 40px 0;
-  }
-  .testimonial-card {
-    background: #0c0c0c;
-    padding: 24px;
-    width: 280px;
-    border-left: 3px solid var(--gold);
-    text-align: left;
-  }
-  .testimonial-card p {
-    font-style: normal;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    margin-bottom: 16px;
-    text-align: left;
-  }
-  .testimonial-card .author {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    color: var(--gold);
-    text-align: left;
-  }
-
-  /* FAQ */
-  .faq-list details {
-    border-bottom: 1px solid rgba(214,181,117,0.2);
-    padding: 20px 0;
-  }
-  .faq-list summary {
-    font-weight: 600;
-    cursor: pointer;
-    font-size: 1rem;
-    letter-spacing: 0.5px;
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .faq-list summary::-webkit-details-marker { display: none; }
-  .faq-list summary::after {
-    content: "+";
-    color: var(--gold);
-    font-size: 1.4rem;
-  }
-  details[open] summary::after {
-    content: "−";
-  }
-  .faq-list p {
-    margin-top: 16px;
-    color: #b8aa8c;
-    font-size: 0.85rem;
-    padding-right: 24px;
-  }
-
-  /* NOU: Bloc prieteni + oferta iPhone */
-  .friend-deal {
-    background: linear-gradient(135deg, #0f0c08 0%, #1a150e 100%);
-    border: 1px solid var(--gold);
-    padding: 40px 28px;
-    text-align: center;
-    margin: 60px 0;
-    position: relative;
-  }
-  .friend-deal h3 {
-    font-size: 2rem;
-    margin-bottom: 16px;
-    color: var(--gold);
-  }
-  .friend-deal p {
-    max-width: 600px;
-    margin: 0 auto 24px;
-    font-size: 1rem;
-  }
-  .gold-text {
-    color: var(--gold);
-    font-weight: bold;
-  }
-  .iphone-giveaway {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    background: #000000aa;
-    backdrop-filter: blur(6px);
-    border-radius: 12px;
-    padding: 30px 24px;
-    margin: 40px 0 20px;
-    border-left: 4px solid var(--gold);
-  }
-  .giveaway-text {
-    flex: 2;
-  }
-  .giveaway-text h4 {
-    font-size: 1.8rem;
-    margin-bottom: 12px;
-    font-family: 'Cormorant Garamond', serif;
-  }
-  .giveaway-detail {
-    font-size: 0.85rem;
-    color: #d1c2a5;
-    margin: 15px 0;
-  }
-  .giveaway-terms {
-    font-size: 0.7rem;
-    color: #a68f60;
-    border-top: 0.5px dashed var(--gold);
-    padding-top: 10px;
-    margin-top: 12px;
-  }
-  .btn-outline-gold {
-    background: transparent;
-    border: 1.5px solid var(--gold);
-    color: var(--gold);
-    padding: 12px 28px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: var(--transition);
-    display: inline-block;
-    text-decoration: none;
-    font-size: 0.8rem;
-  }
-  .btn-outline-gold:hover {
-    background: var(--gold);
-    color: black;
-  }
-  .modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(5px);
-  }
-  .modal-content {
-    background: #0f0e0a;
-    border: 1px solid var(--gold);
-    max-width: 500px;
-    width: 90%;
-    padding: 28px 24px;
-    position: relative;
-    border-radius: 4px;
-  }
-  .modal-content h3 {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-  }
-  .modal-content p, .modal-content ul {
-    margin-bottom: 16px;
-    color: #ddd2be;
-  }
-  .modal-content ul {
-    padding-left: 20px;
-  }
-  .close-modal {
-    position: absolute;
-    top: 12px;
-    right: 20px;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--gold);
-  }
-  .btn-close-modal {
-    background: var(--gold);
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    margin-top: 12px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-
-  /* film strip si restul unchanged */
+  /* film strip */
   .film-strip-container {
     position: relative;
     width: 100%;
@@ -543,13 +357,87 @@
     .film-strip img { height: 160px; }
     .film-strip::-webkit-scrollbar { height: 3px !important; }
   }
-  .stat-badge {
+
+  /* testimoniale */
+  .testimonial-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    margin: 40px 0;
+  }
+  .testimonial-card {
+    background: #0c0c0c;
+    padding: 24px;
+    width: 280px;
+    border-left: 3px solid var(--gold);
+    text-align: left;
+  }
+  .testimonial-card p {
+    font-style: normal;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+  .testimonial-card .author {
     font-size: 0.7rem;
-    background: #1e1b12;
-    display: inline-block;
-    padding: 4px 12px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* FAQ */
+  .faq-list details {
+    border-bottom: 1px solid rgba(214,181,117,0.2);
+    padding: 20px 0;
+  }
+  .faq-list summary {
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-list summary::-webkit-details-marker { display: none; }
+  .faq-list summary::after {
+    content: "+";
+    color: var(--gold);
+    font-size: 1.4rem;
+  }
+  details[open] summary::after {
+    content: "−";
+  }
+  .faq-list p {
+    margin-top: 16px;
+    color: #b8aa8c;
+    font-size: 0.85rem;
+    padding-right: 24px;
+  }
+
+  /* footer original - fara adaugiri */
+  .footer {
+    border-top: 1px solid rgba(214,181,117,0.3);
+    padding: 48px 0 32px;
+    text-align: center;
+    font-size: 0.7rem;
     letter-spacing: 1px;
   }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+  }
+  .footer-links a {
+    color: #a68f60;
+    text-decoration: none;
+  }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* Mobile & misc */
   .mobile-nav {
     position: fixed;
     top: 0;
@@ -609,6 +497,12 @@
   @media (min-width: 761px) {
     .mobile-nav, .overlay, .mobile-menu-btn { display: none; }
   }
+  .micro-offer {
+    margin-top: 20px;
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    color: #9b8e72;
+  }
 </style>
 </head>
 <body>
@@ -639,35 +533,40 @@
   </div>
 </header>
 
-<!-- BANNER STICKY: imagine fixa la scroll, apare sub header -- imaginea dorita /IMG_0665.jpeg -->
-<div class="sticky-banner">
-  <img src="/IMG_0665.jpeg" alt="Promo iPhone giveaway" onerror="this.src='https://placehold.co/1200x400/1a1a1a/d6b575?text=iPhone+Giveaway+Every+Week'">
+<!-- BARA DE URGENȚĂ (OFERTA AGRESIVA) -->
+<div class="urgency-bar">
+  <div class="scrolling-text">
+    🔥 OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp; 🔥 OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp;
+  </div>
+</div>
+
+<!-- FOTOGRAFIE SUB BARA DE OFERTĂ (dispare la scroll la fel ca bara) -->
+<div class="promo-banner">
+  <img src="/IMG_0665.jpeg" alt="Promo IPTV 24" onerror="this.src='https://placehold.co/1200x400/1a1a1a/d6b575?text=+IMG_0665.jpeg+'">
 </div>
 
 <main>
-  <div class="urgency-bar">
-    <div class="scrolling-text">
-      OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp; OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp;
-    </div>
-  </div>
-
   <div class="container">
-    <!-- HERO -->
-    <section class="hero fade-on-scroll" style="margin-top: 0; padding-top: 20px;">
-      <h1>Divertisment <span class="hero-gold">nelimitat</span><br>Fără contracte.</h1>
-      <p>Acces instant la filme, seriale, sport și canale internaționale. Testează 24 de ore complet gratuit.</p>
-      <a href="#" class="btn-primary">TESTEAZĂ GRATUIT 24h</a>
-      <div class="micro-offer">Activare în maxim 30 minute • Suport 24/7</div>
-    </section>
+    <!-- SECȚIUNE AGRESIVĂ DE CONVERSIE (înlocuiește vechiul hero + oferta prieteni/iphone) -->
+    <div class="hero-conversion fade-on-scroll">
+      <h1>Un singur pas: <span class="hero-gold">ACCES TOTAL</span><br>Fără limită.</h1>
+      <div class="price-ultra">10.000+ canale + VOD nelimitat</div>
+      <p>Test gratuit 24h. Activare în sub 30 minute. Suport 24/7. Renunță la contracte și începe să economisești 50%.</p>
+      <div>
+        <a href="https://wa.me/40793371730?text=Salut%2C%20vreau%20test%20gratuit%2024h%20si%20oferta%20speciala" class="btn-primary wa-button" style="background:#25D366; color:#000; margin-right: 16px;">📱 ACTIVEAZĂ PE WHATSAPP</a>
+        <a href="https://iptv24romania.com/shop/" class="btn-primary btn-outline-light">→ CUMPĂRĂ ACUM ←</a>
+      </div>
+      <div class="micro-offer">50% reducere + 1 lună BONUS la pachetul de 14 luni</div>
+    </div>
 
-    <!-- 3 argumente -->
+    <!-- 3 ARGUMENTE -->
     <div class="features-grid fade-on-scroll">
       <div class="feature-item"><h3>+10.000 conținut</h3><p>Filme, seriale, documentare, evenimente sportive în 4K și Full HD.</p></div>
       <div class="feature-item"><h3>Activare instant</h3><p>Plătești o dată, primești accesul în mai puțin de o oră. Fără întârzieri.</p></div>
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel) -->
+    <!-- SECȚIUNE FILME -->
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
@@ -686,28 +585,6 @@
         <div class="price-card"><h3>14 luni</h3><div class="price-old">€193.98</div><div class="price-new">€96.99</div><ul><li>Economie 50%</li><li>2 luni bonus</li><li>Toate opțiunile premium</li><li>Instalare gratuită</li></ul><a href="https://iptv24romania.com/product/abonament-14-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
       </div>
       <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
-    </div>
-
-    <!-- BLOC PRIETENI: OFERTA UN LUNĂ GRATUIT -->
-    <div class="friend-deal fade-on-scroll">
-      <h3>🎁 Recomandă un prieten 🎁</h3>
-      <p>Oferă-i <span class="gold-text">divertisment premium</span> iar tu primești <strong>1 lună GRATUIT</strong> de abonament! Prietenul tău cumpără orice subscripție, iar noi îți adăugăm 30 de zile fără niciun cost.</p>
-      <div style="font-size: 1.4rem; margin: 10px 0;">⭐ +1 lună gratis pentru fiecare prieten plătitor ⭐</div>
-      <a href="#" class="btn-primary" style="background: var(--gold); color:#000;">ÎMPARTĂ LINK ACUM</a>
-      <p style="font-size:0.7rem; margin-top:12px;">* Se aplică la orice abonament cumpărat de prieten, ofertă valabilă permanent.</p>
-    </div>
-
-    <!-- SECȚIUNE IPHONE GIVEAWAY: tombolă săptămânală cu condiții si buton detalii -->
-    <div class="iphone-giveaway fade-on-scroll">
-      <div class="giveaway-text">
-        <h4>📱 iPhone Săptămânal! 🎰</h4>
-        <p><strong>Fiecare săptămână</strong> un iPhone 15 (sau model echivalent) este oferit unui client norocos printre cei care au cumpărat un abonament în acea săptămână.</p>
-        <div class="giveaway-detail">✨ Ai intrat automat în tombolă dacă ai achiziționat <strong>orice abonament</strong> (1 lună, 4 luni, 8 luni sau 14 luni). Extragerea are loc în fiecare luni, iar câștigătorul este anunțat pe WhatsApp și email.</div>
-        <div class="giveaway-terms">⭐ Condiție: orice subscripție activă în săptămâna extragerii. Premiu garantat săptămânal de către IPTV 24 Romania.</div>
-      </div>
-      <div>
-        <button id="giveawayDetailsBtn" class="btn-outline-gold">Află regulament complet</button>
-      </div>
     </div>
 
     <!-- TESTIMONIALE -->
@@ -741,11 +618,11 @@
       </div>
     </div>
 
-    <!-- ULTIMUL CTA -->
+    <!-- ULTIM CTA AGGRESIV -->
     <div style="text-align: center; margin: 80px 0 60px;" class="fade-on-scroll">
-      <div class="stat-badge">Oferta se încheie în curând</div>
-      <h2 style="font-size: 2.2rem; margin: 16px 0;">Începe testul gratuit<br>acum.</h2>
-      <a href="#" class="btn-primary" style="margin-top: 12px;">SOLICITĂ ACCES GRATUIT</a>
+      <div class="stat-badge">OFERTA EXCLUSIVĂ ONLINE</div>
+      <h2 style="font-size: 2.2rem; margin: 16px 0;">Începe testul gratuit acum.</h2>
+      <a href="https://wa.me/40793371730?text=TEST%20GRATUIT%2024h%20SI%20OFERTA" class="btn-primary" style="margin-top: 12px; background:#25D366; color:#000;">SOLICITĂ ACCES PE WHATSAPP</a>
       <p style="margin-top: 20px; font-size: 0.7rem;">Fără obligații. Fără card. Doar 24 ore de conținut premium.</p>
     </div>
   </div>
@@ -765,24 +642,6 @@
     <div>© 2025 IPTV 24 ROMANIA – Toate drepturile rezervate</div>
   </div>
 </footer>
-
-<!-- MODAL pentru condiții iPhone -->
-<div id="modalTerms" class="modal">
-  <div class="modal-content">
-    <span class="close-modal" id="closeModalBtn">&times;</span>
-    <h3>🍀 Reguli Tombolă iPhone</h3>
-    <p><strong>Cum participi?</strong> Orice client care achiziționează un abonament IPTV 24 Romania (indiferent de durată) într-o săptămână calendaristică (luni – duminică) participă automat la extragere.</p>
-    <ul>
-      <li>În fiecare <strong>luni</strong> are loc extragerea unui câștigător care primește un iPhone (model disponibil în stoc, actualizat cu versiunea nouă).</li>
-      <li>Câștigătorul este notificat prin email-ul asociat comenzii și pe WhatsApp (dacă este disponibil).</li>
-      <li>Premiul se trimite gratuit prin curier în maxim 14 zile lucrătoare.</li>
-      <li>Participarea este valabilă pentru orice abonament activ în săptămâna respectivă; nu este necesar să fie activ la momentul extragerii, dar tranzacția trebuie confirmată în perioada menționată.</li>
-      <li>Fiecare tranzacție reprezintă un bilet în extragere. Clienții existenți care reînnoiesc participă și ei la tombolă.</li>
-      <li>Ofertă valabilă pe perioadă nedeterminată, IPTV 24 Romania își rezervă dreptul de a schimba modelul iPhone în funcție de disponibilitate.</li>
-    </ul>
-    <button class="btn-close-modal" id="confirmModalBtn">Înțeleg condițiile</button>
-  </div>
-</div>
 
 <script>
   // imagini film strip
@@ -834,19 +693,6 @@
       if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
     });
   }, 150);
-
-  // MODAL pentru detalii iPhone
-  const modal = document.getElementById('modalTerms');
-  const giveawayBtn = document.getElementById('giveawayDetailsBtn');
-  const closeModal = document.getElementById('closeModalBtn');
-  const confirmModal = document.getElementById('confirmModalBtn');
-
-  function showModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
-  function hideModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
-  if(giveawayBtn) giveawayBtn.addEventListener('click', showModal);
-  if(closeModal) closeModal.addEventListener('click', hideModal);
-  if(confirmModal) confirmModal.addEventListener('click', hideModal);
-  window.addEventListener('click', (e) => { if(e.target === modal) hideModal(); });
 </script>
 </body>
 </html>
