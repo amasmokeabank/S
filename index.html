@@ -145,7 +145,34 @@
     }
   }
 
-  /* HERO - redus distanta fata de bara cu oferta */
+  /* --- NOU: BANNER STICKY SUB HEDER (foto fixa la scroll, dar initial sub header) --- */
+  .sticky-banner {
+    position: sticky;
+    top: 80px; /* inaltimea header-ului sticky (aprox) */
+    z-index: 99;
+    width: 100%;
+    background: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    border-bottom: 1px solid var(--gold);
+  }
+  .sticky-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 320px;
+  }
+  /* compensare pentru ecrane mici */
+  @media (max-width: 760px) {
+    .sticky-banner {
+      top: 70px;
+    }
+    .sticky-banner img {
+      max-height: 200px;
+    }
+  }
+
+  /* HERO - distanta redusa acum avem banner sticky sub header */
   .hero {
     text-align: center;
     padding: 30px 0 80px;
@@ -345,75 +372,161 @@
     padding-right: 24px;
   }
 
-  /* footer extrem de simplu */
-  .footer {
-    border-top: 1px solid rgba(214,181,117,0.3);
-    padding: 48px 0 32px;
+  /* NOU: Bloc prieteni + oferta iPhone */
+  .friend-deal {
+    background: linear-gradient(135deg, #0f0c08 0%, #1a150e 100%);
+    border: 1px solid var(--gold);
+    padding: 40px 28px;
     text-align: center;
-    font-size: 0.7rem;
-    letter-spacing: 1px;
+    margin: 60px 0;
+    position: relative;
   }
-  .footer-links {
+  .friend-deal h3 {
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: var(--gold);
+  }
+  .friend-deal p {
+    max-width: 600px;
+    margin: 0 auto 24px;
+    font-size: 1rem;
+  }
+  .gold-text {
+    color: var(--gold);
+    font-weight: bold;
+  }
+  .iphone-giveaway {
     display: flex;
-    justify-content: center;
-    gap: 32px;
     flex-wrap: wrap;
-    margin: 20px 0;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    background: #000000aa;
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 30px 24px;
+    margin: 40px 0 20px;
+    border-left: 4px solid var(--gold);
   }
-  .footer-links a {
+  .giveaway-text {
+    flex: 2;
+  }
+  .giveaway-text h4 {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .giveaway-detail {
+    font-size: 0.85rem;
+    color: #d1c2a5;
+    margin: 15px 0;
+  }
+  .giveaway-terms {
+    font-size: 0.7rem;
     color: #a68f60;
-    text-decoration: none;
+    border-top: 0.5px dashed var(--gold);
+    padding-top: 10px;
+    margin-top: 12px;
   }
-  .footer-links a:hover { color: var(--gold); }
+  .btn-outline-gold {
+    background: transparent;
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    padding: 12px 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    display: inline-block;
+    text-decoration: none;
+    font-size: 0.8rem;
+  }
+  .btn-outline-gold:hover {
+    background: var(--gold);
+    color: black;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+  }
+  .modal-content {
+    background: #0f0e0a;
+    border: 1px solid var(--gold);
+    max-width: 500px;
+    width: 90%;
+    padding: 28px 24px;
+    position: relative;
+    border-radius: 4px;
+  }
+  .modal-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+  .modal-content p, .modal-content ul {
+    margin-bottom: 16px;
+    color: #ddd2be;
+  }
+  .modal-content ul {
+    padding-left: 20px;
+  }
+  .close-modal {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gold);
+  }
+  .btn-close-modal {
+    background: var(--gold);
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-weight: bold;
+  }
 
-  /* ========== SECȚIUNE FILME - BARĂ DE DERRULARE (SWIPE) VIZIBILĂ, SUBȚIRE ȘI AURIE ========== */
-  
-  /* Containerul principal - nu modificăm nimic în plus */
+  /* film strip si restul unchanged */
   .film-strip-container {
     position: relative;
     width: 100%;
   }
-
-  /* Conform cerinței: înlocuit complet blocul .film-strip */
   .film-strip {
     display: flex;
-    overflow-x: scroll; /* Forțează afișarea barei de derulare permanent */
+    overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     gap: 16px;
-    padding-bottom: 12px; /* Spațiu subțire sub imagini pentru bara de scroll */
-    
-    /* Pentru Firefox: bară subțire, culoare aurie */
+    padding-bottom: 12px;
     scrollbar-width: thin;
     scrollbar-color: #d6b575 #1a1a1a;
   }
-
-  /* Stiluri pentru Chrome, Safari, Edge (Webkit) – bară foarte subțire, aurie, mereu vizibilă */
   .film-strip::-webkit-scrollbar {
-    height: 4px !important;        /* Înălțime mică și elegantă */
-    display: block !important;     /* Asigură vizibilitatea permanentă */
+    height: 4px !important;
+    display: block !important;
   }
-
-  /* Fundalul (șina) – aproape invizibil, doar pentru contrast */
   .film-strip::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
   }
-
-  /* Bara de derulare (thumb) – culoare aurie exactă #d6b575 */
   .film-strip::-webkit-scrollbar-thumb {
     background-color: #d6b575 !important;
     border-radius: 10px;
-    /* Umbra subtilă forțează redarea constantă și previne dispariția în unele browsere mobile */
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
   }
-
-  /* Pseudoelement pentru a asigura că ultima imagine nu este tăiată și scroll-ul apare corect */
   .film-strip::after {
     content: "";
     padding-right: 20px;
   }
-
-  /* Interzicem comprimarea imaginilor – astfel scroll-ul orizontal este întotdeauna necesar */
   .film-strip img {
     flex-shrink: 0 !important;
     height: 220px;
@@ -422,24 +535,14 @@
     filter: grayscale(20%);
     transition: var(--transition);
   }
-  
   .film-strip img:hover {
     filter: grayscale(0%);
     transform: scale(1.02);
   }
-
-  /* Adaptare pentru ecrane mici (mobile) – bară și mai subțire */
   @media (max-width: 640px) {
-    .film-strip img {
-      height: 160px;
-    }
-    .film-strip::-webkit-scrollbar {
-      height: 3px !important;   /* Extra-subțire pe mobil */
-    }
+    .film-strip img { height: 160px; }
+    .film-strip::-webkit-scrollbar { height: 3px !important; }
   }
-  
-  /* Eliminat complet orice element de tip hint / cloud / sugestie de glisare */
-  
   .stat-badge {
     font-size: 0.7rem;
     background: #1e1b12;
@@ -447,8 +550,6 @@
     padding: 4px 12px;
     letter-spacing: 1px;
   }
-
-  /* mobile menu */
   .mobile-nav {
     position: fixed;
     top: 0;
@@ -463,9 +564,7 @@
     transition: 0.3s;
     border-right: 1px solid var(--gold);
   }
-  .mobile-nav.open {
-    left: 0;
-  }
+  .mobile-nav.open { left: 0; }
   .mobile-nav a {
     display: block;
     color: var(--white);
@@ -498,8 +597,6 @@
     opacity: 1;
     visibility: visible;
   }
-
-  /* animatie la scroll simpla (opacitate) */
   .fade-on-scroll {
     opacity: 0;
     transform: translateY(15px);
@@ -509,7 +606,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-
   @media (min-width: 761px) {
     .mobile-nav, .overlay, .mobile-menu-btn { display: none; }
   }
@@ -522,7 +618,7 @@
   <button class="close-nav" id="closeNavBtn">✕</button>
   <a href="#">ACASĂ</a>
   <a href="https://iptv24romania.com/channels-list/">LISTA CANALE</a>
-  <a href="https://iptv24romania.com/setup-guide/">GHID INSTALARE</a>
+  <a href="/d.html">GHID INSTALARE</a>
   <a href="https://iptv24romania.com/shop/">PREȚURI</a>
   <a href="#">BLOG</a>
 </div>
@@ -530,13 +626,12 @@
 <header class="site-header">
   <div class="container header-inner">
     <div class="logo-area">
-      <!-- Logo imagine: culoare originală, fără niciun filtru -->
       <img class="logo-img" src="https://iptv24romania.com/wp-content/uploads/2025/04/cropped-logo_iptv24romania.png" alt="IPTV 24 Romania">
     </div>
     <ul class="nav-links">
       <li><a href="#">ACASĂ</a></li>
       <li><a href="https://iptv24romania.com/channels-list/">CANALE</a></li>
-      <li><a href="https://iptv24romania.com/setup-guide/">GHID</a></li>
+      <li><a href="/d.html">GHID</a></li>
       <li><a href="https://iptv24romania.com/shop/">ABONAMENTE</a></li>
       <li><a href="#">BLOG</a></li>
     </ul>
@@ -544,8 +639,12 @@
   </div>
 </header>
 
+<!-- BANNER STICKY: imagine fixa la scroll, apare sub header -- imaginea dorita /IMG_0665.jpeg -->
+<div class="sticky-banner">
+  <img src="/IMG_0665.jpeg" alt="Promo iPhone giveaway" onerror="this.src='https://placehold.co/1200x400/1a1a1a/d6b575?text=iPhone+Giveaway+Every+Week'">
+</div>
+
 <main>
-  <!-- BARA URGENTA -->
   <div class="urgency-bar">
     <div class="scrolling-text">
       OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp; OFERTĂ LIMITATĂ: -50% REDUCERE + TEST 24H GRATUIT &nbsp;&nbsp;&nbsp;
@@ -568,13 +667,12 @@
       <div class="feature-item"><h3>Suport regal</h3><p>Asistență 24/7 pe WhatsApp și email. Rezolvăm orice problemă.</p></div>
     </div>
 
-    <!-- SECȚIUNE FILME + SERIALE (carusel cu bara de derulare aurie subțire, mereu vizibilă) -->
+    <!-- SECȚIUNE FILME + SERIALE (carusel) -->
     <div class="fade-on-scroll">
       <h2 style="font-size: 1.8rem; margin-bottom: 8px;">Cinematoteca de aur</h2>
       <p style="margin-bottom: 20px; color:#b8aa8c;">Mii de titluri disponibile on-demand, actualizate săptămânal.</p>
       <div class="film-strip-container">
         <div class="film-strip" id="filmStrip"></div>
-        <!-- Niciun element de tip hint / cloud / sugestie – doar bara de scroll permanentă -->
       </div>
     </div>
 
@@ -588,6 +686,28 @@
         <div class="price-card"><h3>14 luni</h3><div class="price-old">€193.98</div><div class="price-new">€96.99</div><ul><li>Economie 50%</li><li>2 luni bonus</li><li>Toate opțiunile premium</li><li>Instalare gratuită</li></ul><a href="https://iptv24romania.com/product/abonament-14-luni/" class="btn-primary">CUMPĂRĂ ACUM</a></div>
       </div>
       <p style="text-align:center; margin-top: 24px; font-size:0.75rem;">Plăți securizate: PayPal / Card bancar</p>
+    </div>
+
+    <!-- BLOC PRIETENI: OFERTA UN LUNĂ GRATUIT -->
+    <div class="friend-deal fade-on-scroll">
+      <h3>🎁 Recomandă un prieten 🎁</h3>
+      <p>Oferă-i <span class="gold-text">divertisment premium</span> iar tu primești <strong>1 lună GRATUIT</strong> de abonament! Prietenul tău cumpără orice subscripție, iar noi îți adăugăm 30 de zile fără niciun cost.</p>
+      <div style="font-size: 1.4rem; margin: 10px 0;">⭐ +1 lună gratis pentru fiecare prieten plătitor ⭐</div>
+      <a href="#" class="btn-primary" style="background: var(--gold); color:#000;">ÎMPARTĂ LINK ACUM</a>
+      <p style="font-size:0.7rem; margin-top:12px;">* Se aplică la orice abonament cumpărat de prieten, ofertă valabilă permanent.</p>
+    </div>
+
+    <!-- SECȚIUNE IPHONE GIVEAWAY: tombolă săptămânală cu condiții si buton detalii -->
+    <div class="iphone-giveaway fade-on-scroll">
+      <div class="giveaway-text">
+        <h4>📱 iPhone Săptămânal! 🎰</h4>
+        <p><strong>Fiecare săptămână</strong> un iPhone 15 (sau model echivalent) este oferit unui client norocos printre cei care au cumpărat un abonament în acea săptămână.</p>
+        <div class="giveaway-detail">✨ Ai intrat automat în tombolă dacă ai achiziționat <strong>orice abonament</strong> (1 lună, 4 luni, 8 luni sau 14 luni). Extragerea are loc în fiecare luni, iar câștigătorul este anunțat pe WhatsApp și email.</div>
+        <div class="giveaway-terms">⭐ Condiție: orice subscripție activă în săptămâna extragerii. Premiu garantat săptămânal de către IPTV 24 Romania.</div>
+      </div>
+      <div>
+        <button id="giveawayDetailsBtn" class="btn-outline-gold">Află regulament complet</button>
+      </div>
     </div>
 
     <!-- TESTIMONIALE -->
@@ -635,9 +755,9 @@
   <div class="container">
     <div class="logo-area" style="margin-bottom: 16px; justify-content: center;">IPTV 24 ROMANIA</div>
     <div class="footer-links">
-      <a href="https://iptv24romania.com/refund_returns/">Confidențialitate</a>
-      <a href="https://iptv24romania.com/refund_returns/">Politică retur</a>
-      <a href="https://iptv24romania.com/setup-guide/">Ghid instalare</a>
+      <a href="/p.html">Confidențialitate</a>
+      <a href="/p.html">Politică retur</a>
+      <a href="/d.html">Ghid instalare</a>
       <a href="https://iptv24romania.com/channels-list/">Listă canale</a>
       <a href="https://wa.me/40793371730">WhatsApp suport</a>
     </div>
@@ -646,8 +766,26 @@
   </div>
 </footer>
 
+<!-- MODAL pentru condiții iPhone -->
+<div id="modalTerms" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+    <h3>🍀 Reguli Tombolă iPhone</h3>
+    <p><strong>Cum participi?</strong> Orice client care achiziționează un abonament IPTV 24 Romania (indiferent de durată) într-o săptămână calendaristică (luni – duminică) participă automat la extragere.</p>
+    <ul>
+      <li>În fiecare <strong>luni</strong> are loc extragerea unui câștigător care primește un iPhone (model disponibil în stoc, actualizat cu versiunea nouă).</li>
+      <li>Câștigătorul este notificat prin email-ul asociat comenzii și pe WhatsApp (dacă este disponibil).</li>
+      <li>Premiul se trimite gratuit prin curier în maxim 14 zile lucrătoare.</li>
+      <li>Participarea este valabilă pentru orice abonament activ în săptămâna respectivă; nu este necesar să fie activ la momentul extragerii, dar tranzacția trebuie confirmată în perioada menționată.</li>
+      <li>Fiecare tranzacție reprezintă un bilet în extragere. Clienții existenți care reînnoiesc participă și ei la tombolă.</li>
+      <li>Ofertă valabilă pe perioadă nedeterminată, IPTV 24 Romania își rezervă dreptul de a schimba modelul iPhone în funcție de disponibilitate.</li>
+    </ul>
+    <button class="btn-close-modal" id="confirmModalBtn">Înțeleg condițiile</button>
+  </div>
+</div>
+
 <script>
-  // imagini pentru banda de filme - doar setul original (fără duplicate) pentru a păstra scroll-ul natural
+  // imagini film strip
   const movieImages = [
     "https://iptv24romania.com/wp-content/uploads/2024/09/barbie.webp",
     "https://iptv24romania.com/wp-content/uploads/2024/09/creed.jpg",
@@ -696,6 +834,19 @@
       if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('visible');
     });
   }, 150);
+
+  // MODAL pentru detalii iPhone
+  const modal = document.getElementById('modalTerms');
+  const giveawayBtn = document.getElementById('giveawayDetailsBtn');
+  const closeModal = document.getElementById('closeModalBtn');
+  const confirmModal = document.getElementById('confirmModalBtn');
+
+  function showModal() { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  function hideModal() { modal.style.display = 'none'; document.body.style.overflow = ''; }
+  if(giveawayBtn) giveawayBtn.addEventListener('click', showModal);
+  if(closeModal) closeModal.addEventListener('click', hideModal);
+  if(confirmModal) confirmModal.addEventListener('click', hideModal);
+  window.addEventListener('click', (e) => { if(e.target === modal) hideModal(); });
 </script>
 </body>
 </html>
