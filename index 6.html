@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>sap@jajaja.cc</title>
+    <style>
+        :root {
+            --pure-black: #000000;
+            --pure-white: #ffffff;
+            --muted: #555555;
+            --purple-drank: #4B0082;
+            --border-thin: 1px solid #222222;
+            --gold-treasure: #D4AF37;
+            --dark-bg: #050505;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--pure-black);
+            color: var(--pure-white);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        button { border-radius: 0; font-family: inherit; }
+        
+        .wrapper { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        
+        header { 
+            border-bottom: var(--border-thin); 
+            padding-bottom: 20px; 
+            margin-bottom: 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: baseline; 
+        }
+        .logo { 
+            font-size: 24px; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            text-transform: uppercase; 
+            color: var(--pure-white);
+        }
+
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 80px; }
+        @media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+
+        .preview-box { 
+            width: 100%; 
+            aspect-ratio: 1/1; 
+            background: var(--pure-black); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: visible;
+        }
+        .ascii-art {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            white-space: pre-wrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: clamp(4px, 1.8vw, 7px);
+            line-height: 1.2;
+            color: #ffffff;
+            text-align: center;
+            transition: transform 0.04s ease-out, filter 0.04s ease-out;
+            will-change: transform, filter;
+            transform-origin: center;
+            transform: scale(1);
+        }
+
+        .offer-details { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            text-align: left;
+        }
+        h1 { 
+            font-size: clamp(32px, 5vw, 48px); 
+            font-weight: 900; 
+            line-height: 1.2;
+            letter-spacing: -1px; 
+            text-transform: uppercase; 
+            margin-bottom: 20px;
+        }
+        .price-tag { 
+            font-size: 36px;            
+            font-weight: 900;           
+            color: var(--gold-treasure); 
+            margin-bottom: 24px;        
+            font-family: monospace;
+            line-height: 1;             
+        }
+        .desc { 
+            color: var(--muted); 
+            font-size: 14px; 
+            margin-bottom: 40px; 
+            line-height: 1.6;
+        }
+
+        .btn-main-buy { 
+            background: var(--pure-white); 
+            color: var(--pure-black); 
+            border: none; 
+            padding: 20px; 
+            font-size: 14px; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            transition: 0.1s;
+            width: 100%;
+        }
+        .btn-main-buy:hover { background: var(--gold-treasure); color: var(--pure-black); }
+
+        .archive-title { 
+            font-size: 18px; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            border-bottom: var(--border-thin); 
+            padding-bottom: 10px; 
+            margin-bottom: 30px; 
+            text-transform: uppercase;
+        }
+        
+        .catalog-container { 
+            display: grid; 
+            grid-template-columns: 250px 1fr; 
+            gap: 40px; 
+            margin-bottom: 20px; 
+            align-items: start;
+        }
+        @media (max-width: 800px) { 
+            .catalog-container { grid-template-columns: 1fr; gap: 20px; } 
+        }
+
+        .filter-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            min-height: 420px;
+        }
+        @media (max-width: 800px) { .filter-list { min-height: auto; } }
+        
+        .freekit-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 0;
+            border-bottom: 1px solid transparent;
+            transition: 0.1s;
+        }
+        .freekit-row.active-border { border-bottom: 1px solid var(--gold-treasure); }
+        .freekit-btn {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 0;
+            font-family: inherit;
+            transition: color 0.1s ease;
+            text-align: left;
+        }
+        .freekit-btn:hover { color: var(--pure-white); }
+        .freekit-btn.active { color: var(--pure-white); }
+        .download-btn-gold-small {
+            background: var(--gold-treasure);
+            color: var(--pure-white);
+            border: none;
+            padding: 4px 14px;
+            font-weight: 800;
+            font-size: 10px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.1s;
+            letter-spacing: 1.5px;
+            font-family: monospace;
+            white-space: nowrap;
+            border-radius: 0;
+        }
+        .download-btn-gold-small:hover { background: var(--pure-white); color: var(--pure-black); }
+        .download-btn-hidden { display: none; }
+        
+        .filter-btn { 
+            background: transparent; 
+            border: none; 
+            color: var(--muted); 
+            text-align: left; 
+            font-size: 12px; 
+            letter-spacing: 1px; 
+            text-transform: uppercase; 
+            cursor: pointer; 
+            padding: 10px 0; 
+            border-bottom: 1px solid transparent; 
+            transition: 0.1s; 
+            width: 100%;
+        }
+        .filter-btn:hover { color: var(--pure-white); }
+        .filter-btn.active { 
+            color: var(--pure-white); 
+            border-bottom: 1px solid var(--purple-drank); 
+        }
+
+        .genre-display { 
+            border: 1px solid #222; 
+            padding: 40px; 
+            background: var(--dark-bg);
+            display: none;
+        }
+        .genre-display.visible { display: block; }
+        
+        .genre-content-inner { width: 100%; }
+        .genre-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-end; 
+            border-bottom: 1px solid #222; 
+            padding-bottom: 20px; 
+            flex-wrap: wrap; 
+        }
+        @media (max-width: 600px) { .genre-header { flex-direction: column; align-items: flex-start; gap: 20px; } }
+        .genre-title { font-size: 24px; font-weight: 700; text-transform: uppercase; }
+        .genre-meta-group { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; justify-content: flex-end; }
+        .genre-meta { font-family: monospace; color: var(--pure-white); font-size: 12px; }
+        .show-more-link { font-family: monospace; font-size: 11px; color: var(--pure-white); text-decoration: none; border-bottom: 1px dashed var(--pure-white); cursor: pointer; }
+        .show-more-link:hover { opacity: 0.7; }
+        
+        .kit-list { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+        .kit-item { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; padding-bottom: 10px; font-family: monospace; font-size: 12px; color: #888; text-transform: uppercase; }
+        .kit-item span { color: var(--pure-white); }
+        .btn-play-kit { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 5px 15px; font-size: 10px; cursor: pointer; transition: 0.1s; }
+        .btn-play-kit:hover, .btn-play-kit.playing { background: var(--pure-white); color: var(--pure-black); border-color: var(--pure-white); }
+        .btn-genre-buy { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.1s; margin-top: 20px; }
+        .btn-genre-buy:hover { background: var(--pure-white); color: var(--pure-black); }
+
+        .vertical-carousel { margin: 0; background: #050505; border-left: 2px solid var(--purple-drank); font-family: monospace; max-height: 400px; overflow-y: auto; display: none; width: 100%; }
+        .vertical-carousel.active { display: block; }
+        .carousel-list { list-style: none; margin: 0; padding: 0; }
+        .carousel-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #1a1a1a; font-size: 12px; background: #050505; }
+        .carousel-item .category { color: var(--pure-white); }
+        .carousel-item .count { color: var(--purple-drank); font-weight: bold; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.2s; }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-box { width: 100%; max-width: 500px; background: var(--pure-black); border: 1px solid #333; padding: 40px; position: relative; }
+        .btn-close { position: absolute; top: 20px; right: 20px; background: transparent; border: none; color: var(--muted); font-size: 16px; cursor: pointer; }
+        .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 30px; border-bottom: 1px solid #222; padding-bottom: 10px; }
+        .checkout-step { display: none; flex-direction: column; gap: 20px; }
+        .checkout-step.active { display: flex; }
+        .summary { font-family: monospace; font-size: 12px; margin-bottom: 20px; }
+        input[type="email"] { width: 100%; background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-size: 14px; outline: none; font-family: monospace; }
+        .btn-modal { background: var(--pure-white); color: var(--pure-black); border: none; padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; width: 100%; transition: 0.1s; }
+        .btn-modal:hover { background: var(--purple-drank); color: var(--pure-white); }
+        .btn-outline { background: transparent; border: 1px solid #333; color: var(--pure-white); padding: 15px; font-weight: 700; cursor: pointer; text-transform: uppercase; font-size: 12px; width: 100%; }
+        .crypto-address-box { padding: 20px; border: 1px dashed #444; text-align: center; font-family: monospace; word-break: break-all; margin: 20px 0; background: #0a0a0a; }
+        .footer-royalty { text-align: center; padding: 20px; font-family: monospace; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
+
+        .gold-modal .btn-modal { background: var(--pure-white); color: var(--pure-black); }
+        .gold-modal .btn-modal:hover { background: var(--purple-drank); color: var(--pure-white); }
+        .purple-modal .btn-modal { background: var(--pure-white); color: var(--pure-black); }
+        .purple-modal .btn-modal:hover { background: var(--purple-drank); color: var(--pure-white); }
+        
+        .modal-box, .modal-box * { color: var(--pure-white); }
+        .btn-modal, .btn-outline, .btn-close, .crypto-address-box, .summary, .modal-title { color: var(--pure-white); }
+        .btn-modal { color: var(--pure-black); }
+        .btn-modal:hover { color: var(--pure-white); } 
+        .btn-outline { color: var(--pure-white); }
+        .crypto-address-box { color: var(--pure-white); }
+        .modal-title { color: var(--pure-white); border-bottom-color: #333; }
+        .summary { color: var(--pure-white); }
+        .summary span { color: var(--pure-white); }
+        #final-price, #final-network { color: var(--pure-white); font-weight: bold; }
+        .total-dollar { font-weight: 900; display: inline-block; }
+        #checkout-item-price { font-weight: 800; }
+    </style>
+</head>
+<body>
+
+    <audio id="kit-player" crossorigin="anonymous"></audio>
+
+    <div class="wrapper">
+        <header>
+            <div class="logo">sap@jajaja.cc</div>
+        </header>
+
+        <section class="hero">
+            <div class="preview-box">
+                <pre class="ascii-art" id="ascii-pirate">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⠀⠀⢀⣠⣤⣶⣶⣶⣶⣶⣶⣶⣦⣤⣀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⡔⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢟⣫⣯⣷⣾⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣷⡙⢿⣿⣿⣿⣿⣿⣿⡿⢋⣵⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣙⠿⠿⠿⢟⣫⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢹⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⢀⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⢸⣿⣿⣿⡏⠉⠙⢿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⣿⡿⡍⠳⣄⡀⢀⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⢀⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣿⢿⡄⠸⡿⢄⠛⣘⢠⣼⣿⣿⣿⣿⣿⣧⡀⠀⠀⠀⠀
+⠀⠀⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡞⣼⡻⡄⠳⡤⠽⠾⠿⠿⠿⢛⣻⣿⣿⣿⣷⡀⠀⠀⠀
+⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣾⣿⣿⣄⠙⢶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀
+⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠛⠉⢉⣁⣀⣀⣀⣀⣀⣉⡉⠙⠛⠻⢿⣿⣿⣿⣿⣿⣯⣻⣍⡲⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡄⠀⠀
+⠀⢀⡀⣶⣤⣌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣁⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣈⠛⢿⣿⣿⣿⣿⣿⣷⣾⣿⣿⣿⣿⣿⡿⠟⠛⠛⠁⠀⠀
+⣰⣿⣿⣿⣿⣿⣿⣿⣝⢿⣿⣿⣿⣿⣿⣿⣟⣡⣶⠿⢛⣛⣉⣭⣭⣤⣤⡴⠶⠶⠶⠶⢲⣴⣤⠭⠭⡭⣟⠻⠦⣝⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢉⣀⣠⣶⣿⣆⠀⠀
+⠹⣿⣿⣿⣿⣿⣿⣙⠻⣿⣮⣛⠿⣿⣿⣿⣫⣵⡶⠟⣛⣋⣭⣭⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣾⣮⣽⣿⣿⣿⠿⠟⠛⠉⢀⣴⣿⣿⣿⣿⣿⣿⣶⡀
+⠀⠈⠙⠋⠁⠀⠈⠉⠛⠳⣭⣛⢷⣦⣸⣿⣯⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⣿⠀⠀⠀⣀⣴⣾⣿⣿⣿⣿⡟⣿⣿⣿⣿⡇
+⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⠿⠿⢿⣹⣿⣧⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢸⡏⣀⣴⣾⣿⣿⠿⠛⠉⠀⠀⠀⠈⠛⠛⠉⠀
+⠀⠀⠀⠀⢀⣴⠿⠛⠋⠁⠀⠀⠀⢀⣯⢿⣿⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⠣⣟⡻⠟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠉⠀⠀⠀⠀⠀⢀⣀⣴⣾⣿⠈⡿⣿⠃⠀⠀⠀⠈⠉⠛⠻⠿⣿⣿⣿⣿⣿⠿⠛⠉⠉⠀⠈⠉⠛⣿⣽⡟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣠⣤⣶⣾⣿⣿⣿⣿⣿⣀⣼⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⣹⡟⣻⣿⡋⠀⠀⠀⠀⠀⠀⠀⠀⢹⣷⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⢀⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⡿⢹⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⣰⣿⢣⡇⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⣼⣿⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠟⠋⠙⠛⠻⣿⣿⣿⣿⣿⠏⠀⠈⢿⣿⣿⣿⣦⣄⣀⣀⣀⣠⣴⣿⣏⡞⢻⣸⣿⣷⣄⠀⠀⣀⣤⠴⣾⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⠃⠀⠀⠀⠈⢿⣿⣵⣾⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣶⠾⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣏⠀⡀⠀⢠⠀⣀⣼⣿⡛⢿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⠟⣡⣾⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠀⠸⣠⣶⣿⣿⣯⣿⡇⠀⢹⣿⣿⣿⣿⣷⣤⣤⣦⣶⣿⣿⣿⣿⣿⡇⠀⣿⣿⢸⣿⣶⣤⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⢀⣄⣠⣴⣿⣿⣿⣿⠟⠁⣿⡇⠀⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⡇⢀⣿⣿⠙⢮⣛⠿⣷⣦⣄⣀⣀⣀⣠⣀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⣴⣶⣶⣾⣿⣿⡿⣛⣿⣞⠋⠀⠀⠀⣿⣷⠀⣍⠇⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠉⡄⣸⣿⡿⠀⠀⠀⠈⠙⠮⣟⠿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣹⣿⣿⣿⢵⣿⠋⢠⡌⠀⠀⠀⠀⢿⣿⣦⣿⡷⣄⠙⠿⣿⢹⣿⣿⢼⡿⠋⣡⣶⣳⣿⣿⣿⠃⠀⠀⠀⠀⠀⠈⠿⠬⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠸⣿⣿⣿⣿⠟⢸⠀⠆⠊⡀⠀⠀⠀⠀⠻⣿⣿⣷⣻⢿⣶⣬⣈⣉⣉⣤⣴⣿⣻⣾⣿⣿⠟⠁⠀⠀⠀⠤⠄⠂⠁⠁⠁⢿⣿⣿⡿⠇⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠙⠋⠁⠀⢘⢸⠬⠀⡀⠀⠀⠀⠀⠀⠈⠻⣿⣿⣿⣿⡇⣿⣇⣿⢹⣿⣿⣿⣿⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠰⢘⡁⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⢝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣿⣿⣿⡿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⡂⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡀⡁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
+            </div>
+
+            <div class="offer-details">
+                <h1>10,000 SOUNDS.<br>140 KITS.</h1>
+                <div class="price-tag">$29.99</div>
+                <p class="desc"> TROPIC BORN, MASTER GRADE.<br>100% ROYALTY FREE.<br>24-BIT WAV. MAXIMUM FIDELITY.<br>140 KITS (6 GENRES + 20 HIDDEN VAULTS).<br>SAVE $29.95. PAY WITH SOL / BTC.<br>INSTANT DELIVERY.</p>
+                <button class="btn-main-buy" onclick="openCheckout('FULL ARCHIVE BUNDLE (140 KITS)', '29.99', 'gold')">PURCHASE ENTIRE ARCHIVE</button>
+            </div>
+        </section>
+
+        <div class="archive-title">EXPLORE THE ARCHIVE</div>
+        
+        <section class="catalog-container">
+            <div class="filter-list" id="filter-container"></div>
+            <div class="genre-display" id="genre-content"></div>
+        </section>
+    </div>
+
+    <div class="footer-royalty">100% ROYALTY FREE</div>
+
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-box" id="modal-box">
+            <button class="btn-close" onclick="closeCheckout()">✕</button>
+            <div class="modal-title">SECURE CHECKOUT</div>
+            <div class="checkout-step active" id="step-1">
+                <div class="summary">ITEM: <span id="checkout-item-name">...</span><br>TOTAL: $<span id="checkout-item-price" style="font-weight:900;">...</span></div>
+                <input type="email" id="user-email" placeholder="ENTER EMAIL FOR DELIVERY" required>
+                <button class="btn-modal" onclick="goToStep2()">CONTINUE TO PAYMENT</button>
+            </div>
+            <div class="checkout-step" id="step-2">
+                <div class="summary">SELECT CRYPTOCURRENCY:</div>
+                <button class="btn-outline" onclick="goToStep3('SOLANA', 'Gx1iDY6nh7mz2QSFFGcViBtGs1HwMZYZWxJHbNAwVUSw', 'purple')">PAY WITH SOLANA (SOL)</button>
+                <button class="btn-outline" onclick="goToStep3('BITCOIN', 'bc1qv5ch8gj7x04ufnyfaehrj3vfkmazpwqrrzwtm0', 'gold')">PAY WITH BITCOIN (BTC)</button>
+            </div>
+            <div class="checkout-step" id="step-3">
+                <div class="summary" style="text-align: center;">SEND EXACTLY <b id="final-price"></b> VIA <b id="final-network"></b> TO:</div>
+                <div class="crypto-address-box" id="crypto-address">...</div>
+                <button class="btn-modal" id="btn-copy" onclick="copyAddress()">COPY ADDRESS</button>
+                <div style="font-family: monospace; font-size: 10px; color: var(--muted); text-align: center; margin-top: 15px;">
+                    <span style="color: #ff8888;">WARNING: SEND EXACTLY THIS AMOUNT.<br>TIME LIMIT: 120 MINUTES.</span><br>Download link sent to <span id="display-email" style="color:#ffffff;"></span> after confirmation.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===================== BASS IMPACT VISUALIZER (только пират) =====================
+        let audioCtx = null;
+        let analyser = null;
+        let dataArray = null;
+        let source = null;
+        let currentScale = 1;
+        let targetScale = 1;
+        let lastBass = 0;
+        const kitPlayer = document.getElementById('kit-player');
+        const visualTarget = document.getElementById('ascii-pirate');
+
+        // Флаг для автоматического скролла к пирату при первом PLAY
+        let hasAutoFocused = false;
+
+        function initAudioContext() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 128;
+            analyser.smoothingTimeConstant = 0.2;
+            source = audioCtx.createMediaElementSource(kitPlayer);
+            source.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            dataArray = new Uint8Array(analyser.frequencyBinCount);
+            renderFrame();
+        }
+
+        function renderFrame() {
+            requestAnimationFrame(renderFrame);
+            if (!analyser || kitPlayer.paused) {
+                currentScale += (1 - currentScale) * 0.1;
+                updateVisuals(currentScale);
+                return;
+            }
+            analyser.getByteFrequencyData(dataArray);
+            let bass = 0;
+            for (let i = 0; i < 4; i++) bass += dataArray[i];
+            bass = bass / 4;
+            if (bass > 160 && bass > lastBass + 8) {
+                targetScale = 1.045;
+            } else {
+                targetScale = 1.0;
+            }
+            lastBass = bass;
+            let lerpFactor = targetScale > currentScale ? 0.35 : 0.07;
+            currentScale += (targetScale - currentScale) * lerpFactor;
+            updateVisuals(currentScale);
+        }
+
+        function updateVisuals(s) {
+            if (visualTarget) {
+                visualTarget.style.transform = `scale(${s.toFixed(4)})`;
+                visualTarget.style.filter = `brightness(${Math.min(1.4, 0.75 + (s - 1) * 12)})`;
+            }
+        }
+
+        // ===================== СМУТ-СКРОЛЛ К ПИРАТУ ПРИ ПЕРВОМ PLAY =====================
+        function smoothCinematicScrollToPirate() {
+            if (!hasAutoFocused) {
+                const pirateHero = document.querySelector('.hero');
+                if (pirateHero) {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                    hasAutoFocused = true;
+                }
+            }
+        }
+
+        // ===================== ОСНОВНАЯ ЛОГИКА =====================
+        const FULL_CATEGORIES = [
+            "Kicks", "Claps", "Snares", "Rimshots", "Closed Hats", "Open Hats", "Shakers", "Crashes", "Rides", "Percs",
+            "808s", "Bass One Shots", "Drum Loops", "Top Loops", "Percussion Loops", "Hi-Hat Loops", "Snare Rolls",
+            "Drum Fills", "Risers", "Downlifters", "Generic FX", "Atmospheric Textures", "Glitch FX", "Ear Candy",
+            "Impact Hits", "Cinematic Braams", "Vox Chops", "Phrases", "Acapellas", "Synth Stabs", "Melodic Loops",
+            "One Shot Synths", "Foley", "Field Recordings", "Reverse FX", "Cassette Textures", "Vinyl Crackle",
+            "MIDI Hats", "MIDI 808s", "MIDI Melodies", "Custom Master Presets", "Mixer States"
+        ];
+        
+        const genreDataExact = [
+            { name: "AFROBEATS", soundsCount: 1418, kitsAmount: 20 },
+            { name: "AMAPIANO", soundsCount: 1738, kitsAmount: 20 },
+            { name: "DANCEHALL", soundsCount: 1550, kitsAmount: 20 },
+            { name: "REGGAE", soundsCount: 1820, kitsAmount: 20 },
+            { name: "REGGAETON", soundsCount: 1644, kitsAmount: 20 },
+            { name: "DUB", soundsCount: 1830, kitsAmount: 20 }
+        ];
+        
+        function generateDistributionWithVariance(totalSounds) {
+            let base = Math.floor(totalSounds / FULL_CATEGORIES.length);
+            let dist = {};
+            let sum = 0;
+            for(let i = 0; i < FULL_CATEGORIES.length - 1; i++) {
+                let variance = Math.floor(Math.random() * 16) - 5;
+                let val = Math.max(5, base + variance);
+                dist[FULL_CATEGORIES[i]] = val;
+                sum += val;
+            }
+            let lastVal = totalSounds - sum;
+            dist[FULL_CATEGORIES[FULL_CATEGORIES.length - 1]] = Math.max(5, lastVal);
+            return dist;
+        }
+        
+        const distributionsCache = {};
+        genreDataExact.forEach(g => { distributionsCache[g.name] = generateDistributionWithVariance(g.soundsCount); });
+        
+        let allTracks = [];
+        genreDataExact.forEach(genre => {
+            for(let i = 1; i <= genre.kitsAmount; i++) {
+                allTracks.push({ 
+                    genreName: genre.name, 
+                    kitNumber: i, 
+                    displayName: `${genre.name.toUpperCase()} VOL. ${i}`, 
+                    filePath: `/${genre.name}${i}.mp3` 
+                });
+            }
+        });
+
+        let currentTrackIndex = -1;
+        let autoNextEnabled = true;      
+        let userPausedManually = false;   
+
+        function findGenreButton(genreName) {
+            const btns = document.querySelectorAll('.filter-btn');
+            for(let btn of btns) {
+                if(btn.innerText === genreName) return btn;
+            }
+            return null;
+        }
+
+        function renderGenreByName(genreName) {
+            const genreObj = genreDataExact.find(g => g.name === genreName);
+            if(!genreObj) return;
+            const genreBtn = findGenreButton(genreName);
+            if(genreBtn) renderGenre(genreObj, genreBtn);
+        }
+
+        function playNextTrack() {
+            if (!autoNextEnabled) return;
+            if (userPausedManually) return;
+            let nextIndex = currentTrackIndex + 1;
+            if (nextIndex >= allTracks.length) nextIndex = 0;
+            const nextTrack = allTracks[nextIndex];
+            const currentGenre = currentTrackIndex !== -1 ? allTracks[currentTrackIndex].genreName : null;
+            const nextGenre = nextTrack.genreName;
+            if (currentGenre !== nextGenre) renderGenreByName(nextGenre);
+            playTrackByIndex(nextIndex);
+        }
+
+        function stopAutoPlay() { autoNextEnabled = false; userPausedManually = true; updateAllPlayButtons(); }
+        function resumeAutoPlay() { autoNextEnabled = true; userPausedManually = false; }
+        
+        function updateAllPlayButtons() { 
+            const btns = document.querySelectorAll('.btn-play-kit');
+            if(currentTrackIndex === -1 || !allTracks[currentTrackIndex]) { 
+                btns.forEach(b=>{b.innerText='▶ PLAY';b.classList.remove('playing');}); 
+                return; 
+            }
+            const curName = allTracks[currentTrackIndex].displayName;
+            const playing = !kitPlayer.paused;
+            btns.forEach(btn=>{ 
+                if(btn.getAttribute('data-displayname')===curName && playing) { 
+                    btn.innerText='|| PAUSE'; 
+                    btn.classList.add('playing'); 
+                } else { 
+                    btn.innerText='▶ PLAY'; 
+                    btn.classList.remove('playing'); 
+                } 
+            });
+        }
+        
+        function playTrackByIndex(idx) { 
+            if(idx<0||idx>=allTracks.length) return; 
+            const track=allTracks[idx]; 
+            currentTrackIndex=idx; 
+            if(kitPlayer.src!==track.filePath) kitPlayer.src=track.filePath; 
+            kitPlayer.play().catch(e=>{}); 
+            updateAllPlayButtons(); 
+        }
+        
+        kitPlayer.addEventListener('ended', function() {
+            if (autoNextEnabled && !userPausedManually) playNextTrack();
+            updateAllPlayButtons();
+        });
+        kitPlayer.addEventListener('pause', function() {
+            if (!kitPlayer.ended && autoNextEnabled) {
+                autoNextEnabled = false;
+                userPausedManually = true;
+            }
+            updateAllPlayButtons();
+        });
+        kitPlayer.addEventListener('play', function() {
+            if (userPausedManually) {
+                autoNextEnabled = true;
+                userPausedManually = false;
+            }
+            updateAllPlayButtons();
+        });
+        
+        window.playKitAudio = function(btn, genreName, kitNumber, displayName) { 
+            initAudioContext();
+            const idx=allTracks.findIndex(t=>t.genreName===genreName && t.kitNumber===kitNumber); 
+            if(idx===-1) return; 
+            
+            // ЭФФЕКТ: при первом в сессии нажатии PLAY — плавный скролл к пирату (cinematic reveal)
+            smoothCinematicScrollToPirate();
+            
+            if(currentTrackIndex===idx && !kitPlayer.paused){ 
+                kitPlayer.pause(); 
+                stopAutoPlay();
+                return; 
+            } 
+            autoNextEnabled = true;
+            userPausedManually = false;
+            const currentGenre = currentTrackIndex !== -1 ? allTracks[currentTrackIndex].genreName : null;
+            const newGenre = allTracks[idx].genreName;
+            if (currentGenre !== newGenre) renderGenreByName(newGenre);
+            playTrackByIndex(idx); 
+        };
+        
+        const filterContainer = document.getElementById('filter-container');
+        const genreContentDiv = document.getElementById('genre-content');
+        
+        function createVerticalCarousel(genreName, containerId) {
+            const dist = distributionsCache[genreName];
+            let itemsHTML = '';
+            FULL_CATEGORIES.forEach(cat => {
+                itemsHTML += `<li class="carousel-item"><span class="category">${cat}</span><span class="count">(${dist[cat]})</span></li>`;
+            });
+            const carouselHTML = `<div id="${containerId}" class="vertical-carousel"><ul class="carousel-list">${itemsHTML}</ul></div>`;
+            const insertPoint = document.querySelector('#genre-content .genre-header');
+            if(insertPoint && !document.getElementById(containerId)) {
+                insertPoint.insertAdjacentHTML('afterend', carouselHTML);
+            }
+            const carouselDiv = document.getElementById(containerId);
+            if(carouselDiv) carouselDiv.classList.add('active');
+            return carouselDiv;
+        }
+        
+        window.toggleBreakdown = function(genreName) {
+            const containerId = `carousel-${genreName.replace(/\s/g,'')}`;
+            const existing = document.getElementById(containerId);
+            if(existing) {
+                existing.classList.toggle('active');
+                return;
+            }
+            createVerticalCarousel(genreName, containerId);
+        };
+        
+        function renderGenre(genreObj, activeBtn) {
+            const freeKitRow = document.getElementById('freekit-row');
+            if(freeKitRow) {
+                freeKitRow.classList.remove('active-border');
+                const downloadBtn = freeKitRow.querySelector('.download-btn-gold-small');
+                if(downloadBtn) downloadBtn.classList.add('download-btn-hidden');
+                const freeKitBtn = freeKitRow.querySelector('.freekit-btn');
+                if(freeKitBtn) freeKitBtn.classList.remove('active');
+            }
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            if(activeBtn) activeBtn.classList.add('active');
+            genreContentDiv.classList.add('visible');
+            let kitsHTML = '';
+            for(let i = 1; i <= genreObj.kitsAmount; i++) {
+                let displayName = `${genreObj.name.toUpperCase()} VOL. ${i}`;
+                kitsHTML += `<div class="kit-item"><span>${displayName}</span><button class="btn-play-kit" data-displayname="${displayName}" onclick="playKitAudio(this, '${genreObj.name}', ${i}, '${displayName}')">▶ PLAY</button></div>`;
+            }
+            genreContentDiv.innerHTML = `
+                <div class="genre-content-inner">
+                    <div class="genre-header">
+                        <div class="genre-title">${genreObj.name} BUNDLE</div>
+                        <div class="genre-meta-group">
+                            <div class="genre-meta">${genreObj.kitsAmount} KITS / ${genreObj.soundsCount.toLocaleString()} SOUNDS</div>
+                            <div class="show-more-link" onclick="toggleBreakdown('${genreObj.name}')">SHOW MORE</div>
+                        </div>
+                    </div>
+                    <div class="kit-list">${kitsHTML}</div>
+                    <button class="btn-genre-buy" onclick="openCheckout('${genreObj.name.toUpperCase()} BUNDLE (${genreObj.kitsAmount} KITS)', '9.99', 'purple')">PURCHASE GENRE FOR $9.99</button>
+                </div>
+            `;
+            updateAllPlayButtons();
+        }
+        
+        function renderFreeKit() {
+            const freeKitRow = document.getElementById('freekit-row');
+            if(freeKitRow) {
+                freeKitRow.classList.add('active-border');
+                const downloadBtn = freeKitRow.querySelector('.download-btn-gold-small');
+                if(downloadBtn) downloadBtn.classList.remove('download-btn-hidden');
+                const freeKitBtn = freeKitRow.querySelector('.freekit-btn');
+                if(freeKitBtn) freeKitBtn.classList.add('active');
+            }
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            genreContentDiv.classList.remove('visible');
+            genreContentDiv.innerHTML = '';
+        }
+        
+        // Функция скачивания ja.rar с твоего сервера без уведомлений
+        window.downloadFreeKit = function() {
+            const link = document.createElement('a');
+            link.href = '/ja.rar';
+            link.download = 'ja.rar';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+        
+        const freeKitRow = document.createElement('div');
+        freeKitRow.id = 'freekit-row';
+        freeKitRow.className = 'freekit-row';
+        freeKitRow.innerHTML = `<button id="freekit-btn" class="freekit-btn" onclick="renderFreeKit()">FREE KIT</button><button class="download-btn-gold-small download-btn-hidden" onclick="downloadFreeKit()">DOWNLOAD</button>`;
+        filterContainer.appendChild(freeKitRow);
+        
+        genreDataExact.forEach(g => { 
+            const btn = document.createElement('button'); 
+            btn.className = 'filter-btn'; 
+            btn.innerText = g.name; 
+            btn.onclick = () => renderGenre(g, btn); 
+            filterContainer.appendChild(btn); 
+        });
+        
+        renderFreeKit();
+        
+        // --- Модальное окно и платежи ---
+        const modal = document.getElementById('modal-overlay');
+        const modalBox = document.getElementById('modal-box');
+        let currentPrice = '';
+        const SOL_RATE = 87.95, BTC_RATE = 79617;
+        
+        window.openCheckout = (item, price, type) => { 
+            currentPrice = price; 
+            document.getElementById('checkout-item-name').innerText = item; 
+            document.getElementById('checkout-item-price').innerText = price; 
+            document.getElementById('user-email').value = ''; 
+            document.querySelectorAll('.checkout-step').forEach(s => s.classList.remove('active')); 
+            document.getElementById('step-1').classList.add('active'); 
+            modal.classList.add('active'); 
+            modalBox.classList.remove('gold-modal', 'purple-modal'); 
+            modalBox.classList.add(type === 'gold' ? 'gold-modal' : 'purple-modal'); 
+        };
+        
+        window.closeCheckout = () => modal.classList.remove('active');
+        window.goToStep2 = () => { 
+            const email = document.getElementById('user-email').value; 
+            if(!email || !email.includes('@')){ alert('Valid email required'); return; } 
+            document.getElementById('display-email').innerText = email; 
+            document.getElementById('step-1').classList.remove('active'); 
+            document.getElementById('step-2').classList.add('active'); 
+        };
+        
+        window.goToStep3 = (net, addr) => { 
+            let amt, ticker; 
+            if(net === 'SOLANA'){ amt = (parseFloat(currentPrice)/SOL_RATE).toFixed(5); ticker = 'SOL'; } 
+            else { amt = (parseFloat(currentPrice)/BTC_RATE).toFixed(8); ticker = 'BTC'; } 
+            document.getElementById('final-network').innerText = ticker; 
+            document.getElementById('final-price').innerText = amt; 
+            document.getElementById('crypto-address').innerText = addr; 
+            document.getElementById('step-2').classList.remove('active'); 
+            document.getElementById('step-3').classList.add('active'); 
+            document.getElementById('btn-copy').innerText = 'COPY ADDRESS'; 
+        };
+        
+        window.copyAddress = () => { 
+            const addr = document.getElementById('crypto-address').innerText; 
+            navigator.clipboard.writeText(addr).then(() => { 
+                document.getElementById('btn-copy').innerText = 'COPIED!'; 
+                setTimeout(() => document.getElementById('btn-copy').innerText = 'COPY ADDRESS', 2000); 
+            }); 
+        };
+    </script>
+</body>
+</html>
